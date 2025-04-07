@@ -1,7 +1,8 @@
 # Jogo da Forca (Hangman Game)
  Practical college project
 
-![image](https://github.com/user-attachments/assets/75c9fedc-f42c-4696-8af8-4c163eeb1b0c)
+![image](https://github.com/user-attachments/assets/efdd4330-575e-43aa-b65a-adea5383000c)
+
 
 
 ## Introdução
