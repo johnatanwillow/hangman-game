@@ -1,7 +1,8 @@
 # Jogo da Velha
  Practical college project
 
-![image](#)
+![image](https://github.com/user-attachments/assets/75c9fedc-f42c-4696-8af8-4c163eeb1b0c)
+
 
 ## Introdução
 
