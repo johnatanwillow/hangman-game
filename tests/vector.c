@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> // Para strncpy()
+#include <time.h>
 #include <math.h>
+#include <locale.h> // Para setlocale()
 
-int main() {
+int main() 
+{
+    // Matriz 3x3 de strings: cada linha = um "registro", cada coluna = código, nome, descrição
+    char palavras[] = "victor";
+    char teste[] = "victor";
 
-    int N, i;
-
-    printf("Enter the number of elements: ");
-    scanf("%d", &N);
-
-    double vet[N];
-
-    for (i = 0; i < N; i++) {
-        printf("Enter element %d: ", i + 1);
-        scanf("%lf", &vet[i]);
+    if (strcmp(palavras, teste) == 0) {
+        printf("As strings são iguais.\n");
+    } else {
+        printf("As strings são diferentes.\n");
     }
 
     return 0;
