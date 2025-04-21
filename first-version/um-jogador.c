@@ -14,19 +14,16 @@ void marciano();
 // Número máximo de erros permitidos
 #define MAX_ERROS 6
 
-int main() 
+int main(void) 
 {
     srand(time(NULL)); // Inicializa o gerador de números aleatórios
-    setlocale(LC_ALL, "Portuguese"); // Define a localidade para o idioma português
-    setlocale(LC_CTYPE, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil");
 
     // Matriz 3x3 de strings: cada linha = um "registro", cada coluna = ID, nome e dica
-    char *palavras[5][3] = {
-        {"1", "VICTOR", "É aluno de SI"},
-        {"2", "MARCIANO", "É um professor"},
-        {"3", "MURILO", "Termina com O"},
-        {"4", "GUSTAVO", "Fez o frontend do projeto"},
-        {"5", "ARTHUR", "É das arabia"}
+    char *palavras[3][3] = {
+        {"8", "MAÇÃ", "É uma fruta vermelha!"},
+        {"9", "ELISANGELA", "É mulher e dá aula de matemática!"},
+        {"10", "MAMAO", "É uma fruta laranja!"}
     };
 
     int tamanho_matriz, id_randomico;
@@ -43,9 +40,9 @@ int main()
     palavra[sizeof(dica) - 1] = '\0'; // Garante terminação nula
 
     char letra[20]; // Variável para armazenar a letra digitada pelo usuário
-	char letras_testadas[27][2];  // 27 posições, cada uma pode armazenar 1 letra + '\0'
+	char letras_testadas[27];  // 27 posições, cada uma pode armazenar 1 letra + '\0'
 	int tamanho = strlen(palavra);
-    int acertou = 1; // Variável para verificar se o usuário acertou a palavra completa
+    int acertou = 0; // Variável para verificar se o usuário acertou a palavra completa
 	int erros = 0; // Contador de erros
 	int acertos = 0; // Contador de acertos
 	int esperar = 2; // Tempo de espera em segundos (para Sleep)
@@ -55,7 +52,7 @@ int main()
     (operador nulo) no final. Isso garante que cada posição do 
     vetor seja inicializada corretamente */
     for(i = 0; i < 27; i++){
-        letras_testadas[i][0] = '\0';
+        letras_testadas[i] = '\0';
     }
 
 	char descoberta[tamanho + 1];
@@ -66,7 +63,7 @@ int main()
 	}
 	descoberta[tamanho] = '\0';
 
-	while(erros < MAX_ERROS && acertos < tamanho && acertou == 1)
+	while(erros < MAX_ERROS && acertos < tamanho && acertou == 0)
     {
 		system("cls || clear");
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -75,11 +72,12 @@ int main()
 		printf("Erros -> %d.\n", erros);
 		printf("Acertos -> %d.\n", acertos);
 		printf("Letras testadas ->");
+        printf(" |");
 		for (i = 0; i < 26; i++)
 		{
 			// Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-            if (letras_testadas[i][0] != '\0')
-                printf(" | %c", letras_testadas[i][0]);
+            if (letras_testadas[i] != '\0')
+                printf(" %c |", letras_testadas[i]);
 		}
         printf("\nDica -> %s.\n", dica);
 		printf("\nRestam %d chances.\n", (MAX_ERROS - erros));
@@ -117,24 +115,6 @@ int main()
                 Sleep(esperar * 1000);
             }
     
-            // Verifica se a letra já foi testada (se está em letras_testadas); se não, adiciona na próxima posição livre
-            pos = -1;
-            for (i = 0; i < 26; i++) 
-            {
-                if (letras_testadas[i][0] == letra[0]) {
-                    pos = i;
-                    break;
-                }
-                if (letras_testadas[i][0] == '\0') {
-                    pos = i;
-                    break;
-                }
-            }
-            if (pos != -1 && letras_testadas[pos][0] == '\0') {
-                letras_testadas[pos][0] = letra[0];
-                letras_testadas[pos][1] = '\0';
-            }
-    
             // Compara cacharacteres da palavra com a letra digitada
             if(strchr(palavra, letra[0]) != 0) 
             {
@@ -146,11 +126,59 @@ int main()
                         acertos++;
                     }
                 } 
+            } else {
+                int verificador_testado = 0; // Variável para verificar se a letra já foi testada
+                for (i = 0; i < strlen(letras_testadas); i++) 
+                {
+                    if (toupper(letras_testadas[i]) == letra[0]) {
+                        verificador_testado = 1;
+                        break;
+                    }
+                }
+                if (verificador_testado != 0) {
+                    system("cls || clear");
+                    printf("---------------------------------------------------------------------------------------------------------------------------\n");
+                    printf("                                                       JOGO DA FORCA                                                       \n");
+                    printf("---------------------------------------------------------------------------------------------------------------------------\n");
+                    printf("A letra \"%c\" já foi testada!\n", letra[0]);
+                    printf("\nAguarde...\n");
+                    printf("---------------------------------------------------------------------------------------------------------------------------\n");
+
+                    Sleep(esperar * 1000);
+                } else {
+                    system("cls || clear");
+                    printf("---------------------------------------------------------------------------------------------------------------------------\n");
+                    printf("                                                       JOGO DA FORCA                                                       \n");
+                    printf("---------------------------------------------------------------------------------------------------------------------------\n");
+                    printf("A letra \"%c\" não está na palavra!\n", letra[0]);
+                    printf("\nAguarde...\n");
+                    printf("---------------------------------------------------------------------------------------------------------------------------\n");
+                    erros++;
+
+                    Sleep(esperar * 1000);
+                }
+            }
+        
+            // Verifica se a letra já foi testada (se está em letras_testadas); se não, adiciona na próxima posição livre
+            pos = -1;
+            for (i = 0; i < 26; i++) 
+            {
+                if (letras_testadas[i] == letra[0]) {
+                    pos = i;
+                    break;
+                }
+                if (letras_testadas[i] == '\0') {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos != -1 && letras_testadas[pos] == '\0') {
+                letras_testadas[pos] = letra[0];
             }
         } else if (strlen(letra) == tamanho) {
             if (strcmp(letra, palavra) == 0) {
-                acertou = 0; // O usuário acertou a palavra
-                // acertos = tamanho;
+                acertou = 1; // O usuário acertou a palavra
+                acertos = tamanho; // Define o número de acertos como o tamanho da palavra
             } else {
                 system("cls || clear");
                 printf("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -172,39 +200,28 @@ int main()
 			printf("---------------------------------------------------------------------------------------------------------------------------\n");
 
 			Sleep(esperar * 1000); // Espera 3 segundos (3000 milissegundos)
-        } else {
-			system("cls || clear");
-            printf("---------------------------------------------------------------------------------------------------------------------------\n");
-            printf("                                                       JOGO DA FORCA                                                       \n");
-            printf("---------------------------------------------------------------------------------------------------------------------------\n");
-			printf("A letra \"%c\" não está na palavra!\n", letra);
-			printf("\nAguarde...\n");
-			printf("---------------------------------------------------------------------------------------------------------------------------\n");
-			erros++;
-
-			Sleep(esperar * 1000); // Espera 3 segundos (3000 milissegundos)
-		}
+        }
 
 		system("cls || clear");
 	}
-	if ((acertou == 0) || (acertos == tamanho))
+	if ((acertou) || (acertos == tamanho))
     {
 		printf("---------------------------------------------------------------------------------------------------------------------------\n");
 		printf("============================================== JOGO DA FORCA COMPLETO COM SUCESSO =========================================\n");
 		printf("---------------------------------------------------------------------------------------------------------------------------\n");
         printf("Parabéns! Você acertou a palavra!\n");
-        printf("\nA palavra era: %s\n\n", palavra);
+        printf("\nA palavra é: %s\n\n", palavra);
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
 		printf("\nNumero de errros: %d", erros);
 		printf("\nNumero de acertos: %d\n", acertos);
 		printf("Letras testadas ->");
-		for (i = 0; i < 26; i++) 
+		printf(" |");
+		for (i = 0; i < 26; i++)
 		{
 			// Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-            if (letras_testadas[i][0] != '\0')
-                printf(" | %c", letras_testadas[i][0]);
+            if (letras_testadas[i] != '\0')
+                printf(" %c |", letras_testadas[i]);
 		}
-		printf(" |");
 		printf("\n---------------------------------------------------------------------------------------------------------------------------\n");
         marciano(); // Chama a função para imprimir a cara do marciano
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -215,18 +232,18 @@ int main()
 		printf("============================================== JOGO DA FORCA COMPLETO COM FRACASSO =========================================\n");
 		printf("---------------------------------------------------------------------------------------------------------------------------\n");
         printf("Se deu mal! Você não conseguiu!\n");
-        printf("\nA palavra era: %s\n\n", palavra);
+        printf("\nA palavra é: %s\n\n", palavra);
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
 		printf("\nNumero de errros: %d", erros);
 		printf("\nNumero de acertos: %d\n", acertos);
 		printf("Letras testadas ->");
-		for (i = 0; i < 26; i++) 
+		printf(" |");
+		for (i = 0; i < 26; i++)
 		{
 			// Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-            if (letras_testadas[i][0] != '\0')
-                printf(" | %c", letras_testadas[i][0]);
+            if (letras_testadas[i] != '\0')
+                printf(" %c |", letras_testadas[i]);
 		}
-		printf(" |");
 		printf("\n---------------------------------------------------------------------------------------------------------------------------\n");
         marciano(); // Chama a função para imprimir a cara do marciano
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
