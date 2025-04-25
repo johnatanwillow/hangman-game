@@ -1,11 +1,12 @@
-#include<stdio.h>
-#include<string.h>//PARA A SEPARAÇÃO DOS COMPONENTES DA LINHA
-#include<stdlib.h>
-#include<time.h>
-#include<conio.h>//PARA RECEBER AS PALVRAS DO USUÁRIO
+#include <stdio.h>
+#include <string.h>//PARA A SEPARAÇÃO DOS COMPONENTES DA LINHA
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>//PARA RECEBER AS PALVRAS DO USUÁRIO
 
 #define MAX_N_CHAR 255//MAXIMO NUMERO DE CARACTERES POR LINHA
 void linhaAleatoria();
+
 void novasPalavras();
 int contaLinhas();
 

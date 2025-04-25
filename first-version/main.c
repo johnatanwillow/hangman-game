@@ -1,26 +1,47 @@
-#include <stdio.h> // Para printf() e scanf()
-#include <string.h> // Para strlen() e strchr()
-#include <locale.h> // Para setlocale()
-#include <time.h> // Para time()
-#include <stdlib.h> // Para system()
-#include <ctype.h> // Para isalpha() e strchr()
-#include <windows.h>  // Para Sleep() no Windows
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <time.h>
+#include <conio.h> //PARA RECEBER AS PALVRAS DO USUÁRIO
 
-int main() 
-{
-    int opcao = 0; // Variável para armazenar a opção escolhida pelo usuário
 
-    do
-    {
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+
+    char opcao;
+
+    do {
         system("cls || clear");
-        printf("---------------------------------------------------------------------------------------------------------------------------\n");
-        printf("                                                       JOGO DA FORCA                                                       \n");
-        printf("---------------------------------------------------------------------------------------------------------------------------\n");
-        menu();
-        printf("---------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Escolha uma opção: \n"); scanf("%d", &opcao);
-        printf("---------------------------------------------------------------------------------------------------------------------------\n");
-    } while (opcao != 0);
-    
+        exibirMenuPrincipal();
+        scanf(" %c", &opcao);
+        limparBuffer();
+
+        switch (opcao) {
+            case '1':
+                telaSingleplayer();
+                break;
+            case '2':
+                telaMultiplayer();
+                break;
+            case '3':
+                menuGerenciarPalavras();
+                break;
+            case '4':
+                telaRanking();
+                break;
+            case '5':
+                telaHistorico();
+                break;
+            case '0':
+                printf("Saindo do jogo...\n");
+                system("cls || clear");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+                getchar();
+        }
+    } while (opcao != '0');
+
     return 0;
 }

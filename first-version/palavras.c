@@ -36,9 +36,9 @@ void linhaAleatoria(){
     int i =0;//Um contador para chegar até a linha aleatorizada
     while (i < linhaAleatoria && fgets(buffer,MAX_N_CHAR,arquivo) != NULL)//Um contador para chegar até a linha aleatorizada
           i++;
-    id = strtok(buffer,",");//Passa o ID,pois é o primeiro item no arquio
-    nome = strtok(NULL,",");//O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O ID)E IR PARA O PROXIMO ITEM DA LISTA QUE É O NOME
-    dica = strtok(NULL,",");//O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O NOME) E VAI PARA O PROXIMO ITEM DA LISTA QUE É A DICA
+    id = strtok(buffer,"|");//Passa o ID,pois é o primeiro item no arquio
+    nome = strtok(NULL,"|");//O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O ID)E IR PARA O PROXIMO ITEM DA LISTA QUE É O NOME
+    dica = strtok(NULL,"|");//O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O NOME) E VAI PARA O PROXIMO ITEM DA LISTA QUE É A DICA
     printf("id:%s\n",id);
     printf("nome:%s\n",nome);
     printf("dica:%s",dica);
@@ -80,7 +80,7 @@ void novasPalavras(){
     fputs("\n",arquivo);//Para pular a linha dentro do arquivo
     for(int i = 0;i<3;i++){    
     fputs(("%s ",formato[i]),arquivo);//Colocar o id , a palavar e a dica
-    fputs(",",arquivo);//Para colocar a vírgula,se juntar os dois a virgula não a aparece
+    fputs("|",arquivo);//Para colocar a vírgula,se juntar os dois a virgula não a aparece
 }
     fclose(arquivo);
 }
