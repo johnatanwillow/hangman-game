@@ -7,6 +7,7 @@
 #include <windows.h>
 //-----------------------------------------------------
 #include "interface.h"
+#include "single-player.h"
 //-----------------------------------------------------
 
 
@@ -26,13 +27,13 @@ int main() {
 
         switch (opcao) {
             case '1':
-                telaSingleplayer();
+                singleplayerJogo();
                 break;
             case '2':
-                telaMultiplayer();
+                // telaMultiplayer();
                 break;
             case '3':
-                menuGerenciarPalavras();
+                telaMenuGerenciarPalavras();
                 break;
             case '4':
                 telaRanking();
