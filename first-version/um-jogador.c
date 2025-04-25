@@ -5,15 +5,16 @@
 #include <stdlib.h> // Para system()
 #include <ctype.h> // Para isalpha() e strchr()
 #include <windows.h>  // Para Sleep() no Windows
+//----------------------------------------------------
+#include "interface.h" 
+//----------------------------------------------------
 
 // Declarando protótipos de funções
-void scanf_completo(char *text, int size);
-void input_clear(); 
-void marciano(); 
+// ...
 
-// Variáveis globais
+// Váriavies globais
 #define MAX_ERROS 6
-int esperar = 2000; // Tempo de espera em segundos (para Sleep)
+#define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
 
 int main(void) 
 {
@@ -65,6 +66,9 @@ int main(void)
 
 	while(erros < MAX_ERROS && acertos < tamanho && acertou == 0)
     {
+        system("cls || clear");
+        exibirMenuPrincipal(); // Chama a função para exibir o menu do jogo
+        Sleep(ESPERAR); // Espera 2 segundos (2000 milissegundos)
 		system("cls || clear");
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
         printf("                                                       JOGO DA FORCA                                                       \n");
@@ -95,8 +99,8 @@ int main(void)
 
 		printf("\n\n---------------------------------------------------------------------------------------------------------------------------\n");
 		printf("Tente uma letra: \n");
-        // input_clear(); // Limpa o buffer de entrada
-        scanf_completo(letra, sizeof(letra)); // Lê a letra digitada pelo usuário
+        limparBuffer(); // Limpa o buffer de entrada
+        scanfFgets(letra, sizeof(letra)); // Lê a letra digitada pelo usuário
         for (int i = 0; i < strlen(letra); i++) {
             letra[i] = toupper(letra[i]); // Converte a string digitada para maiúscula
         }("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -112,7 +116,7 @@ int main(void)
                 printf("\nAguarde...\n");
                 printf("---------------------------------------------------------------------------------------------------------------------------\n");
     
-                Sleep(esperar);
+                Sleep(ESPERAR);
             }
     
             // Compara cacharacteres da palavra com a letra digitada
@@ -144,7 +148,7 @@ int main(void)
                     printf("\nAguarde...\n");
                     printf("---------------------------------------------------------------------------------------------------------------------------\n");
 
-                    Sleep(esperar);
+                    Sleep(ESPERAR);
                 } else {
                     system("cls || clear");
                     printf("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -155,7 +159,7 @@ int main(void)
                     printf("---------------------------------------------------------------------------------------------------------------------------\n");
                     erros++;
 
-                    Sleep(esperar);
+                    Sleep(ESPERAR);
                 }
             }
         
@@ -188,7 +192,7 @@ int main(void)
                 printf("\nAguarde...\n");
                 printf("---------------------------------------------------------------------------------------------------------------------------\n");
                 erros++;
-                Sleep(esperar); // Espera 3 segundos (3000 milissegundos)
+                Sleep(ESPERAR); // Espera 3 segundos (3000 milissegundos)
             }
         } else if (strlen(letra) != 1 || strlen(letra) != tamanho) {
             system("cls || clear");
@@ -199,7 +203,7 @@ int main(void)
 			printf("\nAguarde...\n");
 			printf("---------------------------------------------------------------------------------------------------------------------------\n");
 
-			Sleep(esperar); // Espera 3 segundos (3000 milissegundos)
+			Sleep(ESPERAR); // Espera 3 segundos (3000 milissegundos)
         }
 
 		system("cls || clear");
@@ -225,7 +229,7 @@ int main(void)
 		printf("\n---------------------------------------------------------------------------------------------------------------------------\n");
         marciano(); // Chama a função para imprimir a cara do marciano
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
-		Sleep(esperar);
+		Sleep(ESPERAR);
 
 	} else {
 		printf("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -247,66 +251,8 @@ int main(void)
 		printf("\n---------------------------------------------------------------------------------------------------------------------------\n");
         marciano(); // Chama a função para imprimir a cara do marciano
         printf("---------------------------------------------------------------------------------------------------------------------------\n");
-		Sleep(esperar);
+		Sleep(ESPERAR);
 	}
 
 	return 0;
-}
-
-// Alternativa ao scanf, mas aqui podemos ler até o tamanho máximo da string
-void scanf_completo(char *text, int size) 
-{
-    // Lê a entrada padrão até o tamanho máximo ou até encontrar um '\n'
-    // Deve-se limpar a entrada padrão, pois o fgets() lê até o \n, apenas se houver uma quebra de linha antes, então o fgets() não vai ler nada.
-    fgets(text, size, stdin);
-    strtok(text, "\n"); // Remove the newline character from the string
-    printf("String lida: %s\n", text); // Debug: imprime a string lida
-    Sleep(esperar); // Espera 1 segundo (1000 milissegundos) para ver a string lida
-}
-
-// Define o limpador de entrada padrão
-void input_clear() 
-{
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {}
-}
-
-// Função que imprime a cara do marciano
-void marciano() 
-{
-    printf("                                                     ..--::::::++++::::::..                                                             \n");
-    printf("                                                 ..--::::::::::++::::++++::--..                                                         \n");
-    printf("                                               --::++++::--              ..--::--..                                                     \n");
-    printf("                                           --::++++::                          --::--                                                   \n");
-    printf("                                       --::::::::..                                --::..                                               \n");
-    printf("                                   ..::::++::--                                      ..----..                                           \n");
-    printf("                               ..--::++++::                                              ::::--..                                       \n");
-    printf("                             ..++++++++::                                                  ::::++--                                     \n");
-    printf("                             ++mm++++--                                                      ::++mm::                                   \n");
-    printf("                           ::mmmm++::                                                        ..++mmMM--                                 \n");
-    printf("                         ..++mmmm--                                                            ..::mmMM..                               \n");
-    printf("                         ::MMMM::....                                                            ..++MMmm                               \n");
-    printf("                         ::MMMM::....                                                            ..::MMMM--                             \n");
-    printf("                         ::MMMM::....                                                          ....::MMMM--                             \n");
-    printf("                         ::MMMM--....            ....                                            ..::@@MM..                             \n");
-    printf("                         --MMmm......  ....--------------......................------....        ..::MMMM..                             \n");
-    printf("                         ::MM++......--::++mmmmmmmmmmmm::::----------------::::++mmmm++::----..  ..::@@mm                               \n");
-    printf("                         --@@mm..--::++mmmmMMMM@@@@@@@@mmmm++::----::::::++mm@@@@@@@@MMMMmm++--....--@@++                               \n");
-    printf("                         --MMmm----++++++++::::++++mmMMMMmmmm++::::::++mmmmMM@@MMmm++::::++++++::--::MM++                               \n");
-    printf("                         ..++mm++::::::::::::::++++mmmmmm++mm++::--::++mmmmmmMMmmmmmm++++++++mm++++++mm::                               \n");
-    printf("                         ..++mm::----::::::::++++++mmmmmmmmmmmm++++mmmmMMMMMMMMmmmm++++::::++++::::mmMM--                               \n");
-    printf("                           ++mm++----::::++++mmMM@@MMMMMMmmmmMMMMMMMMMMmmMMMMMMMM@@MMmm++++++::::--mmmm                                 \n");
-    printf("                           ++MM++..--::++MMMMMM@@@@MMMMMMmmmmMM::..mmMMmmMMMMMMMM@@@@@@MMmm++++::::mmmm                                 \n");
-    printf("                           ++MM++..--::++++mmmmMM@@MMMMmmmmmm++    ..MMmmmmMMMMMM@@MMmmMMMMmm::::::mmMM                                 \n");
-    printf("                           ++MM++..--::::::::++++++++++++++MM::      mmMM++++mm++mm++++++++++::--::mmMM                                 \n");
-    printf("                           ++MM++..------::::::::::::::::++mm..      --MM++::::++::++++::::::----::mmMM                                 \n");
-    printf("                           ++MM++....----------::::::----mm::        ..mm++::::::::::::::::------++mmMM                                 \n");
-    printf("                           ::mm--++  ..----------------::mm..          ++mm::--------------------::mm::                                 \n");
-    printf("                           ::mm----::--  ..----------++MM::            --mmmm------------------++::mm                                 \n");
-    printf("                           --mm--..----::++++mmmmmm++++++......    ......::::++++++++::::++::--::::++                                 \n");
-    printf("                           --++::------......------::::::------....------::++::--........--------::mm                                 \n");
-    printf("                           --++++------......--------::::++mm++----::mm++++++::------......------++mm                                 \n");
-    printf("                           ..++++--------....--------::++mm@@MM++++MM##@@++::::--------..--------++mm                                 \n");
-    printf("                           ..::mm------------------::::++@@####@@MM@@####mm::::::::------------::mmmm                                 \n");
-    printf("                             ++mm::--------------::::++mm@@##############@@mm++++::--------::--++mm::                                 \n");
 }

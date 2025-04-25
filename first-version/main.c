@@ -4,7 +4,14 @@
 #include <string.h>
 #include <time.h>
 #include <conio.h> //PARA RECEBER AS PALVRAS DO USUÁRIO
+#include <windows.h>
+//-----------------------------------------------------
+#include "interface.h"
+//-----------------------------------------------------
 
+
+// Váriavies globais
+#define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -35,11 +42,14 @@ int main() {
                 break;
             case '0':
                 printf("Saindo do jogo...\n");
+                Sleep(ESPERAR);
                 system("cls || clear");
+                marciano();
                 break;
             default:
-                printf("Opcao invalida! Tente novamente.\n");
-                getchar();
+            system("cls || clear");
+                inputErroUsuario("Opcao invalida! Tente novamente.");
+                Sleep(ESPERAR);
         }
     } while (opcao != '0');
 
