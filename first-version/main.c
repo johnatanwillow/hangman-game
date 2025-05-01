@@ -16,7 +16,7 @@
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-
+    
     char opcao;
 
     do
@@ -28,7 +28,7 @@ int main()
         switch (opcao)
         {
         case '1':
-            singleplayerJogo();
+            singlePlayerJogo();
             break;
         case '2':
             // telaMultiplayer();

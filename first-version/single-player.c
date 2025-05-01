@@ -16,7 +16,7 @@
 #define TAM_DICA 100
 #define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
 
-void singleplayerJogo() 
+void singlePlayerJogo() 
 {
     srand(time(NULL)); // Inicializa o gerador de números aleatórios
     setlocale(LC_ALL, "Portuguese_Brazil");
@@ -54,7 +54,6 @@ void singleplayerJogo()
     // Partes do corpo para poder alterar a imagem do boneco
     char partes_do_corpo[6] = {'0', '|', '/', '\\', '/', '\\'};
     char errou_palavra = ' ';
-    int count = 0; // Conta o número de repetições do loop
 
 	// Inicializa letras_testadas com strings vazias e adicona o caractere nulo 
     // (operador nulo) em cada elemento. Isso garante que cada posição do 
@@ -71,12 +70,12 @@ void singleplayerJogo()
 	}
 	descoberta[tamanho] = '\0';
 
+    if (telaSingleplayer(nome_player, TAM_NOME) == 1) {
+        return; // Se o usuário quiser voltar, sai da função
+    }
+
 	while(erros < MAX_ERROS && acertos < tamanho && acertou == 0)
     {
-        // Chama a função para exibir a tela do jogo
-        if (count == 0) 
-            telaSingleplayer(nome_player, TAM_NOME);
-            count++;
         telaSingleplayerJogo(letra, dica, letras_testadas, descoberta, acertos, erros, MAX_ERROS, tamanho, partes_do_corpo, TAM_PALAVRA);
         
         if (strlen(letra) == 1)

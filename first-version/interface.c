@@ -31,6 +31,7 @@ void scanfFgets(char *text, int size)
 // Exibe o menu principal do jogo
 void exibirMenuPrincipal()
 {
+
     system("cls || clear");
     printf("+==============================================================================+\n");
     printf("|                             -= JOGO DA FORCA =-                              |\n");
@@ -208,7 +209,7 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
 }
 
 // Função que imprime a interface da tela de escolha do nome do SinglePlayer
-void telaSingleplayer(char nome[], int TAM_NOME)
+int telaSingleplayer(char nome[], int TAM_NOME)
 {
     system("cls || clear");
     printf("+==============================================================================+\n");
@@ -227,14 +228,14 @@ void telaSingleplayer(char nome[], int TAM_NOME)
     printf("+------------------------------------------------------------------------------+\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| Digite seu nome / \"0\" para voltar:                                        |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
+    printf("| Digite seu nome / \"0\" para voltar:                                           |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
     if (strcmp(nome, "0") == 0)
     {
-        exibirMenuPrincipal();
+        return 1; // Retorna 1 se o usuário quiser voltar
     }
     else
     {
@@ -242,6 +243,7 @@ void telaSingleplayer(char nome[], int TAM_NOME)
         printf("| Bem-vindo(a), %s! Preparando o jogo . . .                                     \n", nome);
         printf("+==============================================================================+\n");
         Sleep(ESPERAR);
+        return 0; // Retorna 0 se o usuário quiser continuar
     }
 }
 
