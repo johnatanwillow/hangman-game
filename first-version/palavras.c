@@ -35,7 +35,7 @@ void linhaAleatoria(){
     arquivo = fopen("arquivo.txt","r");//Abertura do arquivo em modo de apenas leitura 'r'
     int i =0;//Um contador para chegar até a linha aleatorizada
     while (i < linhaAleatoria && fgets(buffer,MAX_N_CHAR,arquivo) != NULL)//Um contador para chegar até a linha aleatorizada
-          i++;
+    i++;
     id = strtok(buffer,"|");//Passa o ID,pois é o primeiro item no arquio
     nome = strtok(NULL,"|");//O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O ID)E IR PARA O PROXIMO ITEM DA LISTA QUE É O NOME
     dica = strtok(NULL,"|");//O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O NOME) E VAI PARA O PROXIMO ITEM DA LISTA QUE É A DICA

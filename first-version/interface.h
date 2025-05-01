@@ -6,7 +6,8 @@ void limparBuffer();
 void scanfFgets(char *text, int size);
 //---------------------------------------
 void exibirMenuPrincipal();
-void inputErroUsuario(char *texto_do_erro);
+void inputErroEntrada(char *texto_do_erro);
+void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo);
 void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int erros, char *letras_testadas, char *title, char *messenge, char *nome);
 void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *descoberta, int acertos, int erros, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA);
 void telaSingleplayer(char *nome, int TAM_NOME);
@@ -16,3 +17,4 @@ void telaMenuGerenciarPalavras();
 void telaRanking();
 void telaHistorico();
 void marciano();
+//---------------------------------------

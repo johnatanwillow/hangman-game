@@ -10,47 +10,47 @@
 #include "single-player.h"
 //-----------------------------------------------------
 
-
 // Váriavies globais
 #define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
 
-int main() {
+int main()
+{
     setlocale(LC_ALL, "Portuguese");
 
     char opcao;
 
-    do {
-        system("cls || clear");
+    do
+    {
         exibirMenuPrincipal();
         scanf(" %c", &opcao);
         limparBuffer();
 
-        switch (opcao) {
-            case '1':
-                singleplayerJogo();
-                break;
-            case '2':
-                // telaMultiplayer();
-                break;
-            case '3':
-                telaMenuGerenciarPalavras();
-                break;
-            case '4':
-                telaRanking();
-                break;
-            case '5':
-                telaHistorico();
-                break;
-            case '0':
-                printf("Saindo do jogo...\n");
-                Sleep(ESPERAR);
-                system("cls || clear");
-                marciano();
-                break;
-            default:
+        switch (opcao)
+        {
+        case '1':
+            singleplayerJogo();
+            break;
+        case '2':
+            // telaMultiplayer();
+            break;
+        case '3':
+            // telaMenuGerenciarPalavras();
+            break;
+        case '4':
+            telaRanking();
+            break;
+        case '5':
+            telaHistorico();
+            break;
+        case '0':
+            printf("Saindo do jogo...\n");
+            Sleep(ESPERAR);
             system("cls || clear");
-                inputErroUsuario("Opcao invalida! Tente novamente.");
-                Sleep(ESPERAR);
+            marciano();
+            break;
+        default:
+            inputErroEntrada("Opcao invalida! Tente novamente.");
+            Sleep(ESPERAR);
         }
     } while (opcao != '0');
 
