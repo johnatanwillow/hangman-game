@@ -7,6 +7,8 @@
 #include <windows.h>  // Para Sleep() no Windows
 //----------------------------------------------------
 #include "interface.h" 
+#include "palavras.h"
+#include "single-player.h"
 //----------------------------------------------------
 
 // Váriavies globais
@@ -15,31 +17,15 @@
 #define TAM_PALAVRA 20
 #define TAM_DICA 100
 #define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
-
 void singlePlayerJogo() 
 {
-    srand(time(NULL)); // Inicializa o gerador de números aleatórios
     setlocale(LC_ALL, "Portuguese_Brazil");
 
-    // Matriz 3x3 de strings: cada linha = um "registro", cada coluna = ID, nome e dica
-    char *palavras[3][3] = {
-        {"8", "MACA", "Eh uma fruta vermelha!"},
-        {"9", "ELISANGELA", "Eh mulher e dá aula de matematica!"},
-        {"10", "MAMAO", "Eh uma fruta laranja!"}
-    };
-
-    int tamanho_matriz, id_randomico;
-    char palavra[TAM_PALAVRA];
-    char dica[TAM_DICA];
-
-    tamanho_matriz = sizeof(palavras) / sizeof(palavras[0]); // Tamanho da matriz (número de palavras)
-
-    id_randomico = rand() % tamanho_matriz; // Gera um índice aleatório entre 0 e e o tamanho da matriz - 1
-
-    strncpy(palavra, palavras[id_randomico][1], sizeof(palavra));
-    strncpy(dica, palavras[id_randomico][2], sizeof(dica));
-    palavra[sizeof(palavra) - 1] = '\0'; // Garante terminação nula
-    dica[sizeof(dica) - 1] = '\0'; // Garante terminação nula
+    char *palavra;//Variável para armazenar a palavra escolhida
+    char *dica;//Variável para armazenar a dica da palavra escolhida
+    
+    temArquivo();//Verfica se existe o arquivo.txt
+    linhaAleatoria(&palavra,&dica);//Inicia qual será a palavra e a dica
 
     int pontuacao_player = 0; // Variável para armazenar a pontuação do jogador
     char letra[TAM_PALAVRA]; // Variável para armazenar a letra digitada pelo usuário
@@ -54,8 +40,8 @@ void singlePlayerJogo()
     // Partes do corpo para poder alterar a imagem do boneco
     char partes_do_corpo[6] = {'0', '|', '/', '\\', '/', '\\'};
     char errou_palavra = ' ';
-
-	// Inicializa letras_testadas com strings vazias e adicona o caractere nulo 
+    
+    // Inicializa letras_testadas com strings vazias e adicona o caractere nulo 
     // (operador nulo) em cada elemento. Isso garante que cada posição do 
     // vetor seja inicializada corretamente e não contenha lixo de memória.
     for(i = 0; i < 27; i++){
