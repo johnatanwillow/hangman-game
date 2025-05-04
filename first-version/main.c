@@ -1,3 +1,7 @@
+//-----------------------------------------------------
+// EXECUTAR NO TERMINAL:  gcc main.c single-player.c interface.c palavras.c -o ./compile/main
+//-----------------------------------------------------
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -6,7 +10,8 @@
 #include <conio.h> //PARA RECEBER AS PALVRAS DO USUÁRIO
 #include <windows.h>
 //-----------------------------------------------------
-#include "interface.h"
+#include "interface.h" 
+#include "palavras.h"
 #include "single-player.h"
 //-----------------------------------------------------
 
@@ -34,7 +39,7 @@ int main()
             // telaMultiplayer();
             break;
         case '3':
-            // telaMenuGerenciarPalavras();
+            telaMenuGerenciarPalavras();
             break;
         case '4':
             telaRanking();

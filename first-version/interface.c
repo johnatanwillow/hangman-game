@@ -5,9 +5,13 @@
 #include <windows.h>
 #include <ctype.h> // Para isalpha() e strchr()
 #include <conio.h> // Para getchar()
+//---------------------------------------
+#include "palavras.h"
+#include "interface.h"
+//---------------------------------------
 
 #define MAX_TENTATIVAS 6
-#define ESPERAR 4000 // Tempo de espera em segundos (para Sleep)
+#define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
 
 //-------------------------------------------------------------------------------------
 // Função que limpa o buffer de entrada (usada para evitar problemas com o fgets())
@@ -77,6 +81,12 @@ void inputErroEntrada(char *texto_do_erro)
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("| ❌ %s ❌                                                                            \n", texto_do_erro);
     printf("|------------------------------------------------------------------------------|\n");
     printf("| Aguarde...                                                                   |\n");
@@ -102,6 +112,12 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("| ❌ %s ❌                                                                            \n", texto_do_erro);
     printf("|------------------------------------------------------------------------------|\n");
     printf("| Aguarde...                                                                   |\n");
@@ -110,13 +126,13 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
 }
 
 // Função que imprime o resultado do jagador em jogo SinglePlayer
-void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int erros, char *letras_testadas, char *title, char *messenge, char *nome)
+void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int erros, char *letras_testadas, char *title, char *messenge, char *nome, int pontuacao)
 {
     int i;
 
     system("cls || clear");
     printf("+==============================================================================+\n");
-    printf("|                             -= %s =-                          |\n", title);
+    printf("|                          -= %s =-                       |\n", title);
     printf("+==============================================================================+\n");
     printf("|                                                                              |\n");
     printf("|                                +----+                                        |\n");
@@ -132,7 +148,7 @@ void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int er
     printf("| %s! %s                          \n", nome, messenge);
     printf("+------------------------------------------------------------------------------+\n");
     printf("| A palavra era: %s                                                           \n", palavra);
-    printf("| Sua pontuacao foi: %d                                                        |\n", 10);
+    printf("| Sua pontuacao foi: %d                                                       \n", pontuacao);
     printf("| Acertos: %d                                                                   |\n", acertos);
     printf("| Erros: %d                                                                     |\n", erros);
     printf("| Letras tentadas :");
@@ -183,7 +199,7 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("\n| DICA: \"%s\"                                                             \n", dica);
     printf("+------------------------------------------------------------------------------+\n");
     printf("|                                                                              |\n");
-    printf("|                              ");
+    printf("|                             ");
     for (i = 0; i < tamanho_palavra; i++)
     {
         if (descoberta[i] == '_')
@@ -201,14 +217,13 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("\n+------------------------------------------------------------------------------+\n");
     // limparBuffer(); // Limpa o buffer de entrada
     scanfFgets(letra, TAM_PALAVRA); // Lê a letra digitada pelo usuário
-    for (i = 0; i < strlen(letra); i++)
-    {
+    for (i = 0; i < strlen(letra); i++) {
         letra[i] = toupper(letra[i]); // Converte a string digitada para maiúscula
     }
     printf("+==============================================================================+\n");
 }
 
-// Função que imprime a interface da tela de escolha do nome do SinglePlayer
+// Função que imprime a interface da tela de escolha do nome do SinglePlayer ou retornar ao menu principal (foto de ser int)
 int telaSingleplayer(char nome[], int TAM_NOME)
 {
     system("cls || clear");
@@ -233,7 +248,7 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     printf("| Digite seu nome / \"0\" para voltar:                                           |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
-    if (strcmp(nome, "0") == 0)
+    if (nome[0] == '0')
     {
         return 1; // Retorna 1 se o usuário quiser voltar
     }
@@ -328,11 +343,10 @@ void telaMultiplayer(char *jogador1, char *jogador2, char *letra)
 }
 
 // Função que imprime a interface da tela gerenciamento de palavras do arquivo
-// (ainda não implementada, mas já está com o esqueleto pronto)
 void telaMenuGerenciarPalavras()
 {
     char opcao;
-    // FUNCAO QUE ABRE O MENU DE GERENCIAMENTO DE PALAVRAS (DEFNITIVAMENTE NAO ESTA PRONTO)
+
     do
     {
         system("cls || clear");
@@ -358,7 +372,47 @@ void telaMenuGerenciarPalavras()
         printf("+==============================================================================+\n");
         scanf(" %c", &opcao);
         limparBuffer();
+
+        switch (opcao)
+        {
+        case '1':
+            adicionarPalavra();
+            break;
+        case '2':
+            // excluirPalavra();
+            break;
+        case '0':
+            break;
+        default:
+            inputErroEntrada("Opcao invalida! Tente 1, 2 ou 0.");
+            Sleep(ESPERAR);
+        }
     } while (opcao != '0');
+}
+
+// Função e tela que que auxilia na lógica de adicionar palavras
+void telaAdiconarPalavra(char *text)
+{
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                           -= ADICIONAR PALAVRA =-                            |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("|                                +----+                                        |\n");
+    printf("|                                |/   |                                        |\n");
+    printf("|                                |    0                                        |\n");
+    printf("|                                |   /|\\                                       |\n");
+    printf("|                                |   / \\                                       |\n");
+    printf("|                                |                                             |\n");
+    printf("|                             ==============                                   |\n");
+    printf("|                             \"            \"                                   |\n");
+    printf("|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("| %s\n", text);
+    printf("+==============================================================================+\n");
 }
 
 // Função que imprime a interface da tela de ranking
@@ -450,7 +504,7 @@ void marciano()
     printf("                           ..++++--------....--------::++mm@@MM++++MM##@@++::::--------..--------++mm                                 \n");
     printf("                           ..::mm------------------::::++@@####@@MM@@####mm::::::::------------::mmmm                                 \n");
     printf("                             ++mm::--------------::::++mm@@##############@@mm++++::--------::--++mm::                                 \n");
-    printf("\n+==========================================================================================================================+\n");
+    printf("\n+============================================================================================================================+\n");
     printf("|                                                    -= OBRIGADO, MARCIANO! =-                                               |\n");
     printf("+============================================================================================================================+\n");
 }

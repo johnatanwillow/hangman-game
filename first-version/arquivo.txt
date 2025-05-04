@@ -1,12 +1,100 @@
-1|VICTOR|E aluno de SI|
-2|MARCIANO|E um professor|
-3|MURILO|Termina com O|
-4|GUSTAVO|Fez o frontend do projeto|
-5|ARTHUR|E das arabia|
-6|UVA|Eh uma fruta|
-7|COPO|Eh de vidro|
-8|GARRAFA|Eh de metal|
-9|BANANA|Eh amarela|
-10|HANDBALL|Esporte que tem bola|
-11|FUTEBOL|Esporte mais famoso do brasil|
-12|AGUA|Eh importante|
+1|PLANETA|Gira em torno de uma estrela|
+2|ATOMO|Indivisivel para os gregos|
+3|EVOLUCAO|Selecao natural em acao|
+4|OCEANO|Cobre mais da metade do planeta|
+5|PROTEINA|Formada por aminoacidos|
+6|GALAXIA|Lar do sistema solar|
+7|CELULA|Microunidade vital|
+8|GRAVIDADE|Impedimento para flutuar|
+9|BACTERIA|Reino dos procariontes|
+10|HIDROGENIO|Numero atomico igual a um|
+11|MERCURIO|Orbita mais rapida|
+12|SATURNO|Possui aneis visiveis|
+13|DNA|Carrega instrucoes biologicas|
+14|ROCHA|Fragmento da litosfera|
+15|LAVA|Forma rochas extrusivas|
+16|VULCAO|Nasce onde placas colidem|
+17|RAIO|Fenomeno de alta tensao|
+18|NITROGENIO|Predomina no ar que respiramos|
+19|ALCANE|Cadeia simples e saturada|
+20|FOTON|Quanta de energia luminosa|
+21|INERCIA|Faz corpo parado continuar parado|
+22|NEURONIO|Transmite sinais eletroquimicos|
+23|PLANCTON|Base da cadeia marinha|
+24|ECOSSISTEMA|Interacao entre seres e ambiente|
+25|AURORA|Danca de luz nos polos|
+26|TEOREMA|Precisa ser demonstrado|
+27|ALGEBRA|X marca o lugar|
+28|TRIGONOMETRIA|Relaçoes entre lados e angulos|
+29|ROBOTICA|Simula comportamentos humanos|
+30|PIXEL|Quadrado que forma imagens|
+31|PROTOCOLO|Norma digital de entendimento|
+32|ALGORITMO|Logica de execucao|
+33|COMPILADOR|Transforma instrucoes compreensiveis|
+34|RECURSAO|Auto-referencia computacional|
+35|BIT|Pode valer zero ou um|
+36|BYTE|Oito unidades binarias|
+37|REDE|Infraestrutura de conexoes|
+38|SERVIDOR|Centraliza requisicoes|
+39|BANCODEDADOS|Conjunto de tabelas e relacoes|
+40|NUVEM|Nao esta no ceu, mas armazena|
+41|CRIPTOGRAFIA|Transforma dados em segredo|
+42|SENSOR|Percebe mudancas fisicas|
+43|TRANSISTOR|Comuta sinais eletricos|
+44|DIGITAL|Nao é analogico|
+45|BLOCO|Elemento da cadeia distribuida|
+46|SATELITE|Olho artificial no ceu|
+47|TELESCOPIO|Amplia a vastidao|
+48|MICROSCOPIO|Mostra o invisivel|
+49|FOTOSSINTESE|Combina CO2 com luz|
+50|ENERGIA|Nao se cria, transforma|
+51|ENTROPIA|Tende sempre a aumentar|
+52|QUIMICA|Transformacoes invisiveis e reativas|
+53|FISICA|Explica desde o atomo ao universo|
+54|BIOLOGIA|Estuda o que pulsa|
+55|GEOLOGIA|Testemunha o tempo profundo|
+56|HISTORIA|Relato das civilizacoes|
+57|GEOGRAFIA|Estuda lugares e espacos|
+58|SOCIOLOGIA|Analisa o tecido social|
+59|FILOSOFIA|Semente de toda ciencia|
+60|PSICOLOGIA|Estuda o invisivel interno|
+61|ECONOMIA|Movimenta mercados e decisoes|
+62|POLITICA|Disputa pelo poder|
+63|DIREITO|Normatiza o conviver|
+64|LINGUISTICA|Decifra padroes de fala|
+65|ANTROPOLOGIA|Analisa culturas e simbolos|
+66|ARQUITETURA|Cria espacos para habitar|
+67|ENGENHARIA|Construcao com calculo|
+68|MEDICINA|Evita a mortalidade|
+69|ENFERMAGEM|Cuidado no cotidiano hospitalar|
+70|MATEMATICA|A linguagem do universo|
+71|ESTATISTICA|Extrai sentido dos numeros|
+72|PROBABILIDADE|Calcula o improvavel|
+73|TRATAMENTO|Processo terapeutico|
+74|VACINA|Prevenção em dose|
+75|DIAGNOSTICO|Nome para o problema|
+76|VIRUS|Parasita obrigatorio|
+77|HORMONIO|Sinal quimico interno|
+78|GENOMA|Mapa da especie|
+79|CLIMA|Padrao atmosferico duradouro|
+80|TEMPERATURA|Reflexo do movimento molecular|
+81|UMIDADE|Vapor presente no ar|
+82|PRESSAO|Forca dividida por area|
+83|ALTITUDE|Elevacao sobre o nivel do mar|
+84|VEGETACAO|Capa viva da terra|
+85|BIOMA|Unidade ecologica|
+86|DESERTO|Secura extrema|
+87|FLORESTA|Matriz de biodiversidade|
+88|SAVANA|Transicao entre floresta e deserto|
+89|TUNDRA|Congelada e sem arvores|
+90|GELADEIRA|Baixa temperatura domiciliar|
+91|RADIO|Transmissao auditiva remota|
+92|INTERNET|Rede de redes|
+93|CELULAR|Computador de bolso|
+94|TELEVISOR|Janelas para mundos ficticios|
+95|COMPUTADOR|Processador de instrucoes|
+96|DRONE|Olho voador|
+97|CARRO|Autonomia terrestre|
+98|AVIAO|Voando com asas artificiais|
+99|NAVIO|Colosso dos mares|
+100|ASTRONAUTA|Crianca sonha em ser...|
