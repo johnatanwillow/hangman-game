@@ -217,7 +217,8 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("\n+------------------------------------------------------------------------------+\n");
     // limparBuffer(); // Limpa o buffer de entrada
     scanfFgets(letra, TAM_PALAVRA); // Lê a letra digitada pelo usuário
-    for (i = 0; i < strlen(letra); i++) {
+    for (i = 0; i < strlen(letra); i++)
+    {
         letra[i] = toupper(letra[i]); // Converte a string digitada para maiúscula
     }
     printf("+==============================================================================+\n");
