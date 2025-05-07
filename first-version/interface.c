@@ -165,7 +165,7 @@ void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int er
 }
 
 // Função que imprime a interface da tela de jogo SinglePlayer
-void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *descoberta, int acertos, int erros, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA)
+void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *descoberta, int acertos, int erros, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA, char *dificuldade)
 {
     int i;
 
@@ -189,6 +189,7 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("| Acertos: %d                                                                   |\n", acertos);
     printf("| Erros: %d                                                                     |\n", erros);
     printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - erros);
+    printf("| Dificuldade: %s (Tamanho %d)                                                                     \n", dificuldade, tamanho_palavra);
     printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {

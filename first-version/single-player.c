@@ -26,6 +26,7 @@ void singlePlayerJogo()
     //----------------------------------------------------
     char *palavra; // Variável para armazenar a palavra escolhida
     char *dica; // Variável para armazenar a dica da palavra escolhida
+    char *dificuldade; // Variável para armazenar a dificuldade da palavra escolhida
     int pontuacao_player = 0; // Variável para armazenar a pontuação do jogador
     char letra[TAM_PALAVRA]; // Variável para armazenar a letra digitada pelo usuário
     char nome_player[TAM_NOME];
@@ -44,7 +45,6 @@ void singlePlayerJogo()
     
     // Instancias importantes
     //----------------------------------------------------
-
     // Inicializa letras_testadas com strings vazias e adicona o caractere nulo (operador nulo) em cada elemento.
     for(i = 0; i < 27; i++){
         letras_testadas[i] = '\0';
@@ -59,6 +59,10 @@ void singlePlayerJogo()
 	descoberta[tamanho] = '\0';
     //----------------------------------------------------
 
+    //----------------------------------------------------
+    dificuldadeDaPalavra(tamanho, &dificuldade); // Define a dificuldade da palavra
+    //----------------------------------------------------
+
     // Início do jogo, obtençao do nome do jogador ou retornar ao menu principal
     //----------------------------------------------------
     if (telaSingleplayer(nome_player, TAM_NOME) == 1) {
@@ -69,7 +73,7 @@ void singlePlayerJogo()
     //----------------------------------------------------
 	while(erros < MAX_ERROS && acertos < tamanho)
     {
-        telaSingleplayerJogo(letra, dica, letras_testadas, descoberta, acertos, erros, MAX_ERROS, tamanho, partes_do_corpo, TAM_PALAVRA);
+        telaSingleplayerJogo(letra, dica, letras_testadas, descoberta, acertos, erros, MAX_ERROS, tamanho, partes_do_corpo, TAM_PALAVRA, dificuldade);
         
         if (strlen(letra) == 1)
         {
@@ -91,14 +95,6 @@ void singlePlayerJogo()
                     } 
                 } 
             } else {
-                // int verificador_testado = 0; // Variável para verificar se a letra já foi testada (false)
-                // for (i = 0; i < strlen(letras_testadas); i++) 
-                // {
-                //     if (toupper(letras_testadas[i]) == letra[0]) {
-                //         verificador_testado = 1;
-                //         break;
-                //     }
-                // }
                 if (letraTestada(letra, letras_testadas) != 0) {
                     inputErroLogicaUsuario("❌ Essa letra ja foi testada. Tente uma diferente! ❌", partes_do_corpo);
                 } else {
@@ -144,7 +140,7 @@ void singlePlayerJogo()
 	}
 	if (acertos == tamanho)
     {
-        pontuacao_player = 10 * (MAX_ERROS - erros);
+        pontuacao_player = tamanho * (MAX_ERROS - erros) / (erros + 1) * 100; // Cálculo da pontuação
 		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "✅ CONGRATULATIONS ✅", "✅ Parabens! Voce acertou a palavra e ganhou o jogo! ✅",nome_player, pontuacao_player);
 
 	} else {
@@ -161,4 +157,14 @@ int letraTestada(char *letra, char *letras_testadas) {
         }
     }
     return 0;
+}
+
+void dificuldadeDaPalavra(int tamanho, char **dificuldade) {
+    if (tamanho <= 4) {
+        *dificuldade = "Facil";
+    } else if (tamanho <= 7) {
+        *dificuldade = "Medio";
+    } else {
+        *dificuldade = "Dificil";
+    }
 }

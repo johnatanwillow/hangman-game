@@ -1,100 +1,101 @@
-1|PLANETA|Gira em torno de uma estrela|
-2|ATOMO|Indivisivel para os gregos|
-3|EVOLUCAO|Selecao natural em acao|
-4|OCEANO|Cobre mais da metade do planeta|
-5|PROTEINA|Formada por aminoacidos|
-6|GALAXIA|Lar do sistema solar|
-7|CELULA|Microunidade vital|
-8|GRAVIDADE|Impedimento para flutuar|
-9|BACTERIA|Reino dos procariontes|
-10|HIDROGENIO|Numero atomico igual a um|
-11|MERCURIO|Orbita mais rapida|
-12|SATURNO|Possui aneis visiveis|
-13|DNA|Carrega instrucoes biologicas|
-14|ROCHA|Fragmento da litosfera|
-15|LAVA|Forma rochas extrusivas|
-16|VULCAO|Nasce onde placas colidem|
-17|RAIO|Fenomeno de alta tensao|
-18|NITROGENIO|Predomina no ar que respiramos|
-19|ALCANE|Cadeia simples e saturada|
-20|FOTON|Quanta de energia luminosa|
-21|INERCIA|Faz corpo parado continuar parado|
-22|NEURONIO|Transmite sinais eletroquimicos|
-23|PLANCTON|Base da cadeia marinha|
-24|ECOSSISTEMA|Interacao entre seres e ambiente|
-25|AURORA|Danca de luz nos polos|
-26|TEOREMA|Precisa ser demonstrado|
-27|ALGEBRA|X marca o lugar|
-28|TRIGONOMETRIA|Relaçoes entre lados e angulos|
-29|ROBOTICA|Simula comportamentos humanos|
-30|PIXEL|Quadrado que forma imagens|
-31|PROTOCOLO|Norma digital de entendimento|
-32|ALGORITMO|Logica de execucao|
-33|COMPILADOR|Transforma instrucoes compreensiveis|
-34|RECURSAO|Auto-referencia computacional|
-35|BIT|Pode valer zero ou um|
-36|BYTE|Oito unidades binarias|
-37|REDE|Infraestrutura de conexoes|
-38|SERVIDOR|Centraliza requisicoes|
-39|BANCODEDADOS|Conjunto de tabelas e relacoes|
-40|NUVEM|Nao esta no ceu, mas armazena|
-41|CRIPTOGRAFIA|Transforma dados em segredo|
-42|SENSOR|Percebe mudancas fisicas|
-43|TRANSISTOR|Comuta sinais eletricos|
-44|DIGITAL|Nao é analogico|
-45|BLOCO|Elemento da cadeia distribuida|
-46|SATELITE|Olho artificial no ceu|
-47|TELESCOPIO|Amplia a vastidao|
-48|MICROSCOPIO|Mostra o invisivel|
-49|FOTOSSINTESE|Combina CO2 com luz|
-50|ENERGIA|Nao se cria, transforma|
-51|ENTROPIA|Tende sempre a aumentar|
-52|QUIMICA|Transformacoes invisiveis e reativas|
-53|FISICA|Explica desde o atomo ao universo|
-54|BIOLOGIA|Estuda o que pulsa|
-55|GEOLOGIA|Testemunha o tempo profundo|
-56|HISTORIA|Relato das civilizacoes|
-57|GEOGRAFIA|Estuda lugares e espacos|
-58|SOCIOLOGIA|Analisa o tecido social|
-59|FILOSOFIA|Semente de toda ciencia|
-60|PSICOLOGIA|Estuda o invisivel interno|
-61|ECONOMIA|Movimenta mercados e decisoes|
-62|POLITICA|Disputa pelo poder|
-63|DIREITO|Normatiza o conviver|
-64|LINGUISTICA|Decifra padroes de fala|
-65|ANTROPOLOGIA|Analisa culturas e simbolos|
-66|ARQUITETURA|Cria espacos para habitar|
-67|ENGENHARIA|Construcao com calculo|
-68|MEDICINA|Evita a mortalidade|
-69|ENFERMAGEM|Cuidado no cotidiano hospitalar|
-70|MATEMATICA|A linguagem do universo|
-71|ESTATISTICA|Extrai sentido dos numeros|
-72|PROBABILIDADE|Calcula o improvavel|
-73|TRATAMENTO|Processo terapeutico|
-74|VACINA|Prevenção em dose|
-75|DIAGNOSTICO|Nome para o problema|
-76|VIRUS|Parasita obrigatorio|
-77|HORMONIO|Sinal quimico interno|
-78|GENOMA|Mapa da especie|
-79|CLIMA|Padrao atmosferico duradouro|
-80|TEMPERATURA|Reflexo do movimento molecular|
-81|UMIDADE|Vapor presente no ar|
-82|PRESSAO|Forca dividida por area|
-83|ALTITUDE|Elevacao sobre o nivel do mar|
-84|VEGETACAO|Capa viva da terra|
-85|BIOMA|Unidade ecologica|
-86|DESERTO|Secura extrema|
-87|FLORESTA|Matriz de biodiversidade|
-88|SAVANA|Transicao entre floresta e deserto|
-89|TUNDRA|Congelada e sem arvores|
-90|GELADEIRA|Baixa temperatura domiciliar|
-91|RADIO|Transmissao auditiva remota|
-92|INTERNET|Rede de redes|
-93|CELULAR|Computador de bolso|
-94|TELEVISOR|Janelas para mundos ficticios|
-95|COMPUTADOR|Processador de instrucoes|
-96|DRONE|Olho voador|
-97|CARRO|Autonomia terrestre|
-98|AVIAO|Voando com asas artificiais|
-99|NAVIO|Colosso dos mares|
-100|ASTRONAUTA|Crianca sonha em ser...|
+1|ELEFANTE|Animal de grande porte|
+2|COMPUTADOR|Maquina usada para programar|
+3|BOLA|Objeto usado em esportes|
+4|PIRAMIDE|Estrutura do Egito Antigo|
+5|GUITARRA|Instrumento de corda|
+6|CAFETEIRA|Faz bebida energizante|
+7|ABACAXI|Fruta tropical com casca dura|
+8|AVIAO|Meio de transporte aereo|
+9|CADERNO|Usado para escrever na escola|
+10|CELULAR|Dispositivo de comunicacao|
+11|SEREIA|Criatura metade peixe|
+12|TORNADO|Fenomeno natural destrutivo|
+13|JORNALISTA|Profissao que noticia fatos|
+14|SATURNO|Planeta com aneis|
+15|POLTRONA|Assento confortavel|
+16|ESPELHO|Reflete a imagem|
+17|DINOSSAURO|Animal pre historico|
+18|PRATELEIRA|Lugar para colocar livros|
+19|CACHORRO|Melhor amigo do homem|
+20|CAMINHAO|Transporte de carga|
+21|JANELA|Abertura na parede|
+22|CENOURA|Legume alaranjado|
+23|GUAXINIM|Animal com mascara no rosto|
+24|ALGODAO|Fibra branca macia|
+25|PLANETA|Corpo celeste girando no espaco|
+26|BRINQUEDO|Usado por criancas para brincar|
+27|NAVIO|Transporte aquatico|
+28|TRAVESSEIRO|Usado para dormir melhor|
+29|SAPATO|Protege os pes|
+30|FANTASMA|Espirito assustador|
+31|GIRAFA|Animal de pescoco longo|
+32|BIBLIOTECA|Lugar com muitos livros|
+33|ARVORE|Produz sombra e oxigenio|
+34|LAPIS|Usado para escrever|
+35|ESCADA|Ajuda a subir lugares altos|
+36|MACACO|Animal que vive em arvores|
+37|GELADEIRA|Mantem alimentos gelados|
+38|TELEVISAO|Exibe imagens em movimento|
+39|PRISMA|Objeto que reflete luz|
+40|SAPINHO|Animal pequeno e verde|
+41|VULCAO|Montanha que cospe lava|
+42|AMENDOIM|Semente comum em festas|
+43|PIANISTA|Toca instrumento de teclas|
+44|BRASIL|Pais da America do Sul|
+45|CASTELO|Moradia de reis e rainhas|
+46|CINEMA|Lugar para ver filmes|
+47|COBERTOR|Usado para se aquecer|
+48|CHOCOLATE|Doce feito de cacau|
+49|ESCORREGA|Brinquedo de parque|
+50|FOGUEIRA|Fogo ao ar livre|
+51|MORANGO|Fruta vermelha e doce|
+52|TELEFONE|Aparelho para ligacoes|
+53|UNICORNIO|Cavalo com chifre magico|
+54|XADREZ|Jogo de estrategia|
+55|VIOLINO|Instrumento musical pequeno|
+56|CADEIRA|Usada para sentar|
+57|BULE|Usado para servir cha|
+58|AVIADOR|Pilota avioes|
+59|ASTRONAUTA|Viaja pelo espaco|
+60|HOSPITAL|Onde se trata doencas|
+61|MONTANHA|Elevacao natural do terreno|
+62|QUADRO|Pode ser pintado ou escrito|
+63|TRATOR|Maquina usada em fazendas|
+64|PANTERA|Animal selvagem e furtivo|
+65|RELAMPAGO|Acompanha o trovao|
+66|CANETA|Escreve com tinta|
+67|CANGURU|Animal que salta|
+68|CARRINHO|Brinquedo de rodas|
+69|ESCORPIAO|Animal com veneno|
+70|ESTRELA|Brilha no ceu|
+71|VENTILADOR|Move o ar|
+72|RENA|Animal do Polo Norte|
+73|PASTEL|Salgado frito brasileiro|
+74|POLICIAL|Mantem a ordem|
+75|PINGUIM|Animal do gelo|
+76|FLAUTA|Instrumento de sopro|
+77|MISTURA|Resultado de duas coisas|
+78|BOTINA|Tipo de bota|
+79|FORMIGA|Inseto trabalhador|
+80|VASO|Guarda flores|
+81|JACARE|Reptil de agua doce|
+82|SABONETE|Usado para limpar o corpo|
+83|CORUJA|Animal noturno|
+84|AMOR|Sentimento forte|
+85|PIRATA|Ladrao do mar|
+86|ARCOIRIS|Fenomeno colorido no ceu|
+87|TECLADO|Usado no computador|
+88|ESPADA|Arma de combate antiga|
+89|LANTERNA|Fonte de luz portatil|
+90|COMETA|Corpo celeste com cauda|
+91|PRATEADO|Cor metalica clara|
+92|GUERREIRO|Luta com coragem|
+93|PERGUNTA|Solicitacao de informacao|
+94|JARDIM|Espaco com flores|
+95|PASSARINHO|Pequeno animal voador|
+96|ANZOL|Usado para pescar|
+97|ESCUDO|Protege em batalhas|
+98|LIXEIRA|Guarda o lixo|
+99|PEIXE|Animal que vive na agua|
+100|SORVETE|Sobremesa congelada|
+101|ASTRONAUTA|Crianca sonha em ser...|
