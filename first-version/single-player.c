@@ -138,9 +138,9 @@ void singlePlayerJogo()
             inputErroLogicaUsuario("❌ Tente uma letra ou a palavra inteira! ❌", partes_do_corpo);
         }
 	}
-	if (acertos == tamanho)
-    {
-        pontuacao_player = tamanho * (MAX_ERROS - erros) / (erros + 1) * 100; // Cálculo da pontuação
+	if (acertos == tamanho) {
+        // Pontuação: tamanho da palavra * (tantativas - quantidade de erros) / (quantidade de letras repetidas na palavra) * 100 
+        pontuacao_player = tamanho * (MAX_ERROS - erros) / (quantidadeLetrasRepetidasPalavra(tamanho, palavra)) * 100; // Cálculo da pontuação
 		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "✅ CONGRATULATIONS ✅", "✅ Parabens! Voce acertou a palavra e ganhou o jogo! ✅",nome_player, pontuacao_player);
 
 	} else {
@@ -167,4 +167,23 @@ void dificuldadeDaPalavra(int tamanho, char **dificuldade) {
     } else {
         *dificuldade = "Dificil";
     }
+}
+
+int quantidadeLetrasRepetidasPalavra(int tamanho, char *palavra) {
+    int i, j, cont, rep = 0;
+    for (i = 0; i < tamanho; i++) {
+        cont = 0;
+        for (j = 0 + 1; j < tamanho; j++) {
+            if (palavra[i] == palavra[j]) {
+                cont++;
+            }
+        }
+        if (cont > 1) {
+            rep++;
+        }
+    }
+    if (rep == 0) 
+        return 1;
+    else
+        return rep;
 }
