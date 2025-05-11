@@ -38,7 +38,7 @@ void singlePlayerJogo()
     char partes_do_corpo[6] = {'0', '|', '/', '\\', '/', '\\'}; // Partes do corpo para poder alterar a imagem do boneco
     char errou_palavra = ' ';
     
-    temArquivo();//Verfica se existe o arquivo.txt
+    temArquivo(); // Verfica se existe o arquivo.txt
     palavraAleatoria(&palavra, &dica); // Inicia qual será a palavra e a dica
 	int tamanho = strlen(palavra);
     //----------------------------------------------------
@@ -77,28 +77,40 @@ void singlePlayerJogo()
         
         if (strlen(letra) == 1)
         {
-            if(!isalpha(letra[0])){
-                inputErroLogicaUsuario("❌ A entrada deve ser uma letra. Caractere invalido! ❌", partes_do_corpo);
+            if(!isalpha(letra[0])) {
+                inputErroLogicaUsuario("A entrada deve ser uma letra. Caractere invalido! ", partes_do_corpo);
             }
-    
-            // Compara cacharacteres da palavra com a letra digitada
-            if(strchr(palavra, letra[0]) != 0) {
+            else if(strchr(palavra, letra[0]) != 0) { // Compara cacharacteres da palavra com a letra digitada
                 if (letraTestada(letra, letras_testadas) != 0) {
-                    inputErroLogicaUsuario("❌ Essa letra ja foi testada. Tente uma diferente! ❌", partes_do_corpo);
+                    inputErroLogicaUsuario("Essa letra ja foi testada. Tente uma diferente! ", partes_do_corpo);
                 } else {
                     for (i = 0; i <= tamanho; i++) {
-                        if (palavra[i] == letra[0] && descoberta[i] == '_') 
-                        {
+                        if (palavra[i] == letra[0] && descoberta[i] == '_') {
                             descoberta[i] = letra[0]; 
                             acertos++;
                         }
                     } 
                 } 
+                // Verifica se a letra já foi testada (se está em letras_testadas); se não, adiciona na próxima posição livre de letras_testadas
+                pos = -1;
+                for (i = 0; i < 26; i++) {
+                    if (letras_testadas[i] == letra[0]) {
+                        pos = i;
+                        break;
+                    } 
+                    if (letras_testadas[i] == '\0') {
+                        pos = i;
+                        break;
+                    }
+                }
+                if (pos != -1 && letras_testadas[pos] == '\0') {
+                    letras_testadas[pos] = letra[0];
+                }
             } else {
                 if (letraTestada(letra, letras_testadas) != 0) {
-                    inputErroLogicaUsuario("❌ Essa letra ja foi testada. Tente uma diferente! ❌", partes_do_corpo);
+                    inputErroLogicaUsuario("Essa letra ja foi testada. Tente uma diferente! ", partes_do_corpo);
                 } else {
-                    inputErroLogicaUsuario("❌ Errou! Essa letra nao esta na palavra! ❌", partes_do_corpo);
+                    inputErroLogicaUsuario("Errou! Essa letra nao esta na palavra! ", partes_do_corpo);
                     erros++;
                     for (i = MAX_ERROS - 1; i >= MAX_ERROS - erros; i--) 
                     {
@@ -106,28 +118,11 @@ void singlePlayerJogo()
                     }
                 }
             }
-            
-            // Verifica se a letra já foi testada (se está em letras_testadas); se não, adiciona na próxima posição livre de letras_testadas
-            pos = -1;
-            for (i = 0; i < 26; i++) 
-            {
-                if (letras_testadas[i] == letra[0]) {
-                    pos = i;
-                    break;
-                }
-                if (letras_testadas[i] == '\0') {
-                    pos = i;
-                    break;
-                }
-            }
-            if (pos != -1 && letras_testadas[pos] == '\0') {
-                letras_testadas[pos] = letra[0];
-            }
         } else if (strlen(letra) == tamanho) {
             if (strcmp(letra, palavra) == 0) {
                 acertos = tamanho; // Define o número de acertos como o tamanho da palavra
             } else {
-                inputErroLogicaUsuario("❌ Errou! Essa palavra nao eh a correta! ❌", partes_do_corpo);
+                inputErroLogicaUsuario("Errou! Essa palavra nao eh a correta! ", partes_do_corpo);
                 erros++;
                 for (i = MAX_ERROS - 1; i >= MAX_ERROS - erros; i--) 
                 {
@@ -135,17 +130,17 @@ void singlePlayerJogo()
                 }
             }
         } else if (strlen(letra) != 1 || strlen(letra) != tamanho) {
-            inputErroLogicaUsuario("❌ Tente uma letra ou a palavra inteira! ❌", partes_do_corpo);
+            inputErroLogicaUsuario("Tente uma letra ou a palavra inteira! ", partes_do_corpo);
         }
 	}
 	if (acertos == tamanho) {
         // Pontuação: tamanho da palavra * (tantativas - quantidade de erros) * 100 - (quantidade de letras repetidas na palavra * 100) 
         pontuacao_player = tamanho * (MAX_ERROS - erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
-		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "✅ CONGRATULATIONS ✅", "✅ Parabens! Voce acertou a palavra e ganhou o jogo! ✅",nome_player, pontuacao_player);
+		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "    CONGRATULATIONS    ", "Parabens! Voce acertou a palavra e ganhou o jogo!",nome_player, pontuacao_player);
 
 	} else {
         pontuacao_player = 0;
-		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "❌    GAME OVER    ❌", "❌ Sadness! Voce perdeu o jogo! ❌", nome_player, pontuacao_player);
+		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "      GAME OVER      ", "Sadness! Voce perdeu o jogo! ", nome_player, pontuacao_player);
 	}
 }
 
