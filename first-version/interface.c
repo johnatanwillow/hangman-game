@@ -87,7 +87,7 @@ void inputErroEntrada(char *texto_do_erro)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| ❌ %s ❌                                                                            \n", texto_do_erro);
+    printf("| %s                                                                            \n", texto_do_erro);
     printf("|------------------------------------------------------------------------------|\n");
     printf("| Aguarde...                                                                   |\n");
     printf("+==============================================================================+\n");
@@ -118,7 +118,7 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| ❌ %s ❌                                                                            \n", texto_do_erro);
+    printf("| %s                                                                            \n", texto_do_erro);
     printf("|------------------------------------------------------------------------------|\n");
     printf("| Aguarde...                                                                   |\n");
     printf("+==============================================================================+\n");
@@ -185,11 +185,10 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("|                                                                              |\n");
     printf("| Acertos: %d                                                                   |\n", acertos);
     printf("| Erros: %d                                                                     |\n", erros);
     printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - erros);
-    printf("| Dificuldade: %s (Tamanho %d)                                                                     \n", dificuldade, tamanho_palavra);
+    printf("| Dificuldade: %s (%d letras)                                                    \n", dificuldade, tamanho_palavra);
     printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {
