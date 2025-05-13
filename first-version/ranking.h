@@ -1,6 +1,7 @@
 #pragma once
 
-void rankingEmVetor(char *nome, int *pSomaDasPontuacoes,int pontuacao_ante[],int *pI);
-int contaLinhas();
+int contaLinhasRanking();
+void colocarNomeNoRanking(char *nome , int pontuacao_player);
 void escreveArquivo(int tamanho);
-void ajustarPontuacao(char *nome , int pontuacao_player);
+void rankingEmVetor(char *nome, int *pSomaDasPontuacoes,int pontuacao_ante[],int *pI);
+void leitorArquivo();
