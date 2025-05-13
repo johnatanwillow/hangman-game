@@ -9,6 +9,7 @@
 #include "palavras.h"
 #include "interface.h"
 #include "single-player.h"
+#include "ranking.h"
 //----------------------------------------------------
 
 // Váriavies globais
@@ -137,6 +138,7 @@ void singlePlayerJogo()
         // Pontuação: tamanho da palavra * (tantativas - quantidade de erros) * 100 - (quantidade de letras repetidas na palavra * 100) 
         pontuacao_player = tamanho * (MAX_ERROS - erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
 		telaResultadoJogo(partes_do_corpo, palavra, acertos, erros, letras_testadas, "    CONGRATULATIONS    ", "Parabens! Voce acertou a palavra e ganhou o jogo!",nome_player, pontuacao_player);
+        colocarNomeNoRanking(nome_player,pontuacao_player);
 
 	} else {
         pontuacao_player = 0;
