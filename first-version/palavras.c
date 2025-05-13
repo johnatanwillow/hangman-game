@@ -25,7 +25,7 @@ void palavraAleatoria(char **palavra, char **dica)
     arquivo = fopen("arquivo.txt", "r"); // Abertura do arquivo em modo de apenas leitura 'r'
 
     srand(time(NULL));
-    int linhaAleatoria = rand() % contaLinhas() + 1; // Aleatoriza qual linha será lida,o +1 é pq 0 até (qLinha-1) ir pra 1 até qLinhas
+    int linhaAleatoria = rand() % contaLinhasPalavras() + 1; // Aleatoriza qual linha será lida,o +1 é pq 0 até (qLinha-1) ir pra 1 até qLinhas
 
     int i = 0;                                                               // Um contador para chegar até a linha aleatorizada
     while (i < linhaAleatoria && fgets(buffer, MAX_N_CHAR, arquivo) != NULL) // Um contador para chegar até a linha aleatorizada
@@ -38,7 +38,7 @@ void palavraAleatoria(char **palavra, char **dica)
     fclose(arquivo); // Fecha o arquivo
 }
 
-int contaLinhas()
+int contaLinhasPalavras()
 {
     FILE *arquivo;
     arquivo = fopen("arquivo.txt", "r");
@@ -60,7 +60,7 @@ void adicionarPalavra()
     FILE *arquivo;
     arquivo = fopen("arquivo.txt", "a"); // Abertura do arquivo em mode de adicão recente sem apagar os dados anteirores 'a'
 
-    int linhas = contaLinhas() + 1; // Para o próximo id
+    int linhas = contaLinhasPalavras() + 1; // Para o próximo id
     char id[2];                     // Para guardar o numero no i = 0,e o fim deles em i =1
     sprintf(id, "%d", linhas);      // Transformar de int para str;
 
