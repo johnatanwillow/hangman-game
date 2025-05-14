@@ -14,6 +14,7 @@ int telaSingleplayer(char nome[], int TAM_NOME);
 void telaMultiplayerJogo(char *jogador1, char *jogador2, char *letra);
 void telaMultiplayer(char *jogador1, char *jogador2, char *letra);
 void telaMenuGerenciarPalavras();
+int confirmarAdicaoDePalavra();
 void telaAdiconarPalavra(char *text);
 void telaRanking();
 void telaHistorico();

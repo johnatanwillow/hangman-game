@@ -188,7 +188,7 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("| Acertos: %d                                                                   |\n", acertos);
     printf("| Erros: %d                                                                     |\n", erros);
     printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - erros);
-    printf("| Dificuldade: %s (%d letras)                                                   \n", dificuldade, tamanho_palavra);
+    printf("| Dificuldade: %s (%d letras)                                                   |\n", dificuldade, tamanho_palavra);
     printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {
@@ -342,6 +342,47 @@ void telaMultiplayer(char *jogador1, char *jogador2, char *letra)
     telaMultiplayerJogo(jogador1, jogador2, letra);
 }
 
+int confirmarAdicaoDePalavra() {
+    char opcao;
+
+    do
+    {
+        system("cls || clear");
+        printf("+==============================================================================+\n");
+        printf("|                      -= CONFIRMAR ADICAO DE PALAVRA =-                       |\n");
+        printf("+==============================================================================+\n");
+        printf("|                                                                              |\n");
+        printf("|                                +----+                                        |\n");
+        printf("|                                |/   |                                        |\n");
+        printf("|                                |    0                                        |\n");
+        printf("|                                |   /|\\                                       |\n");
+        printf("|                                |   / \\                                       |\n");
+        printf("|                                |                                             |\n");
+        printf("|                             ==============                                   |\n");
+        printf("|                             \"            \"                                   |\n");
+        printf("|                                                                              |\n");
+        printf("+------------------------------------------------------------------------------+\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("+------------------------------------------------------------------------------+\n");
+        printf("| Deseja realmente adicionar? (1 - SIM, 0 - NAO)                               |\n");
+        printf("+==============================================================================+\n");
+        scanf(" %c", &opcao);
+        limparBuffer();
+
+        switch (opcao)
+        {
+        case '1':
+            return 1; // Retorna 1 se o usuário confirmar a adição
+        case '0':
+            return 0; // Retorna 0 se o usuário não confirmar a adição
+        default:
+            inputErroEntrada("Opcao invalida! Tente 1 ou 0.");
+            Sleep(ESPERAR);
+        }
+    } while (opcao != '0');
+}
+
 // Função que imprime a interface da tela gerenciamento de palavras do arquivo
 void telaMenuGerenciarPalavras()
 {
@@ -365,7 +406,6 @@ void telaMenuGerenciarPalavras()
         printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");
         printf("| 1. Adicionar nova palavra                                                    |\n");
-        printf("| 2. Excluir palavra existente                                                 |\n");
         printf("| 0. Voltar ao menu anterior                                                   |\n");
         printf("+------------------------------------------------------------------------------+\n");
         printf("| Escolha uma opcao:                                                           |\n");
@@ -419,26 +459,22 @@ void telaAdiconarPalavra(char *text)
 // (ainda não implementada, mas já está com o esqueleto pronto)
 void telaRanking()
 {
-    char opcao;
-    // FUNCAO QUE ABRE O MENU DE RANKING, PRESSIONANDO '0' VOCE E LEVADO DE VOLTA AO MENU PRINCIPAL (NOMES E MODO DE CONTAGEM DE PONTOS SAO UM EXEMPLO)
-    // NOS MENUS DE RANKING E HISTORICO PREFERI NAO INSERIR O "LOGO DO JOGO"(O DESENHO DA FORCA)
-    do
-    {
-        system("cls || clear");
-        printf("+==============================================================================+\n");
-        printf("|                                 -= RANKING =-                                |\n");
-        printf("+==============================================================================+\n");
-        printf("| Pos | Nome              | Pontos | Partidas | Vitorias                       |\n");
-        printf("|-----|-------------------|--------|----------|--------------------------------|\n");
-        printf("| 1   | Fulano            |  1500  |    10    |     8                          |\n");
-        printf("| 2   | Beltrano          |  1350  |     9    |     7                          |\n");
-        printf("| 3   | Ciclano           |  1200  |    11    |     6                          |\n");
-        printf("+------------------------------------------------------------------------------+\n");
-        printf("| Escolha uma opcao:                                                           |\n");
-        printf("+==============================================================================+\n");
-        scanf(" %c", &opcao);
-        limparBuffer();
-    } while (opcao != '0');
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                                 -= RANKING =-                                |\n");
+    printf("+==============================================================================+\n");
+    printf("| Escolha uma opcao:                                                           |\n");
+    printf("+==============================================================================+\n");
+    printf("| Pos | Nome              | Pontos | Partidas | Vitorias                       |\n");
+    printf("|-----|-------------------|--------|----------|--------------------------------|\n");
+    printf("| 1   | Fulano            |  1500  |    10    |     8                          |\n");
+    printf("| 2   | Beltrano          |  1350  |     9    |     7                          |\n");
+    printf("| 3   | Ciclano           |  1200  |    11    |     6                          |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| Escolha uma opcao:                                                           |\n");
+    printf("+==============================================================================+\n");
+    getchar();
+    
 }
 
 // Função que imprime a interface da tela de histórico

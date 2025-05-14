@@ -1,5 +1,5 @@
 //-----------------------------------------------------
-// EXECUTAR NO TERMINAL:  gcc main.c single-player.c interface.c palavras.c -o ./compile/main
+// EXECUTAR NO TERMINAL:  gcc main.c single-player.c interface.c palavras.c ranking.c -o ./compile/main
 //-----------------------------------------------------
 
 #include <stdio.h>

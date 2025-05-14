@@ -13,7 +13,7 @@
 
 // Váriáveis globais
 #define MAX_N_CHAR 255 // MAXIMO NUMERO DE CARACTERES POR LINHA
-#define TAM_PALAVRA 20
+#define TAM_PALAVRA 30
 #define TAM_DICA 100
 #define ESPERAR 4000
 
@@ -57,23 +57,25 @@ int contaLinhasPalavras()
 
 void adicionarPalavra()
 {
-    FILE *arquivo;
+    FILE *arquivo, *arquivo_leitrua;
+    temArquivo();
+    arquivo_leitrua = fopen("arquivo.txt", "r"); // Abertura do arquivo em modo de leitura 'r'
     arquivo = fopen("arquivo.txt", "a"); // Abertura do arquivo em mode de adicão recente sem apagar os dados anteirores 'a'
 
     int linhas = contaLinhasPalavras() + 1; // Para o próximo id
-    char id[2];                     // Para guardar o numero no i = 0,e o fim deles em i =1
+    char id[12];                     // Para guardar o numero no i = 0,e o fim deles em i =1
     sprintf(id, "%d", linhas);      // Transformar de int para str;
 
     char palavra[TAM_PALAVRA];
     char dica[TAM_DICA];
     char *formato[3];
+    char *palavra_extraida;
+    char palavra_arquivo[TAM_PALAVRA];
+    int palavraExistente = 0;
 
     telaAdiconarPalavra("Por favor, escreva uma palavra:                                              |");
     fflush(stdin); // Para limpar o 'buffer do teclado' que armazenava dados perdidos,impedindo que o proximo gets fosse lido
     gets(palavra);
-    telaAdiconarPalavra("Por favor, escreva uma dica:                                                 |");
-    fflush(stdin); // Para limpar o 'buffer do teclado' que armazenava dados perdidos,impedindo que o proximo gets fosse lido
-    gets(dica);
 
     // Para transformar a string digitada em maiúscula
     for (int i = 0; i < strlen(palavra); i++)
@@ -81,31 +83,73 @@ void adicionarPalavra()
         palavra[i] = toupper(palavra[i]);
     }
 
-    for (int i = 0; i < strlen(dica); i++)
+    int i = 0;                                                               // Um contador para chegar até a linha aleatorizada
+    while (i < contaLinhasPalavras()) { // Um contador para passar por todos as palavras
+        fgets(buffer, MAX_N_CHAR, arquivo_leitrua); // Lê a linha do arquivo
+        strtok(buffer, "|");          // Pular a parte do Id.
+        palavra_extraida = strtok(NULL, "|"); // O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O ID)E IR PARA O PROXIMO ITEM DA LISTA QUE É O NOME
+        palavra_extraida[strcspn(palavra_extraida, "\n")] = 0; // Remove o '\n' do final da string
+        strcpy(palavra_arquivo, palavra_extraida); // Copia o nome da palavra do arquivo
+        if (strcmp(palavra, palavra_extraida) == 0)
+        {
+            palavraExistente = 1; // Se a palavra já existe, não adiciona
+            break;
+        }
+        i++;  
+    }
+
+    if (palavraExistente == 1)
     {
-        if (i == 0)
-            dica[i] = toupper(dica[i]);
+        // Se a palavra não existe, adiciona
+        telaAdiconarPalavra("Essa palavra ja existe! Aperte uma tecla para continuar...                   |");
+        getchar(); // Para esperar o usuário apertar uma tecla antes de continuar
+
+        formato[0] = NULL;
+        formato[1] = NULL;
+        formato[2] = NULL;
+
+        fclose(arquivo);
+        fclose(arquivo_leitrua);
+    } else {
+        telaAdiconarPalavra("Por favor, escreva uma dica:                                                 |");
+        fflush(stdin); // Para limpar o 'buffer do teclado' que armazenava dados perdidos,impedindo que o proximo gets fosse lido
+        gets(dica);
+
+        for (int i = 0; i < strlen(dica); i++)
+        {
+            if (i == 0)
+                dica[i] = toupper(dica[i]);
+            else
+                dica[i] = tolower(dica[i]);
+        }
+
+        if (confirmarAdicaoDePalavra() == 0)
+        {
+            fclose(arquivo);
+            fclose(arquivo_leitrua);
+        }
         else
-            dica[i] = tolower(dica[i]);
+        {
+            formato[0] = id;
+            formato[1] = palavra;
+            formato[2] = dica;
+
+            fputs("\n", arquivo); // Para pular a linha dentro do arquivo
+            for (int i = 0; i < 3; i++)
+            {
+                fputs(("%s ", formato[i]), arquivo); // Colocar o id , a palavar e a dica
+                fputs("|", arquivo);                 // Para colocar o "|",se juntar os dois o "|" não a aparece
+            }
+
+            telaAdiconarPalavra("Palavra adicionada com sucesso! Aperte uma tecla para continuar...           |");
+            getchar(); // Para esperar o usuário apertar uma tecla antes de continuar
+
+            fclose(arquivo);
+            fclose(arquivo_leitrua);
+        }
     }
-
-    formato[0] = id;
-    formato[1] = palavra;
-    formato[2] = dica;
-
-    fputs("\n", arquivo); // Para pular a linha dentro do arquivo
-    for (int i = 0; i < 3; i++)
-    {
-        fputs(("%s ", formato[i]), arquivo); // Colocar o id , a palavar e a dica
-        fputs("|", arquivo);                 // Para colocar a vírgula,se juntar os dois a virgula não a aparece
-    }
-
-    telaAdiconarPalavra("Por favor escreva uma dica:                                                    |");
-    telaAdiconarPalavra("Palavra adicionada com sucesso! Aperte uma tecla para continuar...");
-    getchar(); // Para esperar o usuário apertar uma tecla antes de continuar
-
-    fclose(arquivo);
 }
+
 // Serve para verficar se possui arquivo
 int temArquivo()
 {

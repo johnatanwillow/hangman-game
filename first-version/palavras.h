@@ -2,7 +2,7 @@
 
 //---------------------------------------
 void palavraAleatoria(char **palavra, char **dica);
-int contaLinhas();
+int contaLinhasPalavras();
 void adicionarPalavra();
 int temArquivo();
 int verificarParaExclusaoOuAdicao();
