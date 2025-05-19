@@ -342,6 +342,7 @@ void telaMultiplayer(char *jogador1, char *jogador2, char *letra)
     telaMultiplayerJogo(jogador1, jogador2, letra);
 }
 
+// Função que confirma a adição de uma nova palavra
 int confirmarAdicaoDePalavra() {
     char opcao;
 

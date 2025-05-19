@@ -2,7 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+//---------------------------------------
 #include "ranking.h"
+//---------------------------------------
 
 #define MAX_N_CHAR 255
 #define MAX_PLAYERS 1000

@@ -18,7 +18,19 @@
 #define TAM_PALAVRA 31
 #define TAM_DICA 100
 #define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
+//----------------------------------------------------
 
+// Struct do player
+typedef struct {
+    int pontuacao_player;
+    char nome_player[TAM_NOME];
+    char letras_testadas[27];  // 27 posições, cada uma pode armazenar 1 letra + '\0'
+	int erros; // Contador de erros
+	int acertos; // Contador de acertos
+} SinglePlayer;
+//----------------------------------------------------
+
+// Função que executa o jogo
 void singlePlayerJogo() 
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
@@ -31,7 +43,6 @@ void singlePlayerJogo()
     int pontuacao_player = 0; // Variável para armazenar a pontuação do jogador
     char letra[TAM_PALAVRA]; // Variável para armazenar a letra digitada pelo usuário
     char nome_player[TAM_NOME];
-    char jogador1[TAM_NOME], jogador2[TAM_NOME];
 	char letras_testadas[27];  // 27 posições, cada uma pode armazenar 1 letra + '\0'
 	int erros = 0; // Contador de erros
 	int acertos = 0; // Contador de acertos
