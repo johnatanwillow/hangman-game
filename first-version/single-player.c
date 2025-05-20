@@ -13,10 +13,10 @@
 //----------------------------------------------------
 
 // Váriavies globais
-#define TAM_NOME 101
 #define MAX_ERROS 6
-#define TAM_PALAVRA 31
-#define TAM_DICA 100
+#define TAM_NOME 255
+#define TAM_PALAVRA 255
+#define TAM_DICA 255
 #define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
 //----------------------------------------------------
 

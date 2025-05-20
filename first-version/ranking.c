@@ -41,7 +41,7 @@ void rankingEmVetor(char *nome, int *pSomaDasPontuacoes, int *piNome, Memoria me
         recebeBuffer = strtok(NULL, "\n");                   
         strncpy(memoria[i].pontuacao,recebeBuffer,MAX_N_CHAR-1);  // Copia do recebe buffer e passa para memoria; 
         memoria[i].pontuacao[MAX_N_CHAR-1] = '\0';  // Para terminar a string  porntuacção;
-                                                               
+
         memoria[i].pontos=atoi(memoria[i].pontuacao);
         
         if (strcmp(nome, memoria[i].nome) == 0) // Verificar se o há outras jogadas deste jogador e somar a pontuação dele
@@ -79,7 +79,6 @@ void organizaRanking(char *nome,int pontuacao_player, int iNome, int *tamanho, M
     if (iNome == -1)
     {
          *tamanho = tam + 1;
-         
     }else{ 
 
         iNome++;
@@ -107,17 +106,22 @@ void escreveArquivo(int tamanho, Memoria memoria[])
     fclose(ranking);
 }
 
-void leitorArquivo()
+void lerArquivoRanking()
 {
     FILE *ranking;
     ranking = fopen("ranking.txt", "r");
+    char *nome_extraido;
+    char *pontuacao_extraida;
 
-    printf("==========Ranking dos jogadores==========\n");
     int i = 0;
     while (fgets(buffer, MAX_N_CHAR, ranking))
     {
         i++;
-        printf("%d %s", i, buffer);
+        nome_extraido = strtok(buffer, "|");
+        pontuacao_extraida = strtok(NULL, "|"); 
+        printf("| %3d | %s   ->   %s \n", i, nome_extraido, pontuacao_extraida);
+        printf("+-----+----------+-------------------------------------------------------------+\n");
+        // printf("| %d %s|\n", i, buffer);
     }
 
     fclose(ranking);

@@ -1,8 +1,8 @@
-Cleiton|14000
-Everson|10000
-Arase|5000
-Rogerio|5000
-Gustavo|4100
-Danone|4000
-Araee|2000
-LobotomiaGames|2000
+Cleiton|14000|
+Everson|10000|
+Arase|5000|
+Rogerio|5000|
+Gustavo|4100|
+Danone|4000|
+Araee|2000|
+LobotomiaGames|2000|
