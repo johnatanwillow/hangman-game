@@ -9,10 +9,11 @@
 #include "palavras.h"
 #include "interface.h"
 #include "ranking.h"
+#include "single-player.h"
 //---------------------------------------
 
 #define MAX_TENTATIVAS 6
-#define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
+#define ESPERAR 2000 // Tempo de espera em segundos (para Sleep)
 
 //-------------------------------------------------------------------------------------
 // Função que limpa o buffer de entrada (usada para evitar problemas com o fgets())
@@ -127,7 +128,7 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
 }
 
 // Função que imprime o resultado do jagador em jogo SinglePlayer
-void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int erros, char *letras_testadas, char *title, char *messenge, char *nome, int pontuacao)
+void telaResultadoJogo(SinglePlayer player, char *partes_do_corpo, char *palavra, char *title, char *messenge)
 {
     int i;
 
@@ -146,18 +147,18 @@ void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int er
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| %s! %s                          \n", nome, messenge);
+    printf("| %s! %s                          \n", player.nome, messenge);
     printf("+------------------------------------------------------------------------------+\n");
     printf("| A palavra era: %s                                                           \n", palavra);
-    printf("| Sua pontuacao foi: %d                                                       \n", pontuacao);
-    printf("| Acertos: %d                                                                   |\n", acertos);
-    printf("| Erros: %d                                                                     |\n", erros);
+    printf("| Sua pontuacao foi: %d                                                       \n", player.pontuacao);
+    printf("| Acertos: %d                                                                   |\n", player.acertos);
+    printf("| Erros: %d                                                                     |\n", player.erros);
     printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {
         // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-        if (letras_testadas[i] != '\0')
-            printf(" %c ", letras_testadas[i]);
+        if (player.letras_testadas[i] != '\0')
+            printf(" %c ", player.letras_testadas[i]);
     }
     printf("\n+------------------------------------------------------------------------------+\n");
     printf("| Pressione uma tecla para continuar...\n");
@@ -166,7 +167,7 @@ void telaResultadoJogo(char *partes_do_corpo, char *palavra, int acertos, int er
 }
 
 // Função que imprime a interface da tela de jogo SinglePlayer
-void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *descoberta, int acertos, int erros, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA, char *dificuldade)
+void telaSingleplayerJogo(SinglePlayer player, char *letra, char *dica, char *descoberta, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA, char *dificuldade)
 {
     int i;
 
@@ -186,16 +187,16 @@ void telaSingleplayerJogo(char *letra, char *dica, char *letras_testadas, char *
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| Acertos: %d                                                                   |\n", acertos);
-    printf("| Erros: %d                                                                     |\n", erros);
-    printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - erros);
-    printf("| Dificuldade: %s (%d letras)                                                   |\n", dificuldade, tamanho_palavra);
+    printf("| Acertos: %d                                                                   |\n", player.acertos);
+    printf("| Erros: %d                                                                     |\n", player.erros);
+    printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - player.erros);
+    printf("| Dificuldade: %s (%d letras)                                                   \n", dificuldade, tamanho_palavra);
     printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {
         // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-        if (letras_testadas[i] != '\0')
-            printf(" %c ", letras_testadas[i]);
+        if (player.letras_testadas[i] != '\0')
+            printf(" %c ", player.letras_testadas[i]);
     }
     printf("\n| DICA: \"%s\"                                                             \n", dica);
     printf("+------------------------------------------------------------------------------+\n");
@@ -246,16 +247,36 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| Digite seu nome / \"0\" para voltar:                                           |\n");
+    printf("| Digite seu nome ou \"0\" / \"Enter\" para voltar:                                |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
     if (nome[0] == '0')
     {
         return 1; // Retorna 1 se o usuário quiser voltar
-    }
-    else
+    } else if (nome[0] == '\n') {
+        return 1; // Retorna 1 se o usuário quiser voltar
+    } else
     {
+        system("cls || clear");
+        printf("+==============================================================================+\n");
+        printf("|                            -= MODO SINGLEPLAYER =-                           |\n");
+        printf("+==============================================================================+\n");
+        printf("|                                                                              |\n");
+        printf("|                                +----+                                        |\n");
+        printf("|                                |/   |                                        |\n");
+        printf("|                                |    0                                        |\n");
+        printf("|                                |   /|\\                                       |\n");
+        printf("|                                |   / \\                                       |\n");
+        printf("|                                |                                             |\n");
+        printf("|                             ==============                                   |\n");
+        printf("|                             \"            \"                                   |\n");
+        printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
         printf("| Bem-vindo(a), %s! Preparando o jogo . . .                                     \n", nome);
         printf("+==============================================================================+\n");
         Sleep(ESPERAR);
@@ -364,6 +385,7 @@ int confirmarAdicaoDePalavra() {
         printf("|                             \"            \"                                   |\n");
         printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");
+        printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");

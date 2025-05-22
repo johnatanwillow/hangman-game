@@ -100,6 +100,7 @@ void escreveArquivo(int tamanho, Memoria memoria[])
         fputs(("%s",memoria[i].nome), ranking);
         fputs("|", ranking);
         fputs(("%s",memoria[i].pontuacao), ranking);
+        fputs("|", ranking);
         fputs("\n", ranking);
     }
 

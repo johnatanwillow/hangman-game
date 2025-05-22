@@ -2,6 +2,10 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "*.html": "html",
-        "interface.h": "c"
+        "interface.h": "c",
+        "palavras.h": "c",
+        "single-player.h": "c",
+        "windows.h": "c",
+        "ctype.h": "c"
     }
 }
