@@ -1,0 +1,3 @@
+Teste|3400
+Gustavo|2900
+Arthur|2300

@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.html": "html",
+        "interface.h": "c",
+        "ranking.h": "c",
+        "single-player.h": "c",
+        "palavras.h": "c"
+    }
+}
