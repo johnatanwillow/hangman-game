@@ -34,7 +34,9 @@ void scanfFgets(char *text, int size)
     // text[strcspn(text, "\n")] = '\0';
 }
 
-// Exibe o menu principal do jogo
+/**
+ * Exibe o menu principal do jogo.
+ */
 void exibirMenuPrincipal()
 {
 
@@ -64,7 +66,9 @@ void exibirMenuPrincipal()
     printf("+==============================================================================+\n");
 }
 
-// Função que imprime alguma mensagem de erro de input para o usuário
+/** Função que exibe algum erro de input para o usuário.
+ * @param {char *} texto_do_erro - texto fornecido de acordo com o tipo de erro.
+ */
 void inputErroEntrada(char *texto_do_erro)
 {
 

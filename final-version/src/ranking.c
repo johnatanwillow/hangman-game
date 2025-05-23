@@ -17,11 +17,6 @@ void ranqueamento(char *nome, int pontuacao_player)
     organizaRanking(nome,pontuacao_player,iNome,&tamanho,memoria);
 
     escreveArquivo(tamanho,memoria);
-
-    //Para debug do progrma utillize isso + main do rankning
-    //   printf("=============Highscores===============");
-    //  for (int i = 0; i < tamanho; i++)
-    //      printf("\n%d %s %s", i + 1, memoria[i].nome,memoria[i].pontuacao);
 }
 
 void rankingEmVetor(char *nome, int *pSomaDasPontuacoes, int *piNome, Memoria memoria[])

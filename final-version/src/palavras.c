@@ -59,8 +59,8 @@ void adicionarPalavra()
 {
     FILE *arquivo, *arquivo_leitrua;
     temArquivo();
-    arquivo_leitrua = fopen("data/arquivo.txt", "r"); // Abertura do arquivo em modo de leitura 'r'
-    arquivo = fopen("data/arquivo.txt", "a"); // Abertura do arquivo em mode de adicão recente sem apagar os dados anteirores 'a'
+    arquivo_leitrua = fopen("data/arquivo.txt", "r+"); // Abertura do arquivo em modo de leitura 'r'
+    arquivo = fopen("data/arquivo.txt", "r+"); // Abertura do arquivo em mode de adicão recente sem apagar os dados anteirores 'a'
 
     int linhas = contaLinhasPalavras() + 1; // Para o próximo id
     char id[12];                     // Para guardar o numero no i = 0,e o fim deles em i =1
@@ -96,7 +96,7 @@ void adicionarPalavra()
     } else {
         int i = 0;                                                               
         while (i < contaLinhasPalavras()) { // Um contador para passar por todos as palavras
-            fgets(buffer, MAX_N_CHAR, arquivo_leitrua); // Lê a linha do arquivo
+            fgets(buffer, MAX_N_CHAR, arquivo); // Lê a linha do arquivo
             strtok(buffer, "|");          // Pular a parte do Id.
             palavra_extraida = strtok(NULL, "|"); // O USO DO NULL É PARA LIMPAR O ENDEREÇO ANTERIOR (O ID)E IR PARA O PROXIMO ITEM DA LISTA QUE É O NOME
             palavra_extraida[strcspn(palavra_extraida, "\n")] = 0; // Remove o '\n' do final da string
@@ -120,7 +120,6 @@ void adicionarPalavra()
             formato[2] = NULL;
     
             fclose(arquivo);
-            fclose(arquivo_leitrua);
         } else {
             telaAdiconarPalavra("Por favor, escreva uma dica:                                                 |");
             fflush(stdin); // Para limpar o 'buffer do teclado' que armazenava dados perdidos,impedindo que o proximo gets fosse lido
@@ -137,7 +136,7 @@ void adicionarPalavra()
             if (confirmarAdicaoDePalavra() == 0)
             {
                 fclose(arquivo);
-                fclose(arquivo_leitrua);
+
             }
             else
             {
