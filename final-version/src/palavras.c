@@ -77,6 +77,12 @@ void adicionarPalavra()
     fflush(stdin); // Para limpar o 'buffer do teclado' que armazenava dados perdidos,impedindo que o proximo gets fosse lido
     fgets(palavra, sizeof(palavra), stdin); // mais seguro que gets
     palavra[strcspn(palavra, "\n")] = '\0';
+    for (int i = 0; i < strlen(palavra); i++) {
+        if (!isalpha(palavra[i])) {
+            inputErroEntrada("Palavra invalida! Não digite espaço ou acentuação.");
+            return; // Retorna 1 se o usuário quiser voltar
+        }
+    }
 
     if (palavra[0] == '\0' || strlen(palavra) == 0) {
         return;

@@ -247,9 +247,15 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| Digite seu nome ou \"0\" / \"Enter\" para voltar:                                |\n");
+    printf("| Digite seu nome ou \"0\" / \"Enter\" p/ voltar (nao digite espaco ou acento):|\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
+    for (int i = 0; i < strlen(nome); i++) {
+        if (!isalpha(nome[i])) {
+            inputErroEntrada("Nome invalido! Tente novamente.");
+            return 1; // Retorna 1 se o usuário quiser voltar
+        }
+    }
     if (nome[0] == '0')
     {
         return 1; // Retorna 1 se o usuário quiser voltar
