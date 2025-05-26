@@ -16,7 +16,9 @@
 #define ESPERAR 2000 // Tempo de espera em segundos (para Sleep)
 
 //-------------------------------------------------------------------------------------
-// Função que limpa o buffer de entrada (usada para evitar problemas com o fgets())
+/**
+ * Função que limpa o buffer de entrada (usada para evitar problemas com o fgets())
+ */
 void limparBuffer()
 {
     char c;
@@ -24,7 +26,9 @@ void limparBuffer()
         ;
 }
 
-// Função que lê a entrada padrão até o tamanho máximo ou até encontrar um '\n'
+/**
+ * Função que lê a entrada padrão até o tamanho máximo ou até encontrar um '\n'
+ */
 void scanfFgets(char *text, int size)
 {
     // Lê a entrada padrão até o tamanho máximo ou até encontrar um '\n'
@@ -100,7 +104,10 @@ void inputErroEntrada(char *texto_do_erro)
     Sleep(ESPERAR);
 }
 
-// Função que imprime alguma mensagem de erro para o usuário (para logica do jogo SinglePlayer)
+/** Função que imprime alguma mensagem de erro para o usuário (para logica do jogo SinglePlayer)
+ * @param {char *} texto_do_erro - texto fornecido de acordo com o tipo de erro.
+ * @param {char *} partes_do_corpo - partes do corpo do personagem que representa o erro.
+ */
 void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
 {
     system("cls || clear");
@@ -131,6 +138,13 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
     Sleep(ESPERAR);
 }
 
+/** Função que imprime o resultado do jogo do jagador em jogo SinglePlayer (para logica do jogo SinglePlayer)
+ * @param {SinglePlayer} player - jogador que jogou o jogo.
+ * @param {char *} palavra - indicando a palavra da vez do jogo.
+ * @param {char *} partes_do_corpo - partes do corpo do personagem que representa o erro.
+ * @param {char *} title - titulo da tela de resultado do jogo.
+ * @param {char *} messenge - mensagem de resultado do jogo, baseado no acerto ou erro do jogador.
+ */
 // Função que imprime o resultado do jagador em jogo SinglePlayer
 void telaResultadoJogo(SinglePlayer player, char *partes_do_corpo, char *palavra, char *title, char *messenge)
 {

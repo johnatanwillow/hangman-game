@@ -1,6 +1,7 @@
 #pragma once
 
 #define TAM_NOME_STRUCT 30
+
 //---------------------------------------
 // Struct of player
 typedef struct 
