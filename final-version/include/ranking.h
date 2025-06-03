@@ -11,7 +11,7 @@ typedef struct
 
 int contaLinhasRanking();
 void ranqueamento(char *nome , int pontuacao_player);
-void escreveArquivo(int tamanho , Memoria memoria[]);
-void rankingEmVetor(char *nome, int *pSomaDasPontuacoes, int *piNome, Memoria memoria[]);
+void escreveArquivo(int tamanho ,int charMax, Memoria memoria[]);
+void rankingEmVetor(char *nome, int *pSomaDasPontuacoes, int *piNome,int *charMax, Memoria memoria[]);
 void organizaRanking(char *nome,int pontuacao_player, int iNome, int *tamanho, Memoria memoria[]);
 void lerArquivoRanking();
