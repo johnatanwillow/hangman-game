@@ -120,7 +120,7 @@ void lerArquivoRanking()
         pontuacao_extraida = strtok(NULL, "\n"); 
 
         printf("| %3d | %s ", i, nome_extraido);
-        for(int j = 0 ; j < palvramaior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+        for(int j = 0 ; j < palvramaior-strlen(nome_extraido);j++) // Comparo os tamnhos e coloco os espaços devidos
         printf(" ");
         printf("-> %s", pontuacao_extraida);
         for(int j = 0 ; j < 51;j++)

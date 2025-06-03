@@ -13,6 +13,7 @@ typedef struct {
     int pontuacao;
 } Historico;
 
+void telaGerenciarHistorico();
 void telaHistorico();
 void strToLower(char *str);
 void carregarHistorico(Historico **historicos, int *total);

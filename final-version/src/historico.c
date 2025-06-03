@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "historico.h"
+#include "../include/historico.h"
 
-int main () {
+void telaGerenciarHistorico () {
     int opcao;
     do {
         system("cls || clear");
