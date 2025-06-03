@@ -33,7 +33,6 @@ int main () {
                 pesquisarPorID();
                 break;
             case 0:
-                printf("Saindo do menu historico...\n");
                 break;
             default:
                 printf("Opcao invalida. Tente novamente. \n");
@@ -41,7 +40,7 @@ int main () {
 
         printf("\nPressione Enter para continuar...");
         getchar();
-        while ((opcao = getchar()) != '\n' && opcao != EOF);
+        // while ((opcao = getchar()) != '\n' && opcao != EOF);
 
     } while (opcao != 0);
 }
