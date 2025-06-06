@@ -60,14 +60,16 @@ void carregarHistorico(Historico **historicos, int *total) {
         return;
     }
 
-    int linhas = 0; //contar as linhas, inicializando com zero
     char buffer[MAX_LINHA];
-    while (fgets(buffer, MAX_LINHA, arquivo)) {
-        if (strlen(buffer) > 1) {
-        linhas++;
-        }
-    }
-    rewind(arquivo);
+    int linhas = contaLinhasHistorico();
+
+    // int linhas = 0; //contar as linhas, inicializando com zero
+    // while (fgets(buffer, MAX_LINHA, arquivo)) {
+    //     if (strlen(buffer) > 1) {
+    //     linhas++;
+    //     }
+    // }
+    // rewind(arquivo);
 
     *historicos = (Historico*) malloc(linhas * sizeof(Historico));
     if(!(*historicos)) {
@@ -79,10 +81,10 @@ void carregarHistorico(Historico **historicos, int *total) {
 
     while (fgets(buffer, MAX_LINHA, arquivo)) {
         sscanf(buffer, "%d;%[^;];%[^;];%d",
-               &(*historicos)[*total].id,
-               (*historicos)[*total].nome,
-               (*historicos)[*total].data,
-               &(*historicos)[*total].pontuacao);
+                &(*historicos)[*total].id,
+                (*historicos)[*total].nome,
+                (*historicos)[*total].data,
+                &(*historicos)[*total].pontuacao);
 
         (*historicos)[*total].data[strcspn((*historicos)[*total].data, "\n\r")] = '\0';
         (*total)++;
@@ -133,8 +135,8 @@ void pesquisarPorData() {
         // compara apenas a parte da data
         if (strcmp(historicos[i].data, dataFormatada) == 0) {
             printf("ID: %d | Nome: %s | Pontuacao: %d\n",
-                   historicos[i].id, historicos[i].nome, 
-                   historicos[i].pontuacao);
+                    historicos[i].id, historicos[i].nome, 
+                    historicos[i].pontuacao);
             encontrados++;
         }
     }
@@ -175,7 +177,7 @@ void pesquisarPorNome() {
         
         if (strstr(nomeComparado, nomeBusca) != NULL) {
             printf("ID: %d | Data: %s | Pontuacao: %d\n",
-                   historicos[j].id, historicos[j].data, historicos[j].pontuacao);
+                    historicos[j].id, historicos[j].data, historicos[j].pontuacao);
             encontrados++;
         }
     }
@@ -204,7 +206,7 @@ void pesquisarPorID() {
     for (int k = 0; k < total; k++) {
         if (historicos[k].id == id) {
             printf("Nome: %s | Data: %s | Pontuacao: %d\n",
-                   historicos[k].nome, historicos[k].data, historicos[k].pontuacao);
+                    historicos[k].nome, historicos[k].data, historicos[k].pontuacao);
             encontrado = 1;
             break;
         }
@@ -215,4 +217,28 @@ void pesquisarPorID() {
     }
 
     liberarHistorico(historicos);
+}
+
+void escreveHistorico(char *nome, int pontuacao)
+{
+    FILE *historico = fopen("data/historico.txt", "a");
+
+    int tamanho = contaLinhasHistorico();
+    for (int id = 0; id < tamanho; id++)
+        fprintf(historico,"%d|%s|%s|%d\n", id+1, nome, "06/06/2025", pontuacao);
+    fclose(historico);
+}
+
+int contaLinhasHistorico() {
+    FILE *arquivo = fopen("data/historico.txt", "r");
+
+    int linhas = 0; //contar as linhas, inicializando com zero
+    char buffer[MAX_LINHA];
+    while (fgets(buffer, MAX_LINHA, arquivo)) {
+        if (strlen(buffer) > 1) {
+        linhas++;
+        }
+    }
+    fclose(arquivo);
+    return linhas;
 }

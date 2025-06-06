@@ -96,7 +96,7 @@ void escreveArquivo(int tamanho,int charMax, Memoria memoria[])
     ranking = fopen("data/ranking.txt", "w");
     fprintf(ranking,"%d %d\n",tamanho,charMax);
     for (int i = 0; i < tamanho - 1; i++)
-       fprintf(ranking,"%s|%s\n",memoria[i].nome,memoria[i].pontuacao);
+        fprintf(ranking,"%s|%s\n",memoria[i].nome,memoria[i].pontuacao);
     
     fclose(ranking);
 }

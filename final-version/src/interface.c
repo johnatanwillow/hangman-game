@@ -216,7 +216,7 @@ void telaSingleplayerJogo(SinglePlayer player, char *letra, char *dica, char *de
         if (player.letras_testadas[i] != '\0')
             printf(" %c ", player.letras_testadas[i]);
     }
-    printf("\n| DICA: \"%s\"                                                             \n", dica);
+    printf("\n| DICA: \"%s\"                                                                \n", dica);
     printf("+------------------------------------------------------------------------------+\n");
     printf("|                                                                              |\n");
     printf("|                             ");
@@ -233,7 +233,7 @@ void telaSingleplayerJogo(SinglePlayer player, char *letra, char *dica, char *de
     }
     printf("\n|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| Digite uma letra: ");
+    printf("| Digite uma letra:                                                            |");
     printf("\n+------------------------------------------------------------------------------+\n");
     scanfFgets(letra, TAM_PALAVRA); // Lê a letra digitada pelo usuário
     for (i = 0; i < strlen(letra); i++)
@@ -265,7 +265,14 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| Digite seu nome ou \"0\" / \"Enter\" p/ voltar (nao digite espaco ou acento):|\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("| Digite seu nome ou \"0\" / \"Enter\" p/ voltar (nao digite espaco ou acento):    |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
     for (int i = 0; i < strlen(nome); i++) {
@@ -296,6 +303,12 @@ int telaSingleplayer(char nome[], int TAM_NOME)
         printf("|                             \"            \"                                   |\n");
         printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
@@ -504,7 +517,6 @@ void telaAdiconarPalavra(char *text)
 }
 
 // Função que imprime a interface da tela de ranking
-// (ainda não implementada, mas já está com o esqueleto pronto)
 void telaRanking()
 {
     system("cls || clear");

@@ -10,6 +10,7 @@
 #include "../include/interface.h"
 #include "../include/single-player.h"
 #include "../include/ranking.h"
+#include "../include/historico.h"
 //----------------------------------------------------
 
 // Váriavies globais
@@ -139,7 +140,7 @@ void singlePlayerJogo()
         }
         else if (strlen(letra) != 1 || strlen(letra) != tamanho)
         {
-            inputErroLogicaUsuario("Tente uma letra ou a palavra inteira! ", partes_do_corpo);
+            inputErroLogicaUsuario("Tente uma letra ou a palavra inteira! ",partes_do_corpo);
         }
     }
     if (player.acertos == tamanho)
@@ -148,11 +149,13 @@ void singlePlayerJogo()
         player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
         telaResultadoJogo(player, partes_do_corpo, palavra, "    CONGRATULATIONS    ", "Parabens! Voce acertou a palavra e ganhou o jogo!");
         ranqueamento(player.nome, player.pontuacao);
+        escreveHistorico(player.nome, player.pontuacao);
     }
     else
     {
         player.pontuacao = 0;
         telaResultadoJogo(player, partes_do_corpo, palavra, "      GAME OVER      ", "Sadness! Voce perdeu o jogo! ");
+        escreveHistorico(player.nome, player.pontuacao);
     }
 }
 

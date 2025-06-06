@@ -1,4 +1,4 @@
-3 7
+4 7
+gustavo|8500
+Gustavo|5800
 Teste|3400
-Gustavo|2900
-Arthur|2300
