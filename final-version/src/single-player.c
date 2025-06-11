@@ -37,6 +37,7 @@ void singlePlayerJogo()
     char *dificuldade;        // Variável para armazenar a dificuldade da palavra escolhida
     char letra[TAM_PALAVRA];  // Variável para armazenar a letra digitada pelo usuário
     int i;                                                 // Operar sobre o vetor de letras testadas
+    char data_hora[20];          // Armazenar data e hora
     //                        {'0', '|', '/', '\\', '/', '\\'};
     char partes_do_corpo[6] = {' ', ' ', ' ', ' ', ' ', ' '}; // Partes do corpo para poder alterar a imagem do boneco
     char errou_palavra[6] = {'0', '|', '/', '\\', '/', '\\'};
@@ -149,13 +150,17 @@ void singlePlayerJogo()
         player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
         telaResultadoJogo(player, partes_do_corpo, palavra, "    CONGRATULATIONS    ", "Parabens! Voce acertou a palavra e ganhou o jogo!");
         ranqueamento(player.nome, player.pontuacao);
-        escreveHistorico(player.nome, player.pontuacao);
+
+        defineData(data_hora);
+        escreveHistorico(player.nome, player.pontuacao, data_hora);
     }
     else
     {
         player.pontuacao = 0;
         telaResultadoJogo(player, partes_do_corpo, palavra, "      GAME OVER      ", "Sadness! Voce perdeu o jogo! ");
-        escreveHistorico(player.nome, player.pontuacao);
+
+        defineData(data_hora);
+        escreveHistorico(player.nome, player.pontuacao, data_hora);
     }
 }
 
@@ -231,4 +236,13 @@ int quantidadeLetrasRepetidasPalavra(int tamanho, char *palavra)
         return 1;
     else
         return rep;
+}
+
+void defineData(char *data_hora) {
+    // Define o tempo atual e pega baseado no local, nesse caso o Brasil
+    time_t data = time(NULL);
+    struct tm *data_local = localtime(&data);
+    sprintf(data_hora, "%02d/%02d/%04d-%02d:%02d:%02d",
+    data_local->tm_mday, data_local->tm_mon + 1, data_local->tm_year + 1900,
+    data_local->tm_hour, data_local->tm_min, data_local->tm_sec);
 }

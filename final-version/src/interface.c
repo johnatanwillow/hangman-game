@@ -9,13 +9,14 @@
 #include "../include/palavras.h"
 #include "../include/interface.h"
 #include "../include/ranking.h"
+#include "../include/historico.h"
 #include "../include/single-player.h"
 //---------------------------------------
 
 #define MAX_TENTATIVAS 6
 #define ESPERAR 2000 // Tempo de espera em segundos (para Sleep)
 
-//-------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
 /**
  * Função que limpa o buffer de entrada (usada para evitar problemas com o fgets())
  */
@@ -145,7 +146,6 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
  * @param {char *} title - titulo da tela de resultado do jogo.
  * @param {char *} messenge - mensagem de resultado do jogo, baseado no acerto ou erro do jogador.
  */
-// Função que imprime o resultado do jagador em jogo SinglePlayer
 void telaResultadoJogo(SinglePlayer player, char *partes_do_corpo, char *palavra, char *title, char *messenge)
 {
     int i;
@@ -491,6 +491,48 @@ void telaMenuGerenciarPalavras()
     } while (opcao != '0');
 }
 
+
+// Função que imprime a interface da tela pesquisa de historicos no arquivo
+void telaGerenciarHistorico() {
+    int opcao;
+    do {
+        system("cls || clear");
+        printf("+==============================================================================+\n");
+        printf("|                               -= HISTORICO =-                                |\n");
+        printf("+==============================================================================+\n");
+        printf("| 1. Pesquisar por Data                                                        |\n");
+        printf("| 2. Pesquisar por Nome do Jogador                                             |\n");
+        printf("| 3. Pesquisar por ID da Partida                                               |\n");
+        printf("| 4. Listar todos os historicos                                                |\n");
+        printf("| 0. Voltar ao menu anterior                                                   |\n");
+        printf("+------------------------------------------------------------------------------+\n");
+        printf("| Escolha uma opcao:                                                           |\n");
+        printf("+==============================================================================+\n");
+        scanf("%d", &opcao);
+        getchar();
+
+        switch (opcao) {
+            case 1:
+                pesquisarPorData();
+                break;
+            case 2:
+                pesquisarPorNome();
+                break;
+            case 3:
+                pesquisarPorID();
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opcao invalida. Tente novamente. \n");
+        }
+
+        printf("\nPressione Enter para continuar...");
+        getchar();
+
+    } while (opcao != 0);
+}
+
 // Função e tela que que auxilia na lógica de adicionar palavras
 void telaAdiconarPalavra(char *text)
 {
@@ -599,4 +641,4 @@ void marciano()
     printf("|                                                    -= OBRIGADO, MARCIANO! =-                                               |\n");
     printf("+============================================================================================================================+\n");
 }
-//-------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------

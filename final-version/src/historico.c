@@ -5,46 +5,6 @@
 #include <ctype.h>
 #include "../include/historico.h"
 
-void telaGerenciarHistorico () {
-    int opcao;
-    do {
-        system("cls || clear");
-        printf("+==============================================================================+\n");
-        printf("|                               -= HISTORICO =-                                |\n");
-        printf("+==============================================================================+\n");
-        printf("| 1. Pesquisar por Data                                                        |\n");
-        printf("| 2. Pesquisar por Nome do Jogador                                             |\n");
-        printf("| 3. Pesquisar por ID da Partida                                               |\n");
-        printf("| 0. Voltar ao menu anterior                                                   |\n");
-        printf("+------------------------------------------------------------------------------+\n");
-        printf("| Escolha uma opcao:                                                           |\n");
-        printf("+==============================================================================+\n");
-        scanf("%d", &opcao);
-        getchar();
-
-        switch (opcao) {
-            case 1:
-                pesquisarPorData();
-                break;
-            case 2:
-                pesquisarPorNome();
-                break;
-            case 3:
-                pesquisarPorID();
-                break;
-            case 0:
-                break;
-            default:
-                printf("Opcao invalida. Tente novamente. \n");
-        }
-
-        printf("\nPressione Enter para continuar...");
-        getchar();
-        // while ((opcao = getchar()) != '\n' && opcao != EOF);
-
-    } while (opcao != 0);
-}
-
 void strToLower(char *str) { // funcao para converter maiusculas e minusculas na pesquisa do nome. agora aceita tanto Gustavo, gustavo ou GUSTavO por exemplo
     for (int i = 0; str[i]; i++) {
         str[i] = tolower((unsigned char)str[i]);
@@ -219,13 +179,13 @@ void pesquisarPorID() {
     liberarHistorico(historicos);
 }
 
-void escreveHistorico(char *nome, int pontuacao)
+void escreveHistorico(char *nome, int pontuacao, char *data)
 {
     FILE *historico = fopen("data/historico.txt", "a");
 
     int tamanho = contaLinhasHistorico();
-    for (int id = 0; id < tamanho; id++)
-        fprintf(historico,"%d|%s|%s|%d\n", id+1, nome, "06/06/2025", pontuacao);
+    // for (int id = 0; id < tamanho; id++)
+    fprintf(historico,"%d|%s|%s|%d\n", tamanho+1, nome, data, pontuacao);
     fclose(historico);
 }
 

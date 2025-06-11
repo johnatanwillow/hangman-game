@@ -1,7 +1,7 @@
 //-----------------------------------------------------
 // EXECUTE NO TERMINAL:
 // gcc main.c ./src/single-player.c ./src/interface.c ./src/palavras.c ./src/ranking.c ./src/historico.c -o ./bin/main
-// ./bin/main
+// ./bin/main ou "./bin/main"
 //-----------------------------------------------------
 
 #include <stdio.h>
@@ -14,6 +14,7 @@
 //-----------------------------------------------------
 #include "./include/interface.h" 
 #include "./include/palavras.h"
+#include "./include/historico.h"
 #include "./include/single-player.h"
 //-----------------------------------------------------
 
@@ -47,7 +48,7 @@ int main()
             telaRanking();
             break;
         case '5':
-            telaHistorico();
+            telaGerenciarHistorico();
             break;
         case '0':
             printf("Saindo do jogo...\n");
