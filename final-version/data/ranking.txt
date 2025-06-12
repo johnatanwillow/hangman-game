@@ -1,5 +1,7 @@
-5 7
+7 7
 gustavo|32300
-Gustavo|5800
+Link|23400
+Gustavo|13300
 Jhoy|3500
 Teste|3400
+Murilo|1300

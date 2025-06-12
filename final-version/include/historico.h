@@ -23,5 +23,6 @@ void pesquisarPorNome();
 void pesquisarPorID();
 void escreveHistorico(char *nome, int pontuacao, char *data);
 int contaLinhasHistorico();
+void listarHistorico();
 
 #endif // HISTORICO_H

@@ -242,7 +242,6 @@ void defineData(char *data_hora) {
     // Define o tempo atual e pega baseado no local, nesse caso o Brasil
     time_t data = time(NULL);
     struct tm *data_local = localtime(&data);
-    sprintf(data_hora, "%02d/%02d/%04d-%02d:%02d:%02d",
-    data_local->tm_mday, data_local->tm_mon + 1, data_local->tm_year + 1900,
-    data_local->tm_hour, data_local->tm_min, data_local->tm_sec);
+    sprintf(data_hora, "%02d/%02d/%04d",
+    data_local->tm_mday, data_local->tm_mon + 1, data_local->tm_year + 1900);
 }

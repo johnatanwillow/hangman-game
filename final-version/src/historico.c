@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "../include/historico.h"
 
 void strToLower(char *str) { // funcao para converter maiusculas e minusculas na pesquisa do nome. agora aceita tanto Gustavo, gustavo ou GUSTavO por exemplo
@@ -12,7 +13,7 @@ void strToLower(char *str) { // funcao para converter maiusculas e minusculas na
 }
 
 void carregarHistorico(Historico **historicos, int *total) {
-    FILE *arquivo = fopen("historico.txt", "r");
+    FILE *arquivo = fopen("data/historico.txt", "r");
     if (!arquivo) {
         perror("Erro ao abrir o arquivo.txt.\n");
         *historicos = NULL;
@@ -21,15 +22,15 @@ void carregarHistorico(Historico **historicos, int *total) {
     }
 
     char buffer[MAX_LINHA];
-    int linhas = contaLinhasHistorico();
+    // int linhas = contaLinhasHistorico();
 
-    // int linhas = 0; //contar as linhas, inicializando com zero
-    // while (fgets(buffer, MAX_LINHA, arquivo)) {
-    //     if (strlen(buffer) > 1) {
-    //     linhas++;
-    //     }
-    // }
-    // rewind(arquivo);
+    int linhas = 0; //contar as linhas, inicializando com zero
+    while (fgets(buffer, MAX_LINHA, arquivo)) {
+        if (strlen(buffer) > 1) {
+        linhas++;
+        }
+    }
+    rewind(arquivo);
 
     *historicos = (Historico*) malloc(linhas * sizeof(Historico));
     if(!(*historicos)) {
@@ -40,7 +41,7 @@ void carregarHistorico(Historico **historicos, int *total) {
     *total = 0;
 
     while (fgets(buffer, MAX_LINHA, arquivo)) {
-        sscanf(buffer, "%d;%[^;];%[^;];%d",
+        sscanf(buffer, "%d|%[^|]|%[^|]|%d",
                 &(*historicos)[*total].id,
                 (*historicos)[*total].nome,
                 (*historicos)[*total].data,
@@ -83,7 +84,7 @@ void pesquisarPorData() {
         strcpy(dataFormatada, data);
         dataFormatada[strcspn(dataFormatada, "\n\r")] = '\0';
     } else {
-        printf("Formato de data invalido! Use DDMMAAAA\n");
+        printf("Formato de data invalido! Use DDMMAAAA ou DD/MM/AAAA\n");
         liberarHistorico(historicos);
         return;
     }
@@ -104,6 +105,28 @@ void pesquisarPorData() {
     if (!encontrados) {
         printf("-= Nenhum registro encontrado para %s =-\n", dataFormatada);
         printf("Dica: Verifique se usou o formato DDMMAAAA\n");
+    }
+
+    liberarHistorico(historicos);
+}
+
+void listarHistorico() {
+    Historico *historicos;
+    int total;
+    char data[MAX_DATA];
+
+    carregarHistorico(&historicos, &total); //caso nao exista nenhum dado historico carregado
+    if (!historicos || total == 0) {
+        printf("Nenhum dado historico carregado.\n");
+        return;
+    }
+
+    printf("\n=== RESULTADOS %s ===\n");
+
+    for (int i = 0; i < total; i++) {
+        printf("ID: %d | Nome: %s | Data: %s | Pontuacao: %d\n",
+                historicos[i].id, historicos[i].nome, historicos[i].data, 
+                historicos[i].pontuacao);
     }
 
     liberarHistorico(historicos);

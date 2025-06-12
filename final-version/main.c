@@ -1,6 +1,6 @@
 //-----------------------------------------------------
 // EXECUTE NO TERMINAL:
-// gcc main.c ./src/single-player.c ./src/interface.c ./src/palavras.c ./src/ranking.c ./src/historico.c -o ./bin/main
+// gcc main.c ./src/single-player.c ./src/interface.c ./src/palavras.c ./src/ranking.c ./src/historico.c ./src/multiplayer.c -o ./bin/main
 // ./bin/main ou "./bin/main"
 //-----------------------------------------------------
 
@@ -12,10 +12,11 @@
 #include <conio.h> //PARA RECEBER AS PALVRAS DO USUÁRIO
 #include <windows.h>
 //-----------------------------------------------------
-#include "./include/interface.h" 
+#include "./include/interface.h"
 #include "./include/palavras.h"
 #include "./include/historico.h"
 #include "./include/single-player.h"
+#include "./include/multiplayer.h"
 //-----------------------------------------------------
 
 // Váriavies globais
@@ -24,7 +25,7 @@
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    
+
     char opcao;
 
     do
@@ -39,7 +40,7 @@ int main()
             singlePlayerJogo();
             break;
         case '2':
-            // telaMultiplayer();
+            multiPlayerJogo();
             break;
         case '3':
             telaMenuGerenciarPalavras();

@@ -11,6 +11,7 @@
 #include "../include/ranking.h"
 #include "../include/historico.h"
 #include "../include/single-player.h"
+#include "../include/multiplayer.h"
 //---------------------------------------
 
 #define MAX_TENTATIVAS 6
@@ -275,8 +276,10 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     printf("| Digite seu nome ou \"0\" / \"Enter\" p/ voltar (nao digite espaco ou acento):    |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
-    for (int i = 0; i < strlen(nome); i++) {
-        if (!isalpha(nome[i])) {
+    for (int i = 0; i < strlen(nome); i++)
+    {
+        if (!isalpha(nome[i]))
+        {
             inputErroEntrada("Nome invalido! Tente novamente.");
             return 1; // Retorna 1 se o usuário quiser voltar
         }
@@ -284,9 +287,12 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     if (nome[0] == '0')
     {
         return 1; // Retorna 1 se o usuário quiser voltar
-    } else if (nome[0] == '\n') {
+    }
+    else if (nome[0] == '\n')
+    {
         return 1; // Retorna 1 se o usuário quiser voltar
-    } else
+    }
+    else
     {
         system("cls || clear");
         printf("+==============================================================================+\n");
@@ -321,20 +327,165 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     }
 }
 
-// Função que imprime a interface da tela de jogo Multiplayer
-// (ainda não implementada, mas já está com o esqueleto pronto)
-void telaMultiplayerJogo(char *jogador1, char *jogador2, char *letra)
+/** Função que imprime o resultado do jogo do jagador em jogo MultiPlayer (para logica do jogo MultiPlayer)
+ * @param {MultiPlayer} player - jogador que jogou o jogo.
+ * @param {char *} palavra - indicando a palavra da vez do jogo.
+ * @param {char *} partes_do_corpo - partes do corpo do personagem que representa o erro.
+ * @param {char *} title - titulo da tela de resultado do jogo.
+ * @param {char *} messenge - mensagem de resultado do jogo, baseado no acerto ou erro do jogador.
+ */
+void telaResultadoJogoMultiplayer(MultiPlayer player, char *partes_do_corpo, char *palavra, char *title, char *messenge)
 {
-    int erros = 2; // EXEMPLO
-    char palavra_oculta[] = "_ _ _ _ _";
-    char letras_tentadas[] = "A, E";
-    // MESMA COISA DA TELA DE JOGO DO MODO SINGLEPLAYER, POREM AGORA ADAPTADA PARA O MODO MULTIPLAYER (IMAGEM ILUSTRATIVA)
+    int i;
 
-    for (int rodada = 1; rodada <= 2; rodada++)
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                          -= %s =-                       |\n", title);
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("|                                +----+                                        |\n");
+    printf("|                                |/   |                                        |\n");
+    printf("|                                |    %c                                        |\n", partes_do_corpo[0]);
+    printf("|                                |   %c%c%c                                       |\n", partes_do_corpo[2], partes_do_corpo[1], partes_do_corpo[3]);
+    printf("|                                |   %c %c                                       |\n", partes_do_corpo[4], partes_do_corpo[5]);
+    printf("|                                |                                             |\n");
+    printf("|                             ==============                                   |\n");
+    printf("|                             \"            \"                                   |\n");
+    printf("|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| %s! %s                          \n", player.nomes[0], messenge);
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| A palavra era: %s                                                           \n", palavra);
+    printf("| Sua pontuacao foi: %d                                                       \n", player.pontuacao);
+    printf("| Acertos: %d                                                                   \n", player.acertos);
+    printf("| Erros: %d                                                                     |\n", player.erros);
+    printf("| Letras tentadas :");
+    for (i = 0; i < 26; i++)
+    {
+        // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
+        if (player.letras_testadas[i] != '\0')
+            printf(" %c ", player.letras_testadas[i]);
+    }
+    printf("\n+------------------------------------------------------------------------------+\n");
+    printf("| Pressione uma tecla para continuar...\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    getchar(); // Aguarda o usuário pressionar uma tecla
+}
+
+// Função que imprime a interface da tela de jogo MultiPlayer
+void telaMultiplayerJogo(MultiPlayer player, char *letra, char *dica, char *descoberta, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA, char *dificuldade, int playerAtivo)
+{
+    int i;
+
+    // FUNCAO QUE MOSTRA A TELA DE JOGO MultiPLAYER (PALAVRAS, TENTATIVAS RESTANTES E LETRAS TENTADAS SAO MERAMENTE ILUSTRATIVAS)
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                             -= MODO MULTIPLAYER =-                          |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("|                                +----+                                        |\n");
+    printf("|                                |/   |                                        |\n");
+    printf("|                                |    %c                                        |\n", partes_do_corpo[0]);
+    printf("|                                |   %c%c%c                                       |\n", partes_do_corpo[2], partes_do_corpo[1], partes_do_corpo[3]);
+    printf("|                                |   %c %c                                       |\n", partes_do_corpo[4], partes_do_corpo[5]);
+    printf("|                                |                                             |\n");
+    printf("|                             ==============                                   |\n");
+    printf("|                             \"            \"                                   |\n");
+    printf("|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| Vez de: %s                                                                     |\n", player.nomes[playerAtivo]);
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| Acertos: %d                                                                   |\n", player.acertos);
+    printf("| Erros: %d                                                                     |\n", player.erros);
+    printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - player.erros);
+    printf("| Dificuldade: %s (%d letras)                                                   \n", dificuldade, tamanho_palavra);
+    printf("| Letras tentadas :");
+    for (i = 0; i < 26; i++)
+    {
+        // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
+        if (player.letras_testadas[i] != '\0')
+            printf(" %c ", player.letras_testadas[i]);
+    }
+    printf("\n| DICA: \"%s\"                                                                \n", dica);
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                             ");
+    for (i = 0; i < tamanho_palavra; i++)
+    {
+        if (descoberta[i] == '_')
+        {
+            printf("_ ");
+        }
+        else
+        {
+            printf("%c ", descoberta[i]);
+        }
+    }
+    printf("\n|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| Digite uma letra:                                                            |");
+    printf("\n+------------------------------------------------------------------------------+\n");
+    scanfFgets(letra, TAM_PALAVRA); // Lê a letra digitada pelo usuário
+    for (i = 0; i < strlen(letra); i++)
+    {
+        letra[i] = toupper(letra[i]); // Converte a string digitada para maiúscula
+    }
+    printf("+==============================================================================+\n");
+}
+
+// Função que imprime a interface da tela de escolha do nome do MultiPlayer ou retornar ao menu principal (foto de ser int)
+int telaMultiplayer(char nomeA[], char nomeB[], int TAM_NOME)
+{
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                            -= MODO MULTIPLAYER =-                           |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("|                                +----+                                        |\n");
+    printf("|                                |/   |                                        |\n");
+    printf("|                                |    0                                        |\n");
+    printf("|                                |   /|\\                                       |\n");
+    printf("|                                |   / \\                                       |\n");
+    printf("|                                |                                             |\n");
+    printf("|                             ==============                                   |\n");
+    printf("|                             \"            \"                                   |\n");
+    printf("|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("| Digite nome do jogador 1 ou \"0\" / \"Enter\" p/ voltar:                     |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    scanfFgets(nomeA, TAM_NOME); // Lê o nome do jogador
+    for (int i = 0; i < strlen(nomeA); i++)
+    {
+        if (!isalpha(nomeA[i]))
+        {
+            inputErroEntrada("Nome invalido! Tente novamente.");
+            return 1; // Retorna 1 se o usuário quiser voltar
+        }
+    }
+    if (nomeA[0] == '0')
+    {
+        return 1; // Retorna 1 se o usuário quiser voltar
+    }
+    else if (nomeA[0] == '\n')
+    {
+        return 1; // Retorna 1 se o usuário quiser voltar
+    }
+    else
     {
         system("cls || clear");
         printf("+==============================================================================+\n");
-        printf("|                              -= MODO MULTIPLAYER =-                          |\n");
+        printf("|                            -= MODO MULTIPLAYER =-                           |\n");
         printf("+==============================================================================+\n");
         printf("|                                                                              |\n");
         printf("|                                +----+                                        |\n");
@@ -348,61 +499,74 @@ void telaMultiplayerJogo(char *jogador1, char *jogador2, char *letra)
         printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");
         printf("|                                                                              |\n");
-        printf("| Palavra: %s                                                           |\n", palavra_oculta);
-        printf("| Letras tentadas: %s                                                        |\n", letras_tentadas);
-        printf("| Tentativas restantes: %d                                                      |\n", MAX_TENTATIVAS - erros);
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("| Digite nome do jogador 2 ou \"0\" / \"Enter\" p/ voltar:                     |\n");
         printf("+------------------------------------------------------------------------------+\n");
-        printf("| Jogador %d (%s), digite uma letra: ", rodada, rodada == 1 ? jogador1 : jogador2);
-        limparBuffer();
-        scanfFgets(letra, sizeof(letra));
-        for (int i = 0; i < strlen(letra); i++)
+        scanfFgets(nomeB, TAM_NOME); // Lê o nome do jogador
+        for (int i = 0; i < strlen(nomeB); i++)
         {
-            letra[i] = toupper(letra[i]); // Converte a string digitada para maiúscula
+            if (!isalpha(nomeB[i]))
+            {
+                inputErroEntrada("Nome invalido! Tente novamente.");
+                return 1; // Retorna 1 se o usuário quiser voltar
+            }
         }
-        printf("| Voce digitou: %c\n", letra);
-        printf("+==============================================================================+\n");
-        getchar();
+        if (nomeB[0] == '0')
+        {
+            return 1; // Retorna 1 se o usuário quiser voltar
+        }
+        else if (nomeB[0] == '\n')
+        {
+            return 1; // Retorna 1 se o usuário quiser voltar
+        }
+        else
+        {
+
+            system("cls || clear");
+            printf("+==============================================================================+\n");
+            printf("|                            -= MODO MULTIPLAYER =-                           |\n");
+            printf("+==============================================================================+\n");
+            printf("|                                                                              |\n");
+            printf("|                                +----+                                        |\n");
+            printf("|                                |/   |                                        |\n");
+            printf("|                                |    0                                        |\n");
+            printf("|                                |   /|\\                                       |\n");
+            printf("|                                |   / \\                                       |\n");
+            printf("|                                |                                             |\n");
+            printf("|                             ==============                                   |\n");
+            printf("|                             \"            \"                                   |\n");
+            printf("|                                                                              |\n");
+            printf("+------------------------------------------------------------------------------+\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("|                                                                              |\n");
+            printf("| Bem-vindos(as), %s e %s! Preparando o jogo . . .                              \n", nomeA, nomeB);
+            printf("+==============================================================================+\n");
+            Sleep(ESPERAR);
+            return 0; // Retorna 0 se o usuário quiser continuar
+        }
     }
 }
-
-// Função que imprime a interface da tela de escolha dos nomes do Multiplayer
-// (ainda não implementada, mas já está com o esqueleto pronto)
-void telaMultiplayer(char *jogador1, char *jogador2, char *letra)
-{
-    // ALGORITMO SEMELHANTE AO DO MODO SINGLEPLAYER, TODAVIA AGORA ADAPTADO PARA O MODO MULTIPLAYER
-    system("cls || clear");
-    printf("+==============================================================================+\n");
-    printf("|                             -= MODO MULTIPLAYER =-                           |\n");
-    printf("+==============================================================================+\n");
-    printf("|                                                                              |\n");
-    printf("|                                +----+                                        |\n");
-    printf("|                                |/   |                                        |\n");
-    printf("|                                |    0                                        |\n");
-    printf("|                                |   /|\\                                       |\n");
-    printf("|                                |   / \\                                       |\n");
-    printf("|                                |                                             |\n");
-    printf("|                             ==============                                   |\n");
-    printf("|                             \"            \"                                   |\n");
-    printf("|                                                                              |\n");
-    printf("+------------------------------------------------------------------------------+\n");
-    printf("| Jogador 1, digite seu nome: ");
-    printf("+------------------------------------------------------------------------------+\n");
-    limparBuffer();
-    scanfFgets(jogador1, sizeof(jogador1));
-    printf("+------------------------------------------------------------------------------+\n");
-    printf("| Jogador 2, digite seu nome: ");
-    printf("+------------------------------------------------------------------------------+\n");
-    limparBuffer();
-    scanfFgets(jogador2, sizeof(jogador2));
-    printf("+------------------------------------------------------------------------------+\n");
-    printf("| Jogadores %s e %s, sejam vem-vindos(as). Preparando o jogo...\n", jogador1, jogador2);
-    printf("+==============================================================================+\n");
-    getchar();
-    telaMultiplayerJogo(jogador1, jogador2, letra);
-}
-
 // Função que confirma a adição de uma nova palavra
-int confirmarAdicaoDePalavra() {
+int confirmarAdicaoDePalavra()
+{
     char opcao;
 
     do
@@ -491,15 +655,27 @@ void telaMenuGerenciarPalavras()
     } while (opcao != '0');
 }
 
-
 // Função que imprime a interface da tela pesquisa de historicos no arquivo
-void telaGerenciarHistorico() {
+void telaGerenciarHistorico()
+{
     int opcao;
-    do {
+    do
+    {
         system("cls || clear");
         printf("+==============================================================================+\n");
         printf("|                               -= HISTORICO =-                                |\n");
         printf("+==============================================================================+\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
         printf("| 1. Pesquisar por Data                                                        |\n");
         printf("| 2. Pesquisar por Nome do Jogador                                             |\n");
         printf("| 3. Pesquisar por ID da Partida                                               |\n");
@@ -511,26 +687,34 @@ void telaGerenciarHistorico() {
         scanf("%d", &opcao);
         getchar();
 
-        switch (opcao) {
-            case 1:
-                pesquisarPorData();
-                break;
-            case 2:
-                pesquisarPorNome();
-                break;
-            case 3:
-                pesquisarPorID();
-                break;
-            case 0:
-                break;
-            default:
-                printf("Opcao invalida. Tente novamente. \n");
+        switch (opcao)
+        {
+        case 1:
+            pesquisarPorData();
+            break;
+        case 2:
+            pesquisarPorNome();
+            break;
+        case 3:
+            pesquisarPorID();
+            break;
+        case 4:
+            listarHistorico();
+            break;
+        case 0:
+            break;
+        default:
+            printf("Opcao invalida. Tente novamente. \n");
         }
 
         printf("\nPressione Enter para continuar...");
         getchar();
 
     } while (opcao != 0);
+}
+
+void telaInterageHistorico(char *text) {
+    
 }
 
 // Função e tela que que auxilia na lógica de adicionar palavras
@@ -554,6 +738,17 @@ void telaAdiconarPalavra(char *text)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("| %s\n", text);
     printf("+==============================================================================+\n");
 }
@@ -571,7 +766,6 @@ void telaRanking()
     printf("+-----+----------+-------------------------------------------------------------+\n");
     lerArquivoRanking();
     getchar();
-    
 }
 
 // Função que imprime a interface da tela de histórico
