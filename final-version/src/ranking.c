@@ -6,6 +6,8 @@
 
 char buffer[MAX_N_CHAR];//Char global para ler os arquivos
 
+//A função principal no ranking ela chama as outras funções 
+
 void ranqueamento(char *nome, int pontuacao_player)
 {
     int tamanho = contaLinhasRanking();
@@ -20,6 +22,9 @@ void ranqueamento(char *nome, int pontuacao_player)
     escreveArquivo(tamanho,charMax,memoria);
 }
 
+/*Pega todos os nomes e pontuações no arquivo e colocam na memoria.Além de verificar se há outro nome igual ao nome jogador e se tiver adicionar a pontuação anterior e a sua posição do vetor.
+* Além de pegar o maior tamanho do nome;
+*/
 void rankingEmVetor(char *nome, int *pSomaDasPontuacoes, int *piNome ,int *charMax, Memoria memoria[])
 {
     FILE *ranking;
@@ -53,7 +58,7 @@ void rankingEmVetor(char *nome, int *pSomaDasPontuacoes, int *piNome ,int *charM
     }
     fclose(ranking);
 }
-
+//Organiza o Rakning adicionando o nome player na posição além de ,se tiver , apagar o nome da antiga posição que estava;
 void organizaRanking(char *nome,int pontuacao_player, int iNome, int *tamanho, Memoria memoria[]){
     int i = 0;
     int tam = *tamanho;//Para fazer mudar ou não o tamanho dela para escrever no arquivo
@@ -89,15 +94,17 @@ void organizaRanking(char *nome,int pontuacao_player, int iNome, int *tamanho, M
 
 }
 
-
+//Escreve dentro de ./data/ranking.txt os metadados , o  nome e a pontuação
 void escreveArquivo(int tamanho,int charMax, Memoria memoria[])
 {
     FILE *ranking;
     ranking = fopen("data/ranking.txt", "w");
+
     fprintf(ranking,"%d %d\n",tamanho,charMax);
-    for (int i = 0; i < tamanho - 1; i++)
-        fprintf(ranking,"%s|%s\n",memoria[i].nome,memoria[i].pontuacao);
     
+    for (int i = 0; i < tamanho; i++){
+        fprintf(ranking,"%s|%s\n",memoria[i].nome,memoria[i].pontuacao);
+    }
     fclose(ranking);
 }
 
@@ -113,17 +120,23 @@ void lerArquivoRanking()
     int aux;
     fscanf(ranking,"%d %d",&aux,&palvramaior);
     fgets(buffer,MAX_N_CHAR,ranking);
-    while (fgets(buffer, MAX_N_CHAR, ranking))
-    {
-        i++;
+    do{ 
+    
+        if(i == 0){
+            nome_extraido = "NOME";
+            pontuacao_extraida = "PONTOS";
+            printf("| POS | %s ", nome_extraido);
+        }else{
         nome_extraido = strtok(buffer, "|");
         pontuacao_extraida = strtok(NULL, "\n"); 
-
         printf("| %3d | %s ", i, nome_extraido);
+        }
+        i++;
+        
         for(int j = 0 ; j < palvramaior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
         printf(" ");
         printf("-> %s", pontuacao_extraida);
-        for(int j = 0 ; j < 63-palvramaior;j++)
+        for(int j = 0 ; j < 67-palvramaior -strlen(pontuacao_extraida);j++)
             printf(" ");//É so para n ter um textão de 51 espaços
         printf("|\n");
         printf("+");
@@ -133,8 +146,8 @@ void lerArquivoRanking()
         for(int j = 0;j < 69-palvramaior;j++)
             printf("-");
         printf("+\n");
-        // printf("| %d %s|\n", i, buffer);
-    }
+
+    }while(fgets(buffer, MAX_N_CHAR, ranking));
     fclose(ranking);
 }
 
@@ -144,7 +157,8 @@ int contaLinhasRanking()
     arquivo = fopen("data/ranking.txt", "r");
 
     int qLinha = 0;
-    fscanf(arquivo,"%d",&qLinha);
+    if(arquivo != NULL)
+        fscanf(arquivo,"%d",&qLinha);
 
     fclose(arquivo);
     return qLinha;
