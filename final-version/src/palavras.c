@@ -22,7 +22,7 @@ char buffer[MAX_N_CHAR]; // Como será usado pelas as duas funções,ele é inst
 void palavraAleatoria(char **palavra, char **dica)
 {
     FILE *arquivo;
-    arquivo = fopen("data/arquivo.txt", "r"); // Abertura do arquivo em modo de apenas leitura 'r'
+    arquivo = fopen("data/palavras.txt", "r"); // Abertura do arquivo em modo de apenas leitura 'r'
 
     srand(time(NULL));
     int linhaAleatoria = rand() % contaLinhasPalavras() + 1; // Aleatoriza qual linha será lida,o +1 é pq 0 até (qLinha-1) ir pra 1 até qLinhas
@@ -41,7 +41,7 @@ void palavraAleatoria(char **palavra, char **dica)
 int contaLinhasPalavras()
 {
     FILE *arquivo;
-    arquivo = fopen("data/arquivo.txt", "r");
+    arquivo = fopen("data/palavras.txt", "r");
 
     int qLinhas = 0;
     if(arquivo != NULL){
@@ -61,7 +61,7 @@ void adicionarPalavra()
     
     FILE *arquivo;
     temArquivo();   
-    arquivo = fopen("data/arquivo.txt", "r+"); // Abertura do arquivo em mode de adicão recente sem apagar os dados anteirores 'a'
+    arquivo = fopen("data/palavras.txt", "r+"); // Abertura do arquivo em mode de adicão recente sem apagar os dados anteirores 'a'
     
     int id = contaLinhasPalavras() + 1; // Para o próximo id
     char palavra[TAM_PALAVRA];
@@ -164,7 +164,7 @@ void adicionarPalavra()
 int temArquivo()
 {
     FILE *arquivo;
-    arquivo = fopen("data/arquivo.txt", "r");
+    arquivo = fopen("data/palavras.txt", "r");
 
     if (arquivo == NULL)
     { // SE CASO ARQUIVO NÃO FOR LIDO,DÁ MENSAGEM DE ERRO
