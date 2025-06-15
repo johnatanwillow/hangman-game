@@ -5,18 +5,16 @@
 int main()
 {
   int tamanho_linha = 80;
-  char text[20] = "Gustav";
+  char text[20] = "Gustavaaaaaaaaaaa";
   char texto[150];
 
   sprintf(texto, "| %s", text);
-  printf("%s", texto);
+  printf("%s", texto); 
   for (int i = 0; i < tamanho_linha - strlen(texto); i++) {
     if (i != tamanho_linha - strlen(texto) - 1)
       printf(" ");
     else 
-      printf("|");
-
-  }
+      printf("|");}
   
   printf("\n|                                                                              |\n");
 }

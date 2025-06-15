@@ -14,7 +14,7 @@ typedef struct {
 } Historico;
 
 void telaGerenciarHistorico();
-void telaHistorico();
+void listarHistorico();
 void strToLower(char *str);
 void carregarHistorico(Historico **historicos, int *total);
 void liberarHistorico(Historico *historicos);

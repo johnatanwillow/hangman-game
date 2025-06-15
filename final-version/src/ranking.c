@@ -135,10 +135,10 @@ void lerArquivoRanking()
         
         for(int j = 0 ; j < palvramaior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
         printf(" ");
-        printf("-> %s", pontuacao_extraida);
+        printf("| %s", pontuacao_extraida);
         for(int j = 0 ; j < 67-palvramaior -strlen(pontuacao_extraida);j++)
             printf(" ");//É so para n ter um textão de 51 espaços
-        printf("|\n");
+        printf(" |\n");
         printf("+");
         for(int j = 0 ; j < palvramaior+8;j++)//Como o + vai na seta ent é necessário ver isso
         printf("-");

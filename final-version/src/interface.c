@@ -16,6 +16,13 @@
 
 #define MAX_TENTATIVAS 6
 #define ESPERAR 2000 // Tempo de espera em segundos (para Sleep)
+char texto[150];
+int tamanho_linha = 78;
+int max_char;
+char texto_letras_testadas[150] = "";
+char texto_letra[4] = "";
+char texto_palavra[50] = "";
+char texto_p[4] = "";
 
 //-----------------------------------------------------------------------------------
 /**
@@ -60,13 +67,18 @@ void exibirMenuPrincipal()
     printf("|   ==============                                                             |\n");
     printf("|   \"            \"                                                             |\n");
     printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("|------------------------------------------------------------------------------|\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("| 1. Jogar (Singleplayer)                                                      |\n");
     printf("| 2. Jogar (Multiplayer)                                                       |\n");
     printf("| 3. Gerenciar Palavras                                                        |\n");
     printf("| 4. Ver Ranking                                                               |\n");
     printf("| 5. Ver Historico                                                             |\n");
     printf("| 0. Sair                                                                      |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("+==============================================================================+\n");
     printf("| Escolha uma opcao:                                                           |\n");
     printf("+==============================================================================+\n");
@@ -99,13 +111,51 @@ void inputErroEntrada(char *texto_do_erro)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| %s                                                                           \n", texto_do_erro);
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    sprintf(texto, "%s", texto_do_erro);
+    formatacaoBonita();
     printf("|------------------------------------------------------------------------------|\n");
     printf("| Aguarde...                                                                   |\n");
     printf("+==============================================================================+\n");
     Sleep(ESPERAR);
 }
 
+void semHistorico(char *texto_do_erro)
+{
+
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                             -= ERROR HISTORICO =-                            |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("|                                +----+                                        |\n");
+    printf("|                                |/   |                                        |\n");
+    printf("|                                |    0                                        |\n");
+    printf("|                                |   /|\\                                       |\n");
+    printf("|                                |   / \\                                       |\n");
+    printf("|                                |                                             |\n");
+    printf("|                             ==============                                   |\n");
+    printf("|                             \"            \"                                   |\n");
+    printf("|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    sprintf(texto, "%s", texto_do_erro);
+    formatacaoBonita();
+    printf("|------------------------------------------------------------------------------|\n");
+    printf("| Aguarde...                                                                   |\n");
+    printf("+==============================================================================+\n");
+    Sleep(ESPERAR);
+}
+
+// ------------------------------------------------------------------------------------------------------
 /** Função que imprime alguma mensagem de erro para o usuário (para logica do jogo SinglePlayer)
  * @param {char *} texto_do_erro - texto fornecido de acordo com o tipo de erro.
  * @param {char *} partes_do_corpo - partes do corpo do personagem que representa o erro.
@@ -133,7 +183,10 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| %s                                                                            \n", texto_do_erro);
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    sprintf(texto, "%s", texto_do_erro);
+    formatacaoBonita();
     printf("|------------------------------------------------------------------------------|\n");
     printf("| Aguarde...                                                                   |\n");
     printf("+==============================================================================+\n");
@@ -150,6 +203,8 @@ void inputErroLogicaUsuario(char *texto_do_erro, char *partes_do_corpo)
 void telaResultadoJogo(SinglePlayer player, char *partes_do_corpo, char *palavra, char *title, char *messenge)
 {
     int i;
+    sprintf(texto_letras_testadas, "");
+    sprintf(texto_letra, "");
 
     system("cls || clear");
     printf("+==============================================================================+\n");
@@ -165,22 +220,30 @@ void telaResultadoJogo(SinglePlayer player, char *partes_do_corpo, char *palavra
     printf("|                             ==============                                   |\n");
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| %s! %s                          \n", player.nome, messenge);
+    sprintf(texto, "%s! %s", player.nome, messenge);
+    formatacaoBonita();
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| A palavra era: %s                                                           \n", palavra);
-    printf("| Sua pontuacao foi: %d                                                       \n", player.pontuacao);
-    printf("| Acertos: %d                                                                   \n", player.acertos);
+    sprintf(texto, "A palavra era: %s", palavra);
+    formatacaoBonita();
+    sprintf(texto, "Sua pontuacao foi: %d", player.pontuacao);
+    formatacaoBonita();
+    sprintf(texto, "Acertos: %d", player.acertos);
+    formatacaoBonita();
     printf("| Erros: %d                                                                     |\n", player.erros);
-    printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {
         // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-        if (player.letras_testadas[i] != '\0')
-            printf(" %c ", player.letras_testadas[i]);
+        if (player.letras_testadas[i] != '\0') {
+            sprintf(texto_letra, " %c ", player.letras_testadas[i]);
+            strncat(texto_letras_testadas, texto_letra, 4);
+        }
     }
-    printf("\n+------------------------------------------------------------------------------+\n");
-    printf("| Pressione uma tecla para continuar...\n");
+    sprintf(texto, "Letras tentadas:%s", texto_letras_testadas);
+    formatacaoBonita();
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("| Pressione uma tecla para continuar . . .                                     |\n");
     printf("+------------------------------------------------------------------------------+\n");
     getchar(); // Aguarda o usuário pressionar uma tecla
 }
@@ -189,8 +252,9 @@ void telaResultadoJogo(SinglePlayer player, char *partes_do_corpo, char *palavra
 void telaSingleplayerJogo(SinglePlayer player, char *letra, char *dica, char *descoberta, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA, char *dificuldade)
 {
     int i;
+    sprintf(texto_letras_testadas, "");
+    sprintf(texto_letra, "");
 
-    // FUNCAO QUE MOSTRA A TELA DE JOGO SINGLEPLAYER (PALAVRAS, TENTATIVAS RESTANTES E LETRAS TENTADAS SAO MERAMENTE ILUSTRATIVAS)
     system("cls || clear");
     printf("+==============================================================================+\n");
     printf("|                             -= MODO SINGLEPLAYER =-                          |\n");
@@ -206,35 +270,51 @@ void telaSingleplayerJogo(SinglePlayer player, char *letra, char *dica, char *de
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| Acertos: %d                                                                   |\n", player.acertos);
+    sprintf(texto, "Acertos: %d", player.acertos);
+    formatacaoBonita();
     printf("| Erros: %d                                                                     |\n", player.erros);
     printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - player.erros);
-    printf("| Dificuldade: %s (%d letras)                                                   \n", dificuldade, tamanho_palavra);
-    printf("| Letras tentadas :");
+    sprintf(texto, "Dificuldade: %s (%d letras)", dificuldade, tamanho_palavra);
+    formatacaoBonita();
     for (i = 0; i < 26; i++)
     {
         // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-        if (player.letras_testadas[i] != '\0')
-            printf(" %c ", player.letras_testadas[i]);
+        if (player.letras_testadas[i] != '\0') {
+            sprintf(texto_letra, " %c ", player.letras_testadas[i]);
+            strncat(texto_letras_testadas, texto_letra, 4);
+        }
     }
-    printf("\n| DICA: \"%s\"                                                                \n", dica);
+    sprintf(texto, "Letras tentadas:%s", texto_letras_testadas);
+    formatacaoBonita();
+    sprintf(texto_letras_testadas, "");
+    if (player.erros >=2) {
+        sprintf(texto, "DICA: \"%s\"", dica);
+        formatacaoBonita();
+    }
     printf("+------------------------------------------------------------------------------+\n");
     printf("|                                                                              |\n");
-    printf("|                             ");
+    // printf("|                             ");
     for (i = 0; i < tamanho_palavra; i++)
     {
         if (descoberta[i] == '_')
         {
-            printf("_ ");
+            // printf("_ ");
+            sprintf(texto_p, "_ ");
+            strncat(texto_palavra, texto_p, 2);
         }
         else
         {
-            printf("%c ", descoberta[i]);
+            // printf("%c ", descoberta[i]);
+            sprintf(texto_p, "%c ", descoberta[i]);
+            strncat(texto_palavra, texto_p, 2);
         }
     }
-    printf("\n|                                                                              |\n");
+    sprintf(texto, "                             %s", texto_palavra);
+    formatacaoBonita();
+    sprintf(texto_palavra, "");
+    printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| Digite uma letra:                                                            |");
+    printf("| Digite uma letra ou a palavra:                                               |");
     printf("\n+------------------------------------------------------------------------------+\n");
     scanfFgets(letra, TAM_PALAVRA); // Lê a letra digitada pelo usuário
     for (i = 0; i < strlen(letra); i++)
@@ -273,7 +353,7 @@ int telaSingleplayer(char nome[], int TAM_NOME)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| Digite seu nome ou \"0\" / \"Enter\" p/ voltar (nao digite espaco ou acento):    |\n");
+    printf("| Digite o nome ou \"0\" / \"Enter\" p/ voltar (nao digite espaco ou acento):      |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nome, TAM_NOME); // Lê o nome do jogador
     for (int i = 0; i < strlen(nome); i++)
@@ -320,7 +400,8 @@ int telaSingleplayer(char nome[], int TAM_NOME)
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
-        printf("| Bem-vindo(a), %s! Preparando o jogo . . .                                     \n", nome);
+        sprintf(texto, "Bem-vindo(a), %s! Preparando o jogo . . .", nome);
+        formatacaoBonita();
         printf("+==============================================================================+\n");
         Sleep(ESPERAR);
         return 0; // Retorna 0 se o usuário quiser continuar
@@ -352,20 +433,28 @@ void telaResultadoJogoMultiplayer(MultiPlayer player, char *partes_do_corpo, cha
     printf("|                             ==============                                   |\n");
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| %s! %s                          \n", player.nomes[0], messenge);
+    sprintf(texto, "%s! %s", player.nomes[0], messenge);
+    formatacaoBonita();
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| A palavra era: %s                                                           \n", palavra);
-    printf("| Sua pontuacao foi: %d                                                       \n", player.pontuacao);
-    printf("| Acertos: %d                                                                   \n", player.acertos);
+    sprintf(texto, "A palavra era: %s", palavra);
+    formatacaoBonita();
+    sprintf(texto, "Sua pontuacao foi: %d", player.pontuacao);
+    formatacaoBonita();
+    sprintf(texto, "Acertos: %d", player.acertos);
+    formatacaoBonita();
     printf("| Erros: %d                                                                     |\n", player.erros);
-    printf("| Letras tentadas :");
     for (i = 0; i < 26; i++)
     {
         // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-        if (player.letras_testadas[i] != '\0')
-            printf(" %c ", player.letras_testadas[i]);
+        if (player.letras_testadas[i] != '\0') {
+            sprintf(texto_letra, " %c ", player.letras_testadas[i]);
+            strncat(texto_letras_testadas, texto_letra, 4);
+        }
     }
+    sprintf(texto, "Letras tentadas:%s", texto_letras_testadas);
+    formatacaoBonita();
     printf("\n+------------------------------------------------------------------------------+\n");
     printf("| Pressione uma tecla para continuar...\n");
     printf("+------------------------------------------------------------------------------+\n");
@@ -376,8 +465,9 @@ void telaResultadoJogoMultiplayer(MultiPlayer player, char *partes_do_corpo, cha
 void telaMultiplayerJogo(MultiPlayer player, char *letra, char *dica, char *descoberta, int MAX_ERROS, int tamanho_palavra, char *partes_do_corpo, int TAM_PALAVRA, char *dificuldade, int playerAtivo)
 {
     int i;
+    sprintf(texto_letras_testadas, "");
+    sprintf(texto_letra, "");
 
-    // FUNCAO QUE MOSTRA A TELA DE JOGO MultiPLAYER (PALAVRAS, TENTATIVAS RESTANTES E LETRAS TENTADAS SAO MERAMENTE ILUSTRATIVAS)
     system("cls || clear");
     printf("+==============================================================================+\n");
     printf("|                             -= MODO MULTIPLAYER =-                          |\n");
@@ -393,35 +483,51 @@ void telaMultiplayerJogo(MultiPlayer player, char *letra, char *dica, char *desc
     printf("|                             \"            \"                                   |\n");
     printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| Vez de: %s                                                                     |\n", player.nomes[playerAtivo]);
+    sprintf(texto, "Vez de: %s", player.nomes[playerAtivo]);
+    formatacaoBonita();
     printf("+------------------------------------------------------------------------------+\n");
-    printf("| Acertos: %d                                                                   |\n", player.acertos);
+    sprintf(texto, "Acertos: %d", player.acertos);
+    formatacaoBonita();
     printf("| Erros: %d                                                                     |\n", player.erros);
     printf("| Tentativas restantes: %d                                                      |\n", MAX_ERROS - player.erros);
-    printf("| Dificuldade: %s (%d letras)                                                   \n", dificuldade, tamanho_palavra);
-    printf("| Letras tentadas :");
+    sprintf(texto, "Dificuldade: %s (%d letras)", dificuldade, tamanho_palavra);
+    formatacaoBonita();
     for (i = 0; i < 26; i++)
     {
         // Se o primeiro caractere do elemento não for o terminador nulo, exibe a letra
-        if (player.letras_testadas[i] != '\0')
-            printf(" %c ", player.letras_testadas[i]);
+        if (player.letras_testadas[i] != '\0') {
+            sprintf(texto_letra, " %c ", player.letras_testadas[i]);
+            strncat(texto_letras_testadas, texto_letra, 4);
+        }
     }
-    printf("\n| DICA: \"%s\"                                                                \n", dica);
+    sprintf(texto, "Letras tentadas:%s", texto_letras_testadas);
+    formatacaoBonita();
+    sprintf(texto_letras_testadas, "");
+    if (player.erros >=2) {
+        sprintf(texto, "DICA: \"%s\"", dica);
+        formatacaoBonita();
+    }
     printf("+------------------------------------------------------------------------------+\n");
     printf("|                                                                              |\n");
-    printf("|                             ");
     for (i = 0; i < tamanho_palavra; i++)
     {
         if (descoberta[i] == '_')
         {
-            printf("_ ");
+            // printf("_ ");
+            sprintf(texto_p, "_ ");
+            strncat(texto_palavra, texto_p, 2);
         }
         else
         {
-            printf("%c ", descoberta[i]);
+            // printf("%c ", descoberta[i]);
+            sprintf(texto_p, "%c ", descoberta[i]);
+            strncat(texto_palavra, texto_p, 2);
         }
     }
-    printf("\n|                                                                              |\n");
+    sprintf(texto, "                             %s", texto_palavra);
+    formatacaoBonita();
+    sprintf(texto_palavra, "");
+    printf("|                                                                              |\n");
     printf("+------------------------------------------------------------------------------+\n");
     printf("| Digite uma letra:                                                            |");
     printf("\n+------------------------------------------------------------------------------+\n");
@@ -462,7 +568,7 @@ int telaMultiplayer(char nomeA[], char nomeB[], int TAM_NOME)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
-    printf("| Digite nome do jogador 1 ou \"0\" / \"Enter\" p/ voltar:                     |\n");
+    printf("| Digite nome do jogador 1 ou \"0\" / \"Enter\" p/ voltar:                         |\n");
     printf("+------------------------------------------------------------------------------+\n");
     scanfFgets(nomeA, TAM_NOME); // Lê o nome do jogador
     for (int i = 0; i < strlen(nomeA); i++)
@@ -509,7 +615,7 @@ int telaMultiplayer(char nomeA[], char nomeB[], int TAM_NOME)
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
-        printf("| Digite nome do jogador 2 ou \"0\" / \"Enter\" p/ voltar:                     |\n");
+        printf("| Digite nome do jogador 2 ou \"0\" / \"Enter\" p/ voltar:                         |\n");
         printf("+------------------------------------------------------------------------------+\n");
         scanfFgets(nomeB, TAM_NOME); // Lê o nome do jogador
         for (int i = 0; i < strlen(nomeB); i++)
@@ -557,13 +663,15 @@ int telaMultiplayer(char nomeA[], char nomeB[], int TAM_NOME)
             printf("|                                                                              |\n");
             printf("|                                                                              |\n");
             printf("|                                                                              |\n");
-            printf("| Bem-vindos(as), %s e %s! Preparando o jogo . . .                              \n", nomeA, nomeB);
+            sprintf(texto, "Bem-vindos(as), %s e %s! Preparando o jogo . . .", nomeA, nomeB);
+            formatacaoBonita();
             printf("+==============================================================================+\n");
             Sleep(ESPERAR);
             return 0; // Retorna 0 se o usuário quiser continuar
         }
     }
 }
+
 // Função que confirma a adição de uma nova palavra
 int confirmarAdicaoDePalavra()
 {
@@ -629,7 +737,14 @@ void telaMenuGerenciarPalavras()
         printf("|                             ==============                                   |\n");
         printf("|                             \"            \"                                   |\n");
         printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
         printf("+------------------------------------------------------------------------------+\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
+        printf("|                                                                              |\n");
         printf("| 1. Adicionar nova palavra                                                    |\n");
         printf("| 0. Voltar ao menu anterior                                                   |\n");
         printf("+------------------------------------------------------------------------------+\n");
@@ -642,9 +757,6 @@ void telaMenuGerenciarPalavras()
         {
         case '1':
             adicionarPalavra();
-            break;
-        case '2':
-            // excluirPalavra();
             break;
         case '0':
             break;
@@ -666,13 +778,17 @@ void telaGerenciarHistorico()
         printf("|                               -= HISTORICO =-                                |\n");
         printf("+==============================================================================+\n");
         printf("|                                                                              |\n");
+        printf("|                                +----+                                        |\n");
+        printf("|                                |/   |                                        |\n");
+        printf("|                                |    0                                        |\n");
+        printf("|                                |   /|\\                                       |\n");
+        printf("|                                |   / \\                                       |\n");
+        printf("|                                |                                             |\n");
+        printf("|                             ==============                                   |\n");
+        printf("|                             \"            \"                                   |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
-        printf("|                                                                              |\n");
-        printf("|                                                                              |\n");
-        printf("|                                                                              |\n");
-        printf("|                                                                              |\n");
-        printf("|                                                                              |\n");
+        printf("+------------------------------------------------------------------------------+\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
         printf("|                                                                              |\n");
@@ -690,16 +806,16 @@ void telaGerenciarHistorico()
         switch (opcao)
         {
         case 1:
-            pesquisarPorData();
+            telaHistoricoData();
             break;
         case 2:
-            pesquisarPorNome();
+            telaHistoricoNome();
             break;
         case 3:
-            pesquisarPorID();
+            telaHistoricoID();
             break;
         case 4:
-            listarHistorico();
+            telaListarHistorico();
             break;
         case 0:
             break;
@@ -711,10 +827,6 @@ void telaGerenciarHistorico()
         getchar();
 
     } while (opcao != 0);
-}
-
-void telaInterageHistorico(char *text) {
-    
 }
 
 // Função e tela que que auxilia na lógica de adicionar palavras
@@ -744,6 +856,31 @@ void telaAdiconarPalavra(char *text)
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
+    printf("| %s\n", text);
+    printf("+==============================================================================+\n");
+}
+
+void telaPesquisaHistorico(char *text)
+{
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                          -= PESQUISA HISTORICO  =-                           |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("|                                +----+                                        |\n");
+    printf("|                                |/   |                                        |\n");
+    printf("|                                |    0                                        |\n");
+    printf("|                                |   /|\\                                       |\n");
+    printf("|                                |   / \\                                       |\n");
+    printf("|                                |                                             |\n");
+    printf("|                             ==============                                   |\n");
+    printf("|                             \"            \"                                   |\n");
+    printf("|                                                                              |\n");
+    printf("+------------------------------------------------------------------------------+\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
+    printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
     printf("|                                                                              |\n");
@@ -760,40 +897,95 @@ void telaRanking()
     printf("+==============================================================================+\n");
     printf("|                                 -= RANKING =-                                |\n");
     printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
     printf("| Aperte qualquer tecla para voltar...                                         |\n");
+    printf("|                                                                              |\n");
     printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
     lerArquivoRanking();
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
     getchar();
 }
 
-// Função que imprime a interface da tela de histórico
-// (ainda não implementada, mas já está com o esqueleto pronto)
-void telaHistorico()
-{
-    char opcao;
-    // FUNCAO QUE ABRE O MENU DE PESQUISA DO HISTORICO (ESTAGIO INICIAL), COM AS OPCOES DE PESQUISA POR DATA, POR NOME DO PLAYER E POR ID DA PARTIDA, PRESSIONANDO '0' VOCE E LEVADO DE VOLTA AO MENU INICIAL/PRINCIPAL
-    do
-    {
-        system("cls || clear");
-        printf("+==============================================================================+\n");
-        printf("|                               -= HISTORICO =-                                |\n");
-        printf("+==============================================================================+\n");
-        printf("| 1. Pesquisar por Data                                                        |\n");
-        printf("| 2. Pesquisar por Nome do Jogador                                             |\n");
-        printf("| 3. Pesquisar por ID da Partida                                               |\n");
-        printf("| 0. Voltar ao menu anterior                                                   |\n");
-        printf("+------------------------------------------------------------------------------+\n");
-        printf("| Escolha uma opcao:                                                           |\n");
-        printf("+==============================================================================+\n");
-        scanf(" %c", &opcao);
-        limparBuffer();
-    } while (opcao != '0');
+void telaHistoricoID() {
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                              -= HISTORICO ID =-                              |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("| Aperte qualquer tecla para voltar...                                         |\n");
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    pesquisarPorID();
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    getchar();
+}
+
+void telaHistoricoNome() {
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                             -= HISTORICO NOME =-                             |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("| Aperte qualquer tecla para voltar...                                         |\n");
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    pesquisarPorNome();
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    getchar();
+}
+
+void telaHistoricoData() {
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                             -= HISTORICO DATA =-                             |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("| Aperte qualquer tecla para voltar...                                         |\n");
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    pesquisarPorData();
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    getchar();
+}
+
+void telaListarHistorico() {
+    system("cls || clear");
+    printf("+==============================================================================+\n");
+    printf("|                             -= LISTA HISTORICO =-                            |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    printf("| Aperte qualquer tecla para voltar...                                         |\n");
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    printf("|                                                                              |\n");
+    listarHistorico();
+    printf("|                                                                              |\n");
+    printf("+==============================================================================+\n");
+    getchar();
+}
+
+void formatacaoBonita() {
+    printf("| %s", texto); 
+    for (int i = 0; i < tamanho_linha - strlen(texto); i++) {
+        if (i != tamanho_linha - strlen(texto) - 1)
+            printf(" ");
+        else 
+            printf("|\n");}
 }
 
 // Função que imprime o rosto do Professor Marciano
 void marciano()
 {
-    printf("+=================================================================================================================+\n");
+    printf("+============================================================================================================================+\n");
+    printf("|                                                                                                                            |\n");
     printf("                                                     ..--::::::++++::::::..                                                             \n");
     printf("                                                 ..--::::::::::++::::++++::--..                                                         \n");
     printf("                                               --::++++::--              ..--::--..                                                     \n");
@@ -829,6 +1021,7 @@ void marciano()
     printf("                           ..++++--------....--------::++mm@@MM++++MM##@@++::::--------..--------++mm                                 \n");
     printf("                           ..::mm------------------::::++@@####@@MM@@####mm::::::::------------::mmmm                                 \n");
     printf("                             ++mm::--------------::::++mm@@##############@@mm++++::--------::--++mm::                                 \n");
+    printf("|                                                                                                                            |\n");
     printf("\n+============================================================================================================================+\n");
     printf("|                                                    -= OBRIGADO, MARCIANO! =-                                               |\n");
     printf("+============================================================================================================================+\n");

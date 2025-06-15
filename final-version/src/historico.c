@@ -5,6 +5,7 @@
 #include <ctype.h>
 
 #include "../include/historico.h"
+#include "../include/interface.h"
 
 void strToLower(char *str) { // funcao para converter maiusculas e minusculas na pesquisa do nome. agora aceita tanto Gustavo, gustavo ou GUSTavO por exemplo
     for (int i = 0; str[i]; i++) {
@@ -15,7 +16,7 @@ void strToLower(char *str) { // funcao para converter maiusculas e minusculas na
 void carregarHistorico(Historico **historicos, int *total) {
     FILE *arquivo = fopen("data/historico.txt", "r");
     if (!arquivo) {
-        perror("Erro ao abrir o arquivo.txt.\n");
+        perror("Erro ao abrir o historico.txt.\n");
         *historicos = NULL;
         *total = 0;
         return;
@@ -62,16 +63,24 @@ void pesquisarPorData() {
     Historico *historicos;
     int total;
     char data[MAX_DATA];
+    char texto_data[150] = "";
 
     carregarHistorico(&historicos, &total); //caso nao exista nenhum dado historico carregado
     if (!historicos || total == 0) {
-        printf("Nenhum dado historico carregado.\n");
+        semHistorico("Nenhum dado historico carregado.");
         return;
     }
 
-    printf("\nDigite a data (DDMMAAAA ou DD/MM/AAAA): ");
+    telaPesquisaHistorico("Digite a data (DDMMAAAA ou DD/MM/AAAA) ou \"Enter\" para voltar:               |");
     fgets(data, sizeof(data), stdin);
     data[strcspn(data, "\n\r")] = '\0';  // remove o \n
+
+    for (int i = 0; i < strlen(data); i++) {
+        if (!isalpha(data[i])) {
+            inputErroEntrada("Data invalida! Não digite espaço ou acentuação.");
+            return; // Retorna se o usuário quiser voltar
+        }
+    }
 
     // padroniza a entrada (adiciona zeros se necessario)
     char dataFormatada[MAX_DATA];
@@ -84,7 +93,7 @@ void pesquisarPorData() {
         strcpy(dataFormatada, data);
         dataFormatada[strcspn(dataFormatada, "\n\r")] = '\0';
     } else {
-        printf("Formato de data invalido! Use DDMMAAAA ou DD/MM/AAAA\n");
+        inputErroEntrada("Formato de data invalido! Use DDMMAAAA ou DD/MM/AAAA");
         liberarHistorico(historicos);
         return;
     }
@@ -103,8 +112,8 @@ void pesquisarPorData() {
     }
 
     if (!encontrados) {
-        printf("-= Nenhum registro encontrado para %s =-\n", dataFormatada);
-        printf("Dica: Verifique se usou o formato DDMMAAAA\n");
+        sprintf(texto_data, "Nenhum registro encontrado para a data %s", dataFormatada);
+        semHistorico(texto_data);
     }
 
     liberarHistorico(historicos);
@@ -113,13 +122,46 @@ void pesquisarPorData() {
 void listarHistorico() {
     Historico *historicos;
     int total;
-    char data[MAX_DATA];
 
     carregarHistorico(&historicos, &total); //caso nao exista nenhum dado historico carregado
     if (!historicos || total == 0) {
-        printf("Nenhum dado historico carregado.\n");
+        semHistorico("Nenhum dado historico carregado.");
         return;
     }
+
+    // int i = 0;
+    // int palvramaior;
+    // int aux;
+    // fscanf(ranking,"%d %d",&aux,&palvramaior);
+    // fgets(buffer,MAX_N_CHAR,ranking);
+    // do{ 
+    
+    //     if(i == 0){
+    //         nome_extraido = "NOME";
+    //         pontuacao_extraida = "PONTOS";
+    //         printf("| POS | %s ", nome_extraido);
+    //     }else{
+    //     nome_extraido = strtok(buffer, "|");
+    //     pontuacao_extraida = strtok(NULL, "\n"); 
+    //     printf("| %3d | %s ", i, nome_extraido);
+    //     }
+    //     i++;
+        
+    //     for(int j = 0 ; j < palvramaior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+    //     printf(" ");
+    //     printf("| %s", pontuacao_extraida);
+    //     for(int j = 0 ; j < 67-palvramaior -strlen(pontuacao_extraida);j++)
+    //         printf(" ");//É so para n ter um textão de 51 espaços
+    //     printf(" |\n");
+    //     printf("+");
+    //     for(int j = 0 ; j < palvramaior+8;j++)//Como o + vai na seta ent é necessário ver isso
+    //     printf("-");
+    //     printf("+");
+    //     for(int j = 0;j < 69-palvramaior;j++)
+    //         printf("-");
+    //     printf("+\n");
+
+    // }while(fgets(buffer, MAX_N_CHAR, ranking));
 
     printf("\n=== RESULTADOS %s ===\n");
 
@@ -139,13 +181,21 @@ void pesquisarPorNome() {
 
     carregarHistorico(&historicos, &total);
     if (!historicos || total == 0) {
-        printf("Nenhum dado historico carregado.\n");
+        semHistorico("Nenhum dado historico carregado.");
         return;
         }
 
-    printf("\nDigite o nome do jogador: ");
+    telaPesquisaHistorico("Digite o nome do jogador ou \"Enter\" para voltar:                             |");
+
     fgets(nome, sizeof(nome), stdin);
     nome[strcspn(nome, "\n")] = '\0';
+
+    for (int i = 0; i < strlen(nome); i++) {
+        if (!isalpha(nome[i])) {
+            inputErroEntrada("Nome invalido! Não digite espaço ou acentuação.");
+            return; // Retorna se o usuário quiser voltar
+        }
+    }
 
     printf("\n=== RESULTADOS PARA %s ===\n", nome);
     int encontrados = 0;
@@ -166,7 +216,7 @@ void pesquisarPorNome() {
     }
 
     if (!encontrados) {
-        printf("-= Nenhum registro encontrado para este nome =-\n");
+        semHistorico("Nenhum registro encontrado para este nome");
     }
 
     liberarHistorico(historicos);
@@ -179,9 +229,14 @@ void pesquisarPorID() {
     carregarHistorico(&historicos, &total);
     if (!historicos) return;
 
-    printf("\nDigite o ID da partida: ");
+    telaPesquisaHistorico("Digite o ID da partida ou \"Enter\" para voltar:                               |");
     scanf("%d", &id);
     getchar();
+
+    if (!isdigit(id)) {
+        inputErroEntrada("ID invalido! Não digite espaço ou acentuação.");
+        return; // Retorna se o usuário quiser voltar
+    }
 
     printf("\n=== RESULTADOS PARA ID %d ===\n", id);
     int encontrado = 0;
@@ -196,7 +251,7 @@ void pesquisarPorID() {
     }
 
     if (!encontrado) {
-        printf("-= Nenhum registro encontrado com este ID =-\n");
+        semHistorico("Nenhum registro encontrado com este ID");
     }
 
     liberarHistorico(historicos);

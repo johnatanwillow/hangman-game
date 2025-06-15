@@ -38,7 +38,7 @@ void singlePlayerJogo()
     char letra[TAM_PALAVRA];  // Variável para armazenar a letra digitada pelo usuário
     int i;                                                 // Operar sobre o vetor de letras testadas
     char data_hora[20];          // Armazenar data e hora
-    //                        {'0', '|', '/', '\\', '/', '\\'};
+    //                       {'0', '|', '/', '\\', '/', '\\'};
     char partes_do_corpo[6] = {' ', ' ', ' ', ' ', ' ', ' '}; // Partes do corpo para poder alterar a imagem do boneco
     char errou_palavra[6] = {'0', '|', '/', '\\', '/', '\\'};
 
@@ -119,7 +119,6 @@ void singlePlayerJogo()
                 else
                 {
                     inputErroLogicaUsuario("Errou! Essa letra nao esta na palavra! ", partes_do_corpo);
-                    // for (i = MAX_ERROS - 1; i >= MAX_ERROS - erros; i--) Lógica linda!!!
                     partes_do_corpo[player.erros] = errou_palavra[player.erros]; // Atualiza a parte do corpo do boneco
                     player.erros++;
                 }
@@ -157,7 +156,8 @@ void singlePlayerJogo()
     else
     {
         player.pontuacao = 0;
-        telaResultadoJogo(player, partes_do_corpo, palavra, "      GAME OVER      ", "Sadness! Voce perdeu o jogo! ");
+        telaResultadoJogo(player, partes_do_corpo, palavra, "       GAME OVER       ", "Sadness! Voce perdeu o jogo! ");
+        ranqueamento(player.nome, player.pontuacao);
 
         defineData(data_hora);
         escreveHistorico(player.nome, player.pontuacao, data_hora);

@@ -78,7 +78,7 @@ void adicionarPalavra()
     for (int i = 0; i < strlen(palavra); i++) {
         if (!isalpha(palavra[i])) {
             inputErroEntrada("Palavra invalida! Não digite espaço ou acentuação.");
-            return; // Retorna 1 se o usuário quiser voltar
+            return; // Retorna se o usuário quiser voltar
         }
     }
 
