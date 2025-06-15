@@ -21,6 +21,7 @@
 
 // Váriavies globais
 #define ESPERAR 3000 // Tempo de espera em segundos (para Sleep)
+#define ESPERAR_FIM 4000
 
 int main()
 {
@@ -52,9 +53,8 @@ int main()
             telaGerenciarHistorico();
             break;
         case '0':
-            printf("Saindo do jogo...\n");
-            Sleep(ESPERAR);
-            system("cls || clear");
+            finalizandoJogo();
+            Sleep(ESPERAR_FIM);
             marciano();
             break;
         default:

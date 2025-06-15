@@ -27,5 +27,7 @@ void telaHistoricoNome();
 void formatacaoBonita();
 void semHistorico(char *texto_do_erro);
 void telaPesquisaHistorico(char *text);
+void finalizandoJogo();
+void formatacaoBonitaFim();
 void marciano();
 //---------------------------------------

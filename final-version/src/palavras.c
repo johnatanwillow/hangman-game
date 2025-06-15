@@ -87,7 +87,7 @@ void adicionarPalavra()
     }
     else {
         //Para transformar a string digitada em maiúscula
-         for (int i = 0; i < strlen(palavra); i++)    {
+        for (int i = 0; i < strlen(palavra); i++)    {
             palavra[i] = toupper(palavra[i]);
     }
 

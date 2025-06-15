@@ -1,6 +1,4 @@
-// historico.h
-#ifndef HISTORICO_H
-#define HISTORICO_H
+#pragma once
 
 #define MAX_LINHA 200
 #define MAX_NOME 50
@@ -15,14 +13,11 @@ typedef struct {
 
 void telaGerenciarHistorico();
 void listarHistorico();
-void strToLower(char *str);
 void carregarHistorico(Historico **historicos, int *total);
 void liberarHistorico(Historico *historicos);
-void pesquisarPorData();
-void pesquisarPorNome();
-void pesquisarPorID();
+void pesquisarPorData(char data[]);
+void pesquisarPorNome(char nome[]);
+void pesquisarPorID(int id);
 void escreveHistorico(char *nome, int pontuacao, char *data);
 int contaLinhasHistorico();
 void listarHistorico();
-
-#endif // HISTORICO_H

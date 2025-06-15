@@ -3,15 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <windows.h>
 
 #include "../include/historico.h"
 #include "../include/interface.h"
-
-void strToLower(char *str) { // funcao para converter maiusculas e minusculas na pesquisa do nome. agora aceita tanto Gustavo, gustavo ou GUSTavO por exemplo
-    for (int i = 0; str[i]; i++) {
-        str[i] = tolower((unsigned char)str[i]);
-    }
-}
 
 void carregarHistorico(Historico **historicos, int *total) {
     FILE *arquivo = fopen("data/historico.txt", "r");
@@ -59,27 +54,15 @@ void liberarHistorico(Historico *historicos) {
     free(historicos);
 }
 
-void pesquisarPorData() {
+void pesquisarPorData(char data[]) {
     Historico *historicos;
     int total;
-    char data[MAX_DATA];
     char texto_data[150] = "";
 
     carregarHistorico(&historicos, &total); //caso nao exista nenhum dado historico carregado
     if (!historicos || total == 0) {
         semHistorico("Nenhum dado historico carregado.");
         return;
-    }
-
-    telaPesquisaHistorico("Digite a data (DDMMAAAA ou DD/MM/AAAA) ou \"Enter\" para voltar:               |");
-    fgets(data, sizeof(data), stdin);
-    data[strcspn(data, "\n\r")] = '\0';  // remove o \n
-
-    for (int i = 0; i < strlen(data); i++) {
-        if (!isalpha(data[i])) {
-            inputErroEntrada("Data invalida! Não digite espaço ou acentuação.");
-            return; // Retorna se o usuário quiser voltar
-        }
     }
 
     // padroniza a entrada (adiciona zeros se necessario)
@@ -93,23 +76,70 @@ void pesquisarPorData() {
         strcpy(dataFormatada, data);
         dataFormatada[strcspn(dataFormatada, "\n\r")] = '\0';
     } else {
-        inputErroEntrada("Formato de data invalido! Use DDMMAAAA ou DD/MM/AAAA");
+        semHistorico("Formato de data invalido! Use DDMMAAAA ou DD/MM/AAAA");
         liberarHistorico(historicos);
         return;
     }
 
-    printf("\n=== RESULTADOS PARA %s ===\n", dataFormatada);
+    int i = -1;
+    int palavra_maior;
+    int max_linhas = contaLinhasHistorico();
+    char *nome_extraido;
+    int pontuacao_extraida_int;
+    char *data_extraida;
+    char *pontuacao_extraida;
     int encontrados = 0;
 
-    for (int i = 0; i < total; i++) {
-        // compara apenas a parte da data
-        if (strcmp(historicos[i].data, dataFormatada) == 0) {
-            printf("ID: %d | Nome: %s | Pontuacao: %d\n",
-                    historicos[i].id, historicos[i].nome, 
-                    historicos[i].pontuacao);
+    FILE *meta_dados_historico = fopen("data/meta_historico.txt", "r");
+
+    fscanf(meta_dados_historico,"%d", &palavra_maior);
+
+    do { 
+        if(i == -1){
+            nome_extraido = "NOME";
+            pontuacao_extraida = "PONTOS";
+            data_extraida = "DATA";
+            printf("|   ID | %s ", nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %s ", pontuacao_extraida);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - strlen(pontuacao_extraida) - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
+        } else if (strcmp(historicos[i].data, dataFormatada) == 0 && i > -1) {
+            nome_extraido = historicos[i].nome;
+            pontuacao_extraida_int = historicos[i].pontuacao;
+            data_extraida = historicos[i].data;
+            printf("| %4d | %s ", i+1, nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %6d ", pontuacao_extraida_int);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - 6 - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
             encontrados++;
         }
-    }
+
+        i++;
+    } while (i < max_linhas);
 
     if (!encontrados) {
         sprintf(texto_data, "Nenhum registro encontrado para a data %s", dataFormatada);
@@ -119,101 +149,79 @@ void pesquisarPorData() {
     liberarHistorico(historicos);
 }
 
-void listarHistorico() {
+void pesquisarPorNome(char nome[]) {
     Historico *historicos;
     int total;
-
-    carregarHistorico(&historicos, &total); //caso nao exista nenhum dado historico carregado
-    if (!historicos || total == 0) {
-        semHistorico("Nenhum dado historico carregado.");
-        return;
-    }
-
-    // int i = 0;
-    // int palvramaior;
-    // int aux;
-    // fscanf(ranking,"%d %d",&aux,&palvramaior);
-    // fgets(buffer,MAX_N_CHAR,ranking);
-    // do{ 
-    
-    //     if(i == 0){
-    //         nome_extraido = "NOME";
-    //         pontuacao_extraida = "PONTOS";
-    //         printf("| POS | %s ", nome_extraido);
-    //     }else{
-    //     nome_extraido = strtok(buffer, "|");
-    //     pontuacao_extraida = strtok(NULL, "\n"); 
-    //     printf("| %3d | %s ", i, nome_extraido);
-    //     }
-    //     i++;
-        
-    //     for(int j = 0 ; j < palvramaior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
-    //     printf(" ");
-    //     printf("| %s", pontuacao_extraida);
-    //     for(int j = 0 ; j < 67-palvramaior -strlen(pontuacao_extraida);j++)
-    //         printf(" ");//É so para n ter um textão de 51 espaços
-    //     printf(" |\n");
-    //     printf("+");
-    //     for(int j = 0 ; j < palvramaior+8;j++)//Como o + vai na seta ent é necessário ver isso
-    //     printf("-");
-    //     printf("+");
-    //     for(int j = 0;j < 69-palvramaior;j++)
-    //         printf("-");
-    //     printf("+\n");
-
-    // }while(fgets(buffer, MAX_N_CHAR, ranking));
-
-    printf("\n=== RESULTADOS %s ===\n");
-
-    for (int i = 0; i < total; i++) {
-        printf("ID: %d | Nome: %s | Data: %s | Pontuacao: %d\n",
-                historicos[i].id, historicos[i].nome, historicos[i].data, 
-                historicos[i].pontuacao);
-    }
-
-    liberarHistorico(historicos);
-}
-
-void pesquisarPorNome() {
-    Historico *historicos;
-    int total;
-    char nome[MAX_NOME], nomeBusca[MAX_NOME]; //a partir de agora a logica segue o mesmo principio da pesquisaPorData
+    char nomeComparado[MAX_NOME];
 
     carregarHistorico(&historicos, &total);
     if (!historicos || total == 0) {
         semHistorico("Nenhum dado historico carregado.");
         return;
-        }
-
-    telaPesquisaHistorico("Digite o nome do jogador ou \"Enter\" para voltar:                             |");
-
-    fgets(nome, sizeof(nome), stdin);
-    nome[strcspn(nome, "\n")] = '\0';
-
-    for (int i = 0; i < strlen(nome); i++) {
-        if (!isalpha(nome[i])) {
-            inputErroEntrada("Nome invalido! Não digite espaço ou acentuação.");
-            return; // Retorna se o usuário quiser voltar
-        }
     }
 
-    printf("\n=== RESULTADOS PARA %s ===\n", nome);
+    int i = -1;
+    int palavra_maior;
+    int max_linhas = contaLinhasHistorico();
+    char *nome_extraido;
+    int pontuacao_extraida_int;
+    char *data_extraida;
+    char *pontuacao_extraida;
     int encontrados = 0;
 
-    strcpy(nomeBusca, nome);
-    strToLower(nomeBusca);
+    FILE *meta_dados_historico = fopen("data/meta_historico.txt", "r");
 
-    for (int j = 0; j < total; j++) {
-        char nomeComparado[MAX_NOME];
-        strcpy(nomeComparado, historicos[j].nome);
-        strToLower(nomeComparado);
-        
-        if (strstr(nomeComparado, nomeBusca) != NULL) {
-            printf("ID: %d | Data: %s | Pontuacao: %d\n",
-                    historicos[j].id, historicos[j].data, historicos[j].pontuacao);
+    fscanf(meta_dados_historico,"%d", &palavra_maior);
+
+    do { 
+        if (i > -1) {
+            strcpy(nomeComparado, historicos[i].nome);
+        }
+        if(i == -1){
+            nome_extraido = "NOME";
+            pontuacao_extraida = "PONTOS";
+            data_extraida = "DATA";
+            printf("|   ID | %s ", nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %s ", pontuacao_extraida);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - strlen(pontuacao_extraida) - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
+        } else if (strstr(nomeComparado, nome) != NULL && i > -1) {
+            nome_extraido = historicos[i].nome;
+            pontuacao_extraida_int = historicos[i].pontuacao;
+            data_extraida = historicos[i].data;
+            printf("| %4d | %s ", i+1, nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %6d ", pontuacao_extraida_int);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - 6 - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
             encontrados++;
         }
-    }
+
+        i++;
+    } while (i < max_linhas);
 
     if (!encontrados) {
         semHistorico("Nenhum registro encontrado para este nome");
@@ -222,49 +230,184 @@ void pesquisarPorNome() {
     liberarHistorico(historicos);
 }
 
-void pesquisarPorID() {
+void pesquisarPorID(int id) {
     Historico *historicos;
-    int total, id;
+    int total;
 
     carregarHistorico(&historicos, &total);
     if (!historicos) return;
 
-    telaPesquisaHistorico("Digite o ID da partida ou \"Enter\" para voltar:                               |");
-    scanf("%d", &id);
-    getchar();
-
-    if (!isdigit(id)) {
-        inputErroEntrada("ID invalido! Não digite espaço ou acentuação.");
-        return; // Retorna se o usuário quiser voltar
-    }
-
-    printf("\n=== RESULTADOS PARA ID %d ===\n", id);
+    int i = -1;
+    int palavra_maior;
+    int max_linhas = contaLinhasHistorico();
+    char *nome_extraido;
+    int pontuacao_extraida_int;
+    char *data_extraida;
+    char *pontuacao_extraida;
     int encontrado = 0;
 
-    for (int k = 0; k < total; k++) {
-        if (historicos[k].id == id) {
-            printf("Nome: %s | Data: %s | Pontuacao: %d\n",
-                    historicos[k].nome, historicos[k].data, historicos[k].pontuacao);
+    FILE *meta_dados_historico = fopen("data/meta_historico.txt", "r");
+
+    fscanf(meta_dados_historico,"%d", &palavra_maior);
+
+    do { 
+        if(i == -1){
+            nome_extraido = "NOME";
+            pontuacao_extraida = "PONTOS";
+            data_extraida = "DATA";
+            printf("|   ID | %s ", nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %s ", pontuacao_extraida);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - strlen(pontuacao_extraida) - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
+        } else if (historicos[i].id == id && i > -1) {
+            nome_extraido = historicos[i].nome;
+            pontuacao_extraida_int = historicos[i].pontuacao;
+            data_extraida = historicos[i].data;
+            printf("| %4d | %s ", i+1, nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %6d ", pontuacao_extraida_int);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - 6 - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
             encontrado = 1;
             break;
         }
-    }
+
+        i++;
+    } while (i < max_linhas);
 
     if (!encontrado) {
         semHistorico("Nenhum registro encontrado com este ID");
+        return;
     }
+
+    liberarHistorico(historicos);
+}
+
+void listarHistorico() {
+    Historico *historicos;
+    int total;
+    int max_linhas = contaLinhasHistorico();
+    char *nome_extraido;
+    int pontuacao_extraida_int;
+    char *data_extraida;
+    char *pontuacao_extraida;
+
+    carregarHistorico(&historicos, &total); //caso nao exista nenhum dado historico carregado
+    if (!historicos || total == 0) {
+        semHistorico("Nenhum dado historico carregado.");
+        return;
+    }
+
+    int i = max_linhas;
+    int palavra_maior;
+
+    FILE *meta_dados_historico = fopen("data/meta_historico.txt", "r");
+
+    fscanf(meta_dados_historico,"%d", &palavra_maior);
+
+    do { 
+        if(i ==  max_linhas){
+            nome_extraido = "NOME";
+            pontuacao_extraida = "PONTOS";
+            data_extraida = "DATA";
+            printf("|   ID | %s ", nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %s ", pontuacao_extraida);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - strlen(pontuacao_extraida) - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
+        } else {
+            nome_extraido = historicos[i].nome;
+            pontuacao_extraida_int = historicos[i].pontuacao;
+            data_extraida = historicos[i].data;
+            printf("| %4d | %s ", i+1, nome_extraido);
+
+            for(int j = 0 ; j < palavra_maior-strlen(nome_extraido);j++)//Comparo os tamnhos e coloco os espaços devidos
+                printf(" ");
+            printf("| %6d ", pontuacao_extraida_int);
+            printf("| %s", data_extraida);
+            for(int j = 0 ; j < 63 - palavra_maior - 6 - strlen(data_extraida);j++)
+                printf(" ");//É so para n ter um textão de 51 espaços
+            printf(" |\n");
+            printf("+");
+            for(int j = 0 ; j < palavra_maior+8;j++)
+                printf("-");
+            printf("-+");
+            for(int j = 0;j < 68-palavra_maior;j++)
+                printf("-");
+            printf("+\n");
+        }
+
+        i--;
+    } while (i >= 0);
 
     liberarHistorico(historicos);
 }
 
 void escreveHistorico(char *nome, int pontuacao, char *data)
 {
-    FILE *historico = fopen("data/historico.txt", "a");
-
+    Historico *historicos;
+    int total;
     int tamanho = contaLinhasHistorico();
-    // for (int id = 0; id < tamanho; id++)
-    fprintf(historico,"%d|%s|%s|%d\n", tamanho+1, nome, data, pontuacao);
-    fclose(historico);
+    int palavra_maior, maior = 0;
+
+    FILE *historico_file = fopen("data/historico.txt", "a");
+    FILE *meta_dados_historico = fopen("data/meta_historico.txt", "w+");
+
+    if (fscanf(meta_dados_historico, "%d", &palavra_maior) < 0) {
+        palavra_maior = 0;
+    }
+
+    carregarHistorico(&historicos, &total);
+
+    fscanf(meta_dados_historico,"%d", &palavra_maior);
+
+    for (int i = 0; i < tamanho; i++) {
+        if (strlen(historicos[i].nome) > maior)
+            maior = strlen(historicos[i].nome);
+    }
+    if (strlen(nome) > maior) 
+        maior = strlen(nome);
+
+    fprintf(meta_dados_historico, "%d\n", maior);
+
+    fprintf(historico_file,"%d|%s|%s|%d\n", tamanho+1, nome, data, pontuacao);
+
+    fclose(historico_file);
+    fclose(meta_dados_historico);
 }
 
 int contaLinhasHistorico() {
