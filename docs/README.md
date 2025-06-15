@@ -1,7 +1,9 @@
-# Jogo da Velha
+# Jogo da Forca (Hangman Game)
  Practical college project
 
-![image](#)
+![image](https://github.com/user-attachments/assets/efdd4330-575e-43aa-b65a-adea5383000c)
+
+
 
 ## Introdução
 
