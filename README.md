@@ -7,7 +7,9 @@ Este repositório implementa um jogo da forca completo com modos Singleplayer e 
 
 ## Introdução
 
-Lorem
+Jogo da forca completo com modos Singleplayer e Multiplayer, gerenciamento de palavras, ranking e histórico de partidas. Foi por Gustavo Cardoso, Murilo Batista, Victor Guilherme, Arthur Martins e Gustavo Marcelino, que tem como objetivo a criação do jogo da forca com funcionalidades requeridas pelo professor Hugo Marciano, como atividade acadêmica da disciplina de Introdução à Programação, para fins educacionais de aprendizagem. 
+
+Para isso, utilizamos a linguagem C. O jogo possui 7 arquivos contendo o código inteiro do projeto : “main.c”, ”single-player.c”, ”ranking.c”, ”palavras.c”, ”multiplayer.c”, ”interface.c” e “historico.c”, as blibliotecas de mesmo nome, onde tem os protótipos das funções e as structs e por fim 4 arquivos .txt, ”palavras.txt”, “historico.txt”, “meta_historico.txt” e “ranking.txt”.
 
 ## Objetivos
 
@@ -22,13 +24,18 @@ O objetivo era desenvolver um jogo (Jogo da Velha) em linguagem C que utilizasse
     - Jogo dever ser construído em C
     - Deve-se usar matrizes, arquivos .txt, vetores e ponteiros 
     - Código modularizado com funções bem definidas
-    - Jogo deve fornecer interface de interação com input e output (console)
-    ![image](https://github.com/user-attachments/assets/d92a8b74-270b-4ee8-9a1b-8ca2f5131bc6)
-    ![image](https://github.com/user-attachments/assets/2b26110a-bd47-47bb-a633-aa10e0ec3502)
-    ![image](https://github.com/user-attachments/assets/e4b2ac83-1387-44cb-a201-1c1f7d99d3c1)
+    - Jogo deve fornecer interface de interação com input e output (console).
+    
+![image](https://github.com/user-attachments/assets/d92a8b74-270b-4ee8-9a1b-8ca2f5131bc6)
+![image](https://github.com/user-attachments/assets/2b26110a-bd47-47bb-a633-aa10e0ec3502)
+![image](https://github.com/user-attachments/assets/e4b2ac83-1387-44cb-a201-1c1f7d99d3c1)
 
-
+Documento com os objetivos propostos:
 ![image](https://github.com/user-attachments/assets/b5d6ecf9-6c48-4e3e-a137-63df83883717)
+
+
+Com isso, conseguimos fazer todos os requerimentos do projeto e concluir os objetivos propostos.
+
 
 ## Fluxograma
 
