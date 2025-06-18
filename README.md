@@ -18,14 +18,14 @@ Lorem
 
 ## Módulos do Projeto
 
-| Módulo            | Descrição                                                                | Link para documentação             |
-| ----------------- | ------------------------------------------------------------------------ | ---------------------------------- |
-| `interface.c`     | Responsável por todas as telas e mensagens exibidas ao jogador.          | [Interface](Doc%20Interface)       |
-| `historico.c`     | Manipula o arquivo de histórico de partidas, incluindo busca e listagem. | [Histórico](Doc%20Historico)       |
-| `single-player.c` | Implementa a lógica do modo solo, controle de fluxo e pontuação.         | [SinglePlayer](Doc%20SinglePlayer) |
-| `multiplayer.c`   | Controla o modo multiplayer e alternação entre jogadores.                | [Multiplayer](Doc%20Multiplayer)   |
-| `palavras.c`      | Gerencia a lista de palavras e dicas, incluindo sorteio e adição.        | [Palavras](Doc%20Palavras)         |
-| `ranking.c`       | Mantém o sistema de ranking atualizado com base nas pontuações.          | [Ranking](Doc%20Ranking)           |
+| Módulo            | Descrição                                                                | Link para documentação                       |
+| ----------------- | ------------------------------------------------------------------------ | -------------------------------------------- |
+| `interface.c`     | Responsável por todas as telas e mensagens exibidas ao jogador.          | [Interface]("./docs/doc_interface.md")       |
+| `historico.c`     | Manipula o arquivo de histórico de partidas, incluindo busca e listagem. | [Histórico](Doc%20Historico)                 |
+| `single-player.c` | Implementa a lógica do modo solo, controle de fluxo e pontuação.         | [SinglePlayer](Doc%20SinglePlayer)           |
+| `multiplayer.c`   | Controla o modo multiplayer e alternação entre jogadores.                | [Multiplayer](Doc%20Multiplayer)             |
+| `palavras.c`      | Gerencia a lista de palavras e dicas, incluindo sorteio e adição.        | [Palavras](Doc%20Palavras)                   |
+| `ranking.c`       | Mantém o sistema de ranking atualizado com base nas pontuações.          | [Ranking](Doc%20Ranking)                     |
 
 ## Compilação
 
