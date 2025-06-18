@@ -20,7 +20,7 @@ Lorem
 
 | Módulo            | Descrição                                                                | Link para documentação                       |
 | ----------------- | ------------------------------------------------------------------------ | -------------------------------------------- |
-| `interface.c`     | Responsável por todas as telas e mensagens exibidas ao jogador.          | [Interface]("https://github.com/ghustcc/hangman-game/blob/main/docs/doc_interface.md")       |
+| `interface.c`     | Responsável por todas as telas e mensagens exibidas ao jogador.          | [Interface](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_interface.md)       |
 | `historico.c`     | Manipula o arquivo de histórico de partidas, incluindo busca e listagem. | [Histórico](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_historico.md)                 |
 | `single-player.c` | Implementa a lógica do modo solo, controle de fluxo e pontuação.         | [SinglePlayer](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_single_player.md)           |
 | `multiplayer.c`   | Controla o modo multiplayer e alternação entre jogadores.                | [Multiplayer](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_multiplayer.md)             |
