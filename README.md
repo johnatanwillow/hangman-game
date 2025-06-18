@@ -14,17 +14,18 @@ Para isso, utilizamos a linguagem C. O jogo possui 7 arquivos contendo o código
 ## Objetivos
 
 O objetivo era desenvolver um jogo (Jogo da Velha) em linguagem C que utilizasse arquivos externos para armazer as informações de forma persistente:
-    - Ser possível armazer e carregar palavras para serem utilizadas no jogo
-    - O jogo permite que um jogador tente adivinhar uma palavra oculta que é sorteada (aleatoriamente) da nossa base de dados palavras.txt
-    - Deve registrar as tentativas e verificar acertos e erros do jogador
-    - Verificação de acertos e erros, sem repetição de palavras ou insercão de caracteres indevidos 
-    - O sistema deve permitir a adição de novas palavras à base de dados, garantindo expansão
-    - Exibis pontuação em ranking em forma de ranking e em histórico, para armazezar as informações do jogo
-    - Implementação de modo multiplyer (de dois jogadores local)
-    - Jogo dever ser construído em C
-    - Deve-se usar matrizes, arquivos .txt, vetores e ponteiros 
-    - Código modularizado com funções bem definidas
-    - Jogo deve fornecer interface de interação com input e output (console).
+
+- Ser possível armazer e carregar palavras para serem utilizadas no jogo
+- O jogo permite que um jogador tente adivinhar uma palavra oculta que é sorteada (aleatoriamente) da nossa base de dados palavras.txt
+- Deve registrar as tentativas e verificar acertos e erros do jogador
+- Verificação de acertos e erros, sem repetição de palavras ou insercão de caracteres indevidos 
+- O sistema deve permitir a adição de novas palavras à base de dados, garantindo expansão
+- Exibis pontuação em ranking em forma de ranking e em histórico, para armazezar as informações do jogo
+- Implementação de modo multiplyer (de dois jogadores local)
+- Jogo dever ser construído em C
+- Deve-se usar matrizes, arquivos .txt, vetores e ponteiros 
+- Código modularizado com funções bem definidas
+- Jogo deve fornecer interface de interação com input e output (console).
     
 ![image](https://github.com/user-attachments/assets/d92a8b74-270b-4ee8-9a1b-8ca2f5131bc6)
 ![image](https://github.com/user-attachments/assets/2b26110a-bd47-47bb-a633-aa10e0ec3502)
