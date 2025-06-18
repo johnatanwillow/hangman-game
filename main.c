@@ -1,7 +1,7 @@
 //-----------------------------------------------------
 // EXECUTE NO TERMINAL:
-// gcc main.c ./src/single-player.c ./src/interface.c ./src/palavras.c ./src/ranking.c ./src/historico.c ./src/multiplayer.c -o ./bin/main
-// ./bin/main ou "./bin/main"
+// gcc main.c ./src/single-player.c ./src/interface.c ./src/palavras.c ./src/ranking.c ./src/historico.c ./src/multiplayer.c -o forca.exe
+// gcc src/*.c -o forca.exe
 //-----------------------------------------------------
 
 #include <stdio.h>
