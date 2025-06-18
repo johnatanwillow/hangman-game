@@ -2,7 +2,6 @@
 
 Este repositório implementa um jogo da forca completo com modos Singleplayer e Multiplayer, gerenciamento de palavras, ranking e histórico de partidas. Abaixo está o índice com links para a documentação de cada módulo fonte do projeto.
 
-| ----------------- | ----------------- | ----------------- | ----------------- | ----------------- | ----------------- |
 | [Interface](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_interface.md)     | [Histórico](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_historico.md)        | [SinglePlayer](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_single_player.md)     | [Palavras](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_palavras.md)         | [Ranking](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_ranking.md)          | [Multiplayer](https://github.com/ghustcc/hangman-game/blob/main/docs/doc_multiplayer.md)      |
 | ----------------- | ----------------- | ----------------- | ----------------- | ----------------- | ----------------- |
 
