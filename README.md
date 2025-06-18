@@ -44,8 +44,9 @@ A forma como pensamos e estruturamos o nosso projeto a fim de satisfazer os obje
 
 ![image](https://github.com/user-attachments/assets/242501e6-dd4a-4f7f-a887-0b92ec29b3f9)
 
- - Organização das tarefas e planejamento (foram utilizadas as ferramentas Milanote, Google Wordspace e Notion): 
-    ![image](https://github.com/user-attachments/assets/efdd4330-575e-43aa-b65a-adea5383000c)
+- Organização das tarefas e planejamento (foram utilizadas as ferramentas Milanote, Google Wordspace e Notion):
+  
+![image](https://github.com/user-attachments/assets/efdd4330-575e-43aa-b65a-adea5383000c)
 
 ## Módulos do Projeto
 
