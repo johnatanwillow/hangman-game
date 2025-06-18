@@ -30,7 +30,8 @@ O objetivo era desenvolver um jogo (Jogo da Velha) em linguagem C que utilizasse
 ![image](https://github.com/user-attachments/assets/2b26110a-bd47-47bb-a633-aa10e0ec3502)
 ![image](https://github.com/user-attachments/assets/e4b2ac83-1387-44cb-a201-1c1f7d99d3c1)
 
-Documento com os objetivos propostos:
+- Documento com os objetivos propostos:
+    
 ![image](https://github.com/user-attachments/assets/b5d6ecf9-6c48-4e3e-a137-63df83883717)
 
 
