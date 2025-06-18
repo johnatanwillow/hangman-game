@@ -88,5 +88,3 @@ Término: 06/2025.
 Disponível em:  [Cronograma](https://docs.google.com/document/d/1ihc3gZmNoJa847M0WD065ILuE_dpgfzT43TwQkcy86E/edit?usp=sharing)
 
 ---
-
-> Para ver os detalhes de cada módulo, clique nos links acima ou navegue pelas documentações associadas.
