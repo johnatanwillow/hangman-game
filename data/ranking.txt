@@ -1,3 +1,4 @@
-2 12
-Gustavo|5800
+3 12
+Gustavo|8900
+arthurzin|1100
 Arthurziiiin|0

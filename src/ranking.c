@@ -83,7 +83,7 @@ void organizaRanking(char *nome,int pontuacao_player, int iNome, int *tamanho, M
     
     if (iNome == -1)
     {
-         *tamanho = tam + 1;
+        *tamanho = tam + 1;
     }else{ 
 
         iNome++;

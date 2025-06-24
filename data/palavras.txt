@@ -99,3 +99,4 @@
 99|PEIXE|Animal que vive na agua|
 100|SORVETE|Sobremesa congelada|
 101|ASTRONAUTA|Crianca sonha em ser...|
+102|VIAJANTE|Pessoa que conhece o mundo|
