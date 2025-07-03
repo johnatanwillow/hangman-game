@@ -1,102 +1,102 @@
-1|ELEFANTE|Animal de grande porte|
-2|COMPUTADOR|Maquina usada para programar|
-3|BOLA|Objeto usado em esportes|
-4|PIRAMIDE|Estrutura do Egito Antigo|
-5|GUITARRA|Instrumento de corda|
-6|CAFETEIRA|Faz bebida energizante|
-7|ABACAXI|Fruta tropical com casca dura|
-8|AVIAO|Meio de transporte aereo|
-9|CADERNO|Usado para escrever na escola|
-10|CELULAR|Dispositivo de comunicacao|
-11|SEREIA|Criatura metade peixe|
-12|TORNADO|Fenomeno natural destrutivo|
-13|JORNALISTA|Profissao que noticia fatos|
-14|SATURNO|Planeta com aneis|
-15|POLTRONA|Assento confortavel|
-16|ESPELHO|Reflete a imagem|
-17|DINOSSAURO|Animal pre historico|
-18|PRATELEIRA|Lugar para colocar livros|
-19|CACHORRO|Melhor amigo do homem|
-20|CAMINHAO|Transporte de carga|
-21|JANELA|Abertura na parede|
-22|CENOURA|Legume alaranjado|
-23|GUAXINIM|Animal com mascara no rosto|
-24|ALGODAO|Fibra branca macia|
-25|PLANETA|Corpo celeste girando no espaco|
-26|BRINQUEDO|Usado por criancas para brincar|
-27|NAVIO|Transporte aquatico|
-28|TRAVESSEIRO|Usado para dormir melhor|
-29|SAPATO|Protege os pes|
-30|FANTASMA|Espirito assustador|
-31|GIRAFA|Animal de pescoco longo|
-32|BIBLIOTECA|Lugar com muitos livros|
-33|ARVORE|Produz sombra e oxigenio|
-34|LAPIS|Usado para escrever|
-35|ESCADA|Ajuda a subir lugares altos|
-36|MACACO|Animal que vive em arvores|
-37|GELADEIRA|Mantem alimentos gelados|
-38|TELEVISAO|Exibe imagens em movimento|
-39|PRISMA|Objeto que reflete luz|
-40|SAPINHO|Animal pequeno e verde|
-41|VULCAO|Montanha que cospe lava|
-42|AMENDOIM|Semente comum em festas|
-43|PIANISTA|Toca instrumento de teclas|
-44|BRASIL|Pais da America do Sul|
-45|CASTELO|Moradia de reis e rainhas|
-46|CINEMA|Lugar para ver filmes|
-47|COBERTOR|Usado para se aquecer|
-48|CHOCOLATE|Doce feito de cacau|
-49|ESCORREGA|Brinquedo de parque|
-50|FOGUEIRA|Fogo ao ar livre|
-51|MORANGO|Fruta vermelha e doce|
-52|TELEFONE|Aparelho para ligacoes|
-53|UNICORNIO|Cavalo com chifre magico|
-54|XADREZ|Jogo de estrategia|
-55|VIOLINO|Instrumento musical pequeno|
-56|CADEIRA|Usada para sentar|
-57|BULE|Usado para servir cha|
-58|AVIADOR|Pilota avioes|
-59|ASTRONAUTA|Viaja pelo espaco|
-60|HOSPITAL|Onde se trata doencas|
-61|MONTANHA|Elevacao natural do terreno|
-62|QUADRO|Pode ser pintado ou escrito|
-63|TRATOR|Maquina usada em fazendas|
-64|PANTERA|Animal selvagem e furtivo|
-65|RELAMPAGO|Acompanha o trovao|
-66|CANETA|Escreve com tinta|
-67|CANGURU|Animal que salta|
-68|CARRINHO|Brinquedo de rodas|
-69|ESCORPIAO|Animal com veneno|
-70|ESTRELA|Brilha no ceu|
-71|VENTILADOR|Move o ar|
-72|RENA|Animal do Polo Norte|
-73|PASTEL|Salgado frito brasileiro|
-74|POLICIAL|Mantem a ordem|
-75|PINGUIM|Animal do gelo|
-76|FLAUTA|Instrumento de sopro|
-77|MISTURA|Resultado de duas coisas|
-78|BOTINA|Tipo de bota|
-79|FORMIGA|Inseto trabalhador|
-80|VASO|Guarda flores|
-81|JACARE|Reptil de agua doce|
-82|SABONETE|Usado para limpar o corpo|
-83|CORUJA|Animal noturno|
-84|AMOR|Sentimento forte|
-85|PIRATA|Ladrao do mar|
-86|ARCOIRIS|Fenomeno colorido no ceu|
-87|TECLADO|Usado no computador|
-88|ESPADA|Arma de combate antiga|
-89|LANTERNA|Fonte de luz portatil|
-90|COMETA|Corpo celeste com cauda|
-91|PRATEADO|Cor metalica clara|
-92|GUERREIRO|Luta com coragem|
-93|PERGUNTA|Solicitacao de informacao|
-94|JARDIM|Espaco com flores|
-95|PASSARINHO|Pequeno animal voador|
-96|ANZOL|Usado para pescar|
-97|ESCUDO|Protege em batalhas|
-98|LIXEIRA|Guarda o lixo|
-99|PEIXE|Animal que vive na agua|
-100|SORVETE|Sobremesa congelada|
-101|ASTRONAUTA|Crianca sonha em ser...|
-102|VIAJANTE|Pessoa que conhece o mundo|
+1|ELEPHANT|Large land animal
+2|COMPUTER|Machine used for programming
+3|BALL|Object used in sports
+4|PYRAMID|Ancient Egyptian structure
+5|GUITAR|String instrument
+6|COFFEEMAKER|Makes an energizing drink
+7|PINEAPPLE|Tropical fruit with a spiky skin
+8|AIRPLANE|Air transport vehicle
+9|NOTEBOOK|Used for writing in school
+10|CELLPHONE|Communication device
+11|MERMAID|Half-fish creature
+12|TORNADO|Destructive natural phenomenon
+13|JOURNALIST|Profession that reports facts
+14|SATURN|Planet with rings
+15|ARMCHAIR|Comfortable seat
+16|MIRROR|Reflects an image
+17|DINOSAUR|Prehistoric animal
+18|SHELF|Place to put books
+19|DOG|Man's best friend
+20|TRUCK|Cargo transport vehicle
+21|WINDOW|Opening in a wall
+22|CARROT|Orange vegetable
+23|RACCOON|Animal with a mask on its face
+24|COTTON|Soft white fiber
+25|PLANET|Celestial body orbiting in space
+26|TOY|Used by children to play
+27|SHIP|Water transport vehicle
+28|PILLOW|Used for better sleep
+29|SHOE|Protects the feet
+30|GHOST|Spooky spirit
+31|GIRAFFE|Long-necked animal
+32|LIBRARY|Place with many books
+33|TREE|Produces shade and oxygen
+34|PENCIL|Used for writing
+35|LADDER|Helps to climb high places
+36|MONKEY|Animal that lives in trees
+37|REFRIGERATOR|Keeps food cold
+38|TELEVISION|Displays moving images
+39|PRISM|Object that refracts light
+40|FROG|Small green animal
+41|VOLCANO|Mountain that spews lava
+42|PEANUT|Common seed in parties
+43|PIANIST|Plays a keyboard instrument
+44|BRAZIL|South American country
+45|CASTLE|Home of kings and queens
+46|CINEMA|Place to watch movies
+47|BLANKET|Used to keep warm
+48|CHOCOLATE|Sweet treat made from cocoa
+49|SLIDE|Park playground equipment
+50|BONFIRE|Outdoor fire
+51|STRAWBERRY|Red and sweet fruit
+52|TELEPHONE|Device for calls
+53|UNICORN|Horse with a magical horn
+54|CHESS|Strategy game
+55|VIOLIN|Small musical instrument
+56|CHAIR|Used for sitting
+57|TEAPOT|Used for serving tea
+58|AVIATOR|Pilots airplanes
+59|ASTRONAUT|Travels through space
+60|HOSPITAL|Where illnesses are treated
+61|MOUNTAIN|Natural elevation of terrain
+62|PAINTING|Can be painted or written on
+63|TRACTOR|Machine used on farms
+64|PANTHER|Wild and stealthy animal
+65|LIGHTNING|Accompanies thunder
+66|PEN|Writes with ink
+67|KANGAROO|Hopping animal
+68|STROLLER|Wheeled toy
+69|SCORPION|Venomous animal
+70|STAR|Shines in the sky
+71|FAN|Moves air
+72|REINDEER|Animal from the North Pole
+73|PASTEL|Brazilian fried pastry
+74|POLICEMAN|Maintains order
+75|PENGUIN|Ice animal
+76|FLUTE|Wind instrument
+77|MIXTURE|Result of two things combined
+78|BOOT|Type of footwear
+79|ANT|Hardworking insect
+80|VASE|Holds flowers
+81|ALLIGATOR|Freshwater reptile
+82|SOAP|Used to clean the body
+83|OWL|Nocturnal animal
+84|LOVE|Strong feeling
+85|PIRATE|Thief of the sea
+86|RAINBOW|Colorful phenomenon in the sky
+87|KEYBOARD|Used with a computer
+88|SWORD|Ancient combat weapon
+89|FLASHLIGHT|Portable light source
+90|COMET|Celestial body with a tail
+91|SILVER|Light metallic color
+92|WARRIOR|Fights with courage
+93|QUESTION|Request for information
+94|GARDEN|Space with flowers
+95|BIRDIE|Small flying animal
+96|FISHHOOK|Used for fishing
+97|SHIELD|Protects in battles
+98|TRASH CAN|Holds trash
+99|FISH|Animal that lives in water
+100|ICE CREAM|Frozen dessert
+101|ASTRONAUT|Child dreams of being...
+102|TRAVELER|Person who explores the world

@@ -24,7 +24,7 @@
 // Função que executa o jogo
 void multiPlayerJogo()
 {
-    setlocale(LC_ALL, "Portuguese_Brazil");
+    setlocale(LC_ALL, "American_English");
 
     // Definição de variáveis
     //----------------------------------------------------
@@ -150,7 +150,7 @@ void multiPlayerJogo()
     {
         // Pontuação: tamanho da palavra * (tentativas - quantidade de erros) * 100 - (quantidade de letras repetidas na palavra * 100)
         player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
-        telaResultadoJogoMultiplayer(player, partes_do_corpo, palavra, "    CONGRATULATIONS    ", "Parabens! Voce acertou a palavra e ganhou o jogo!");
+        telaResultadoJogoMultiplayer(player, partes_do_corpo, palavra, "    CONGRATULATIONS    ", "Congratulations! YOU WON THE GAME!!!");
         ranqueamento(player.nomes[player.atual], player.pontuacao);
 
         defineData(data_hora);

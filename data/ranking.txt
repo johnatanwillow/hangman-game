@@ -1,4 +1,2 @@
-3 12
-Gustavo|8900
-arthurzin|1100
-Arthurziiiin|0
+1 6
+Willow|5400
