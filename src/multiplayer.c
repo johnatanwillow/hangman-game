@@ -149,7 +149,7 @@ void multiPlayerJogo()
     if (player.acertos == tamanho)
     {
         // Pontuação: tamanho da palavra * (tentativas - quantidade de erros) * 100 - (quantidade de letras repetidas na palavra * 100)
-        player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
+        player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 1 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 1); // Cálculo da pontuação
         telaResultadoJogoMultiplayer(player, partes_do_corpo, palavra, "    CONGRATULATIONS    ", "Congratulations! YOU WON THE GAME!!!");
         ranqueamento(player.nomes[player.atual], player.pontuacao);
 

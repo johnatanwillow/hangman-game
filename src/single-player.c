@@ -146,7 +146,7 @@ void singlePlayerJogo()
     if (player.acertos == tamanho)
     {
         // Pontuação: tamanho da palavra * (tantativas - quantidade de erros) * 100 - (quantidade de letras repetidas na palavra * 100)
-        player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 100 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 100); // Cálculo da pontuação
+        player.pontuacao = tamanho * (MAX_ERROS - player.erros) * 1 - (quantidadeLetrasRepetidasPalavra(tamanho, palavra) * 1); // Cálculo da pontuação
         telaResultadoJogo(player, partes_do_corpo, palavra, "    CONGRATULATIONS    ", "Parabens! Voce acertou a palavra e ganhou o jogo!");
         ranqueamento(player.nome, player.pontuacao);
 
